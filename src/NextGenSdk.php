@@ -3,12 +3,9 @@
 namespace Clinect\NextGen;
 
 use Saloon\Http\Connector;
-use Saloon\Contracts\Request;
 
 class NextGenSdk extends Connector
 {
-    public array $headers = [];
-
     public function __construct(
         public string $baseUrl = '',
         public string $token = '',
@@ -20,20 +17,18 @@ class NextGenSdk extends Connector
         return $this->baseUrl;
     }
 
-    public function setHeaders(array $headers): void
+    protected function defaultHeaders(): array
     {
-        $this->headers = $headers;
-    }
-
-    public function defaultHeaders(): array
-    {
-        if ($this->headers) {
-            return $this->headers;
-        }
-
         return [
             'Content-type' => 'application/x-www-form-urlencoded',
             'Accept' => 'application/json',
+        ];
+    }
+
+    protected function defaultQuery(): array
+    {
+        return [
+            'per_page' => 25,
         ];
     }
 }
