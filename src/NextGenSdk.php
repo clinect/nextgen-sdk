@@ -7,9 +7,10 @@ use Saloon\Http\Connector;
 class NextGenSdk extends Connector
 {
     public function __construct(
-        public string $baseUrl = '',
-        public string $token = '',
-    ) {   
+        public string $baseUrl,
+        public string $token,
+    ) {
+        $this->withTokenAuth($this->token);
     }
 
     public function resolveBaseUrl(): string
@@ -20,15 +21,15 @@ class NextGenSdk extends Connector
     protected function defaultHeaders(): array
     {
         return [
-            'Content-type' => 'application/x-www-form-urlencoded',
             'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
         ];
     }
 
     protected function defaultQuery(): array
     {
         return [
-            'per_page' => 25,
+            'per_page' => 20,
         ];
     }
 }
