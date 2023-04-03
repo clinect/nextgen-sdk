@@ -2,8 +2,10 @@
 
 namespace Clinect\NextGen\Requests\Persons;
 
+use Clinect\NextGen\DataTransferObject\Patient\Patient;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Contracts\Response;
 
 class GetPatientContext extends Request
 {
@@ -24,5 +26,10 @@ class GetPatientContext extends Request
     protected function defaultQuery(): array
     {
         return $this->args;
+    }
+
+    public function createDtoFromResponse(Response $response): mixed
+    {
+        return Patient::fromResponse($response);
     }
 }

@@ -4,6 +4,8 @@ namespace Clinect\NextGen\Requests\Patients;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Contracts\Response;
+use Clinect\NextGen\DataTransferObject\Patient\Patient;
 
 class GetAllPatients extends Request
 {
@@ -17,5 +19,10 @@ class GetAllPatients extends Request
     public function resolveEndpoint(): string
     {
         return "/persons";
+    }
+
+    public function createDtoFromResponse(Response $response): mixed
+    {
+        return Patient::fromResponse($response, 'multiple');
     }
 }
