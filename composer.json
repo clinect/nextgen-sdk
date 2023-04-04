@@ -11,6 +11,7 @@
     ],
     "require": {
         "php": "^8.1",
+        "illuminate/support": "^8.0",
         "sammyjo20/saloon": "^2.0"
     },
     "require-dev": {
@@ -19,21 +20,21 @@
     },
     "autoload": {
         "psr-4": {
-            "Clinect\\NextGenSdk\\": "src/"
+            "Clinect\\NextGen\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Clinect\\NextGenSdk\\Tests\\": "tests/"
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Clinect\\NextGen\\ServiceProvider"
+            ],
+            "aliases": {
+                "NexGen": "Clienct\\NexGen\\Facade"
+            }
         }
     },
     "config": {
         "sort-packages": true
-    },
-    "scripts": {
-        "fix-code": [
-            "./vendor/bin/php-cs-fixer fix --allow-risky=yes"
-        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
