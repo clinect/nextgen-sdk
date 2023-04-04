@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen;
+namespace Clinect\NextGenSdk;
 
 use Saloon\Http\Connector;
 
