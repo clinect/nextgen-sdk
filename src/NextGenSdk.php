@@ -6,16 +6,9 @@ use Saloon\Http\Connector;
 
 class NextGenSdk extends Connector
 {
-    public function __construct(
-        public string $baseUrl,
-        public string $token,
-    ) {
-        $this->withTokenAuth($this->token);
-    }
-
     public function resolveBaseUrl(): string
     {
-        return $this->baseUrl;
+        return (string) config('clinect.nextgen.base_url');
     }
 
     protected function defaultHeaders(): array
@@ -29,7 +22,7 @@ class NextGenSdk extends Connector
     protected function defaultQuery(): array
     {
         return [
-            'per_page' => 20,
+            'per_page' => config('clinect.nextgen.per_page'),
         ];
     }
 }
