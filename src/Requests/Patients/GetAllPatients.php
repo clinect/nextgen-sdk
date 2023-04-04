@@ -1,20 +1,15 @@
 <?php
 
-namespace Clinect\NextGen\Requests\Patients;
+namespace Clinect\NextGenSdk\Requests\Patients;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Contracts\Response;
-use Clinect\NextGen\DataTransferObject\Patient\Patient;
+use Clinect\NextGenSdk\DataTransferObjects\Patient;
 
 class GetAllPatients extends Request
 {
     protected Method $method = Method::GET;
-
-    public function __construct(
-        public int $patientId
-    ) {
-    }
 
     public function resolveEndpoint(): string
     {

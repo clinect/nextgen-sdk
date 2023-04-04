@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\Requests\Charts;
+namespace Clinect\NextGenSdk\Requests\Charts;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -11,7 +11,8 @@ class GetChart extends Request
 
     public function __construct(
         public int $chartId
-    ) { }
+    ) {
+    }
 
     public function resolveEndpoint(): string
     {

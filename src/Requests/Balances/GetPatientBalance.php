@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\Requests\Balances;
+namespace Clinect\NextGenSdk\Requests\Balances;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -11,7 +11,8 @@ class GetPatientBalance extends Request
 
     public function __construct(
         public int $patientId
-    ) { }
+    ) {
+    }
 
     public function resolveEndpoint(): string
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\Requests\Insurances;
+namespace Clinect\NextGenSdk\Requests\Insurances;
 
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;

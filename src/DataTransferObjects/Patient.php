@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\DataTransferObjects;
+namespace Clinect\NextGenSdk\DataTransferObjects;
 
 use Saloon\Contracts\Response;
 
@@ -31,7 +31,7 @@ class Patient
     {
         $data = $response->json();
 
-        if($type === 'single') {
+        if ($type === 'single') {
             return new static(
                 $data['id'],
                 null,
@@ -52,7 +52,7 @@ class Patient
             );
         } else {
             $result = [];
-            foreach($data as $item){
+            foreach ($data as $item) {
                 $result[] = new static(
                     $item['id'],
                     null,

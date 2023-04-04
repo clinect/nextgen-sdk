@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\Requests\Encounters;
+namespace Clinect\NextGenSdk\Requests\Encounters;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -12,7 +12,8 @@ class GetAllPatientEncounter extends Request
     public function __construct(
         public int $patientId,
         public int $encounterId
-    ) { }
+    ) {
+    }
 
     public function resolveEndpoint(): string
     {

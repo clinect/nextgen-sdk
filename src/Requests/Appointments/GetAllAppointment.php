@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\Requests\Appointments;
+namespace Clinect\NextGenSdk\Requests\Appointments;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;

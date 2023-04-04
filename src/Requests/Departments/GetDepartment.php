@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\Requests\Departments;
+namespace Clinect\NextGenSdk\Requests\Departments;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -12,7 +12,8 @@ class GetDepartment extends Request
     public function __construct(
         public int $practiceId,
         public int $departmentId
-    ) { }
+    ) {
+    }
 
     public function resolveEndpoint(): string
     {
