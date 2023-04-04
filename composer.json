@@ -39,7 +39,7 @@
                 "Clinect\\NextGen\\ServiceProvider"
             ],
             "aliases": {
-                "NexGen": "Clienct\\NexGen\\Facade"
+                "NexGen": "Clinect\\NexGen\\Facade"
             }
         }
     },
