@@ -3,12 +3,13 @@
 namespace Clinect\NextGen;
 
 use Saloon\Http\Connector;
+use Illuminate\Support\Facades\Config;
 
 class NextGenSdk extends Connector
 {
     public function resolveBaseUrl(): string
     {
-        return (string) config('clinect.nextgen.base_url');
+        return (string) Config::get('clinect.nextgen.base_url');
     }
 
     protected function defaultHeaders(): array
@@ -22,7 +23,7 @@ class NextGenSdk extends Connector
     protected function defaultQuery(): array
     {
         return [
-            'per_page' => config('clinect.nextgen.per_page'),
+            'per_page' => Config::get('clinect.nextgen.per_page'),
         ];
     }
 }
