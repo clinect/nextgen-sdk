@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGenSdk\Requests\HealthHistory;
+namespace Clinect\NextGen\Requests\HealthHistory;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;

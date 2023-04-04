@@ -28,6 +28,11 @@
             "Clinect\\NextGen\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Clinect\\NextGen\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [

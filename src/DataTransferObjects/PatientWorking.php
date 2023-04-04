@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGenSdk\DataTransferObjects;
+namespace Clinect\NextGen\DataTransferObjects;
 
 use Saloon\Contracts\Response;
 

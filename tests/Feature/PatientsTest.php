@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Clinect\NextGenSdk\Tests\Feature;
+namespace Clinect\NextGen\Tests\Feature;
 
-use Clinect\NextGenSdk\DataTransferObjects\Patient;
-use Clinect\NextGenSdk\NextGenSdk;
-use Clinect\NextGenSdk\Requests\Patients\GetAllPatients;
+use Clinect\NextGen\DataTransferObjects\Patient;
+use Clinect\NextGen\NextGenSdk;
+use Clinect\NextGen\Requests\Patients\GetAllPatients;
 use PHPUnit\Framework\TestCase;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;

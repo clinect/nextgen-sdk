@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGenSdk\Requests\Charts;
+namespace Clinect\NextGen\Requests\Charts;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;

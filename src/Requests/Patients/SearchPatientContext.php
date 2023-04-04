@@ -1,8 +1,8 @@
 <?php
 
-namespace Clinect\NextGenSdk\Requests\Patients;
+namespace Clinect\NextGen\Requests\Patients;
 
-use Clinect\NextGenSdk\DataTransferObjects\PatientWorking;
+use Clinect\NextGen\DataTransferObjects\PatientWorking;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Contracts\Response;

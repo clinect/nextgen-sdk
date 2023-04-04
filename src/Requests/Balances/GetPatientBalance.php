@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGenSdk\Requests\Balances;
+namespace Clinect\NextGen\Requests\Balances;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;

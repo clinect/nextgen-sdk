@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGenSdk\Requests\Insurances;
+namespace Clinect\NextGen\Requests\Insurances;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;

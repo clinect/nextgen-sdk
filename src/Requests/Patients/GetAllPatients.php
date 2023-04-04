@@ -1,11 +1,11 @@
 <?php
 
-namespace Clinect\NextGenSdk\Requests\Patients;
+namespace Clinect\NextGen\Requests\Patients;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Contracts\Response;
-use Clinect\NextGenSdk\DataTransferObjects\Patient;
+use Clinect\NextGen\DataTransferObjects\Patient;
 
 class GetAllPatients extends Request
 {

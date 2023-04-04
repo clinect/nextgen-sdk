@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGenSdk\Requests\Encounters;
+namespace Clinect\NextGen\Requests\Encounters;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
