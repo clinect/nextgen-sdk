@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature;
+namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\DataTransferObjects\Patients\PatientWorking;
 use Clinect\NextGen\DataTransferObjects\Persons\Person;
