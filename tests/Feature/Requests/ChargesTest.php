@@ -24,10 +24,7 @@ class ChargesTest extends TestCase
         $nextGenSdk->withMockClient($mockClient);
 
         $response = $nextGenSdk->send($successfulRequest);
-
-        $mockClient->assertSent(function (Request $request) {
-            return $request instanceof GetPatientCharges;
-        });
+        $mockClient->assertSent(GetPatientCharges::class);
 
         $response = $nextGenSdk->send($failedRequest);
         $mockClient->assertSent(GetPatientCharges::class);
