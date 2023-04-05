@@ -6,7 +6,7 @@ use Clinect\NextGen\Requests\HasMockResponses;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Contracts\Response;
-use Clinect\NextGen\DataTransferObjects\Person;
+use Clinect\NextGen\DataTransferObjects\Persons\Person;
 
 class GetAllPersons extends Request
 {

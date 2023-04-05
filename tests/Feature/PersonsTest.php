@@ -2,15 +2,13 @@
 
 namespace Clinect\NextGen\Tests\Feature;
 
-use Clinect\NextGen\DataTransferObjects\Person;
-use Clinect\NextGen\DataTransferObjects\PersonSearch;
+use Clinect\NextGen\DataTransferObjects\Persons\Person;
+use Clinect\NextGen\DataTransferObjects\Persons\PersonSearch;
 use Clinect\NextGen\NextGenSdk;
-use Clinect\NextGen\Requests\Patients\GetPatientContext;
 use Clinect\NextGen\Requests\Persons\GetAllPersons;
 use Clinect\NextGen\Requests\Persons\GetPerson;
 use Clinect\NextGen\Requests\Persons\SearchPerson;
 use Saloon\Http\Faking\MockClient;
-use Saloon\Http\Faking\MockResponse;
 use Orchestra\Testbench\TestCase;
 use Saloon\Contracts\Request;
 use Saloon\Contracts\Response;
@@ -34,7 +32,23 @@ class PersonsTest extends TestCase
 
         $mockClient->assertSent(function (Request $request, Response $response) use ($patient) {
             foreach ($response->dto() as $key => $data) {
-                $this->assertEquals($patient->getBody()->all()[$key], $data);
+                $patientData = $patient->getBody()->all()[$key];
+
+                $this->assertEquals($patientData['id'], $data->external_id);
+                $this->assertEquals($patientData['lastName'], $data->lastname);
+                $this->assertEquals($patientData['firstName'], $data->firstname);
+                $this->assertEquals($patientData['lastName'].', '. $patientData['firstName'], $data->lastfirst);
+                $this->assertEquals($patientData['firstName'], $data->preferredname);
+                $this->assertEquals($patientData['firstName'], $data->altfirstname);
+                $this->assertEquals($patientData['email'], $data->email);
+                $this->assertEquals($patientData['cellPhone'], $data->phone_sms);
+                $this->assertEquals($patientData['dateOfBirth'], $data->dob);
+                $this->assertEquals($patientData['sex'], $data->sex);
+                $this->assertEquals($patientData['consenttotext'], $data->consenttotext);
+                $this->assertEquals('eng', $data->language);
+                $this->assertEquals(false, $data->has_email);
+                $this->assertEquals(false, $data->has_phone_sms);
+                $this->assertEquals($patientData['contactpreference'], $data->contactpreference);
             }
             return $request instanceof GetAllPersons;
         });
@@ -60,7 +74,24 @@ class PersonsTest extends TestCase
         $response = $nextGenSdk->send($successfulRequest);
 
         $mockClient->assertSent(function (Request $request, Response $response) use ($patient) {
-            $this->assertEquals(json_decode($patient->getBody()->all(), true), (array) $response->dto());
+            $patientData = json_decode($patient->getBody()->all(), true);
+            $data = $response->dto();
+
+            $this->assertEquals($patientData['id'], $data->external_id);
+            $this->assertEquals($patientData['lastName'], $data->lastname);
+            $this->assertEquals($patientData['firstName'], $data->firstname);
+            $this->assertEquals($patientData['lastName'] . ', ' . $patientData['firstName'], $data->lastfirst);
+            $this->assertEquals($patientData['firstName'], $data->preferredname);
+            $this->assertEquals($patientData['firstName'], $data->altfirstname);
+            $this->assertEquals($patientData['email'], $data->email);
+            $this->assertEquals($patientData['cellPhone'], $data->phone_sms);
+            $this->assertEquals($patientData['dateOfBirth'], $data->dob);
+            $this->assertEquals($patientData['sex'], $data->sex);
+            $this->assertEquals($patientData['consenttotext'], $data->consenttotext);
+            $this->assertEquals('eng', $data->language);
+            $this->assertEquals(false, $data->has_email);
+            $this->assertEquals(false, $data->has_phone_sms);
+            $this->assertEquals($patientData['contactpreference'], $data->contactpreference);
             return $request instanceof GetPerson;
         });
 
@@ -86,7 +117,12 @@ class PersonsTest extends TestCase
 
         $mockClient->assertSent(function (Request $request, Response $response) use ($patient) {
             foreach ($response->dto() as $key => $data) {
-                $this->assertEquals($patient->getBody()->all()[$key], $data);
+                $patientData = $patient->getBody()->all()[$key];
+                $this->assertEquals($patientData['id'], $data->patientid);
+                $this->assertEquals($patientData['personNumber'], $data->patientnumber);
+                $this->assertEquals($patientData['firstName'], $data->firstname);
+                $this->assertEquals($patientData['lastName'], $data->lastname);
+                $this->assertEquals($patientData['dateOfBirth'], $data->dob);
             }
             return $request instanceof SearchPerson;
         });

@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Requests\Persons;
 
 use Clinect\NextGen\Requests\HasMockResponses;
-use Clinect\NextGen\DataTransferObjects\PersonSearch;
+use Clinect\NextGen\DataTransferObjects\Persons\PersonSearch;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Contracts\Response;
