@@ -4,7 +4,6 @@ namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGenSdk;
 use Clinect\NextGen\Requests\Charges\GetPatientCharges;
-use Clinect\NextGen\Requests\Patients\GetPatientContext;
 use Saloon\Http\Faking\MockClient;
 use Orchestra\Testbench\TestCase;
 use Saloon\Contracts\Request;
