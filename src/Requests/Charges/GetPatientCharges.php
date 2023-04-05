@@ -2,11 +2,14 @@
 
 namespace Clinect\NextGen\Requests\Charges;
 
+use Clinect\NextGen\Requests\HasMockResponses;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 class GetPatientCharges extends Request
 {
+    use HasMockResponses;
+
     protected Method $method = Method::GET;
 
     public function __construct(
