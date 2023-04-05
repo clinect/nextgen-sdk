@@ -19,12 +19,11 @@ class PatientsTest extends TestCase
         $failedRequest = new GetPatientContext(1, 1, []);
 
         $mockClient = new MockClient([
-            $patient = $successfulRequest->mockResponse(),
-            $failedRequest->mockResponse(false)
+            $patient = $successfulRequest->successfulMockDTOResponse(Person::class),
+            $failedRequest->failedMockResponse()
         ]);
 
-
-        $nextGenSdk = new NextGenSdk('url', 'token');
+        $nextGenSdk = new NextGenSdk();
         $nextGenSdk->withMockClient($mockClient);
 
         $response = $nextGenSdk->send($successfulRequest);

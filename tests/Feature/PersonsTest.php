@@ -23,11 +23,11 @@ class PersonsTest extends TestCase
         $failedRequest = new GetAllPersons();
 
         $mockClient = new MockClient([
-            $patient = $successfulRequest->mockResponse(),
-            $failedRequest->mockResponse(false)
+            $patient = $successfulRequest->successfulMockDTOResponse(Person::class, 2),
+            $failedRequest->failedMockResponse()
         ]);
 
-        $nextGenSdk = new NextGenSdk('url', 'token');
+        $nextGenSdk = new NextGenSdk();
         $nextGenSdk->withMockClient($mockClient);
 
         $response = $nextGenSdk->send($successfulRequest);
@@ -50,11 +50,11 @@ class PersonsTest extends TestCase
         $failedRequest = new GetPerson(1);
 
         $mockClient = new MockClient([
-            $patient = $successfulRequest->mockResponse(),
-            $failedRequest->mockResponse(false)
+            $patient = $successfulRequest->successfulMockDTOResponse(Person::class),
+            $failedRequest->failedMockResponse()
         ]);
 
-        $nextGenSdk = new NextGenSdk('url', 'token');
+        $nextGenSdk = new NextGenSdk();
         $nextGenSdk->withMockClient($mockClient);
 
         $response = $nextGenSdk->send($successfulRequest);
@@ -75,11 +75,11 @@ class PersonsTest extends TestCase
         $failedRequest = new SearchPerson([]);
 
         $mockClient = new MockClient([
-            $patient = $successfulRequest->mockResponse(),
-            $failedRequest->mockResponse(false)
+            $patient = $successfulRequest->successfulMockDTOResponse(PersonSearch::class, 2),
+            $failedRequest->failedMockResponse()
         ]);
 
-        $nextGenSdk = new NextGenSdk('url', 'token');
+        $nextGenSdk = new NextGenSdk();
         $nextGenSdk->withMockClient($mockClient);
 
         $response = $nextGenSdk->send($successfulRequest);
