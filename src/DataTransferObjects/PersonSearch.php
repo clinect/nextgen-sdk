@@ -4,7 +4,7 @@ namespace Clinect\NextGen\DataTransferObjects;
 
 use Saloon\Contracts\Response;
 
-class PatientSearch
+class PersonSearch
 {
     // found in formatPatientData()
     public function __construct(
@@ -20,14 +20,13 @@ class PatientSearch
     {
         $data = $response->json();
         $result = [];
-
         foreach ($data as $item) {
             $result[] = new static(
-                $item['id'],
-                $item['personNumber'],
-                $item['firstName'],
-                $item['lastName'],
-                $item['dateOfBirth'],
+                $item['patientid'],
+                $item['patientnumber'],
+                $item['firstname'],
+                $item['lastname'],
+                $item['dob'],
             );
         }
         return $result;
