@@ -41,6 +41,7 @@ class SearchPerson extends Request
                 'Test First Name',
                 'Test Last Name',
                 '11/29/1996',
-            )), 200) : MockResponse::make(['error' => 'Server Error'], 500);
+            )
+        ), 200) : MockResponse::make(['error' => 'Server Error'], 500);
     }
 }

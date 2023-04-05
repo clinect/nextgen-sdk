@@ -38,7 +38,7 @@ class PersonsTest extends TestCase
             }
             return $request instanceof GetAllPersons;
         });
-        
+
         $response = $nextGenSdk->send($failedRequest);
         $mockClient->assertSent(GetAllPersons::class);
         $this->assertTrue($response->failed());
@@ -60,7 +60,7 @@ class PersonsTest extends TestCase
         $response = $nextGenSdk->send($successfulRequest);
 
         $mockClient->assertSent(function (Request $request, Response $response) use ($patient) {
-            $this->assertEquals(json_decode($patient->getBody()->all(),true), (array) $response->dto());
+            $this->assertEquals(json_decode($patient->getBody()->all(), true), (array) $response->dto());
             return $request instanceof GetPerson;
         });
 

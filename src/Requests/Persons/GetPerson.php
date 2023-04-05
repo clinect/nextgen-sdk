@@ -26,26 +26,26 @@ class GetPerson extends Request
     {
         return Person::fromResponse($response);
     }
-    
+
     public function mockResponse($success = true): MockResponse
     {
         return $success ? MockResponse::make(json_encode(new Person(
-                1,
-                null,
-                'Test Last Name',
-                'Test First Name',
-                'Test Last Name, Test First Name',
-                'Test First Name',
-                'Test First Name',
-                'testemail@gmail.com',
-                '123456',
-                '11/29/1996',
-                'male',
-                true,
-                'eng',
-                false,
-                false,
-                'contact pref'
-            ), 200)) : MockResponse::make(['error' => 'Server Error'], 500);
+            1,
+            null,
+            'Test Last Name',
+            'Test First Name',
+            'Test Last Name, Test First Name',
+            'Test First Name',
+            'Test First Name',
+            'testemail@gmail.com',
+            '123456',
+            '11/29/1996',
+            'male',
+            true,
+            'eng',
+            false,
+            false,
+            'contact pref'
+        ), 200)) : MockResponse::make(['error' => 'Server Error'], 500);
     }
 }
