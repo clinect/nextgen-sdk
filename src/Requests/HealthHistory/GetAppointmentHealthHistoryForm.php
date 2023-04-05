@@ -12,12 +12,20 @@ class GetAppointmentHealthHistoryForm extends Request
     public function __construct(
         public int $practiceId,
         public int $appointmentId,
-        public int $formId
+        public int $formId,
+        public array $args,
     ) {
     }
 
     public function resolveEndpoint(): string
     {
         return "/{$this->practiceId}/appointments/{$this->appointmentId}/healthhistoryforms/{$this->formId}";
+    }
+
+    protected function defaultQuery(): array
+    {
+        return [
+            'shownullanswers' => $this->args['shownullanswers']
+        ];
     }
 }
