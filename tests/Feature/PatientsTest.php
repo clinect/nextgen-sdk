@@ -1,29 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Clinect\NextGen\Tests\Feature;
 
-use Clinect\NextGen\DataTransferObjects\Patient;
+use Clinect\NextGen\DataTransferObjects\Person;
 use Clinect\NextGen\NextGenSdk;
-use Clinect\NextGen\Requests\Patients\GetAllPatients;
-use PHPUnit\Framework\TestCase;
+use Clinect\NextGen\Requests\Patients\GetPatientContext;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
+use Orchestra\Testbench\TestCase;
+use Saloon\Contracts\Request;
+use Saloon\Contracts\Response;
 
 class PatientsTest extends TestCase
 {
-    public function testCanGetAllPatients()
+    public function testCanGetPatientContext()
     {
         $mockClient = new MockClient([
-            MockResponse::make(array(new Patient(
+            MockResponse::make(json_encode($patient = new Person(
                 1,
                 null,
                 'Test Last Name',
                 'Test First Name',
-                'Full name',
-                'Test',
-                'alt test',
+                'Test Last Name, Test First Name',
+                'Test First Name',
+                'Test First Name',
                 'testemail@gmail.com',
                 '123456',
                 '11/29/1996',
@@ -34,30 +34,21 @@ class PatientsTest extends TestCase
                 false,
                 'contact pref'
             )), 200),
-            MockResponse::make(array(new Patient(
-                2,
-                null,
-                'Test Last Name 2',
-                'Test First Name 2',
-                'Full name 2',
-                'Test 2',
-                'alt test 2',
-                'testemail2@gmail.com',
-                '1234562',
-                '11/29/1996',
-                'male',
-                true,
-                'eng',
-                false,
-                false,
-                'contact pref'
-            )), 200)
+            MockResponse::make(['error' => 'Server Error'], 500)
         ]);
 
         $nextGenSdk = new NextGenSdk('url', 'token');
         $nextGenSdk->withMockClient($mockClient);
 
-        $nextGenSdk->send(new GetAllPatients());
-        dd($nextGenSdk);
+        $response = $nextGenSdk->send(new GetPatientContext(1, 1, []));
+
+        $mockClient->assertSent(function (Request $request, Response $response) use ($patient) {
+            $this->assertEquals($patient, $response->dto());
+            return $request instanceof GetPatientContext;
+        });
+
+        $response = $nextGenSdk->send(new GetPatientContext(1, 1, []));
+        $mockClient->assertSent(GetPatientContext::class);
+        $this->assertTrue($response->failed());
     }
 }
