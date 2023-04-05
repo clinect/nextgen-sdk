@@ -2,6 +2,7 @@
 
 namespace Clinect\NextGen\DataTransferObjects;
 
+use Faker\Factory;
 use Saloon\Contracts\Response;
 
 class Person
@@ -30,7 +31,7 @@ class Person
     public static function fromResponse(Response $response, $type = 'single')
     {
         $data = $response->json();
-        if ($type === 'single') {
+        if ($type == 'single') {
             return new static(
                 $data['external_id'],
                 null,
@@ -73,5 +74,41 @@ class Person
             }
             return $result;
         }
+    }
+
+    public static function factory($count)
+    {
+        $faker = Factory::create();
+        $result = [];
+        for ($i=0; $i < $count ; $i++) {
+            $lastName = $faker->lastName();
+            $firstName = $faker->firstName();
+            $data = new static(
+                $i,
+                null,
+                $lastName,
+                $firstName,
+                $lastName . ', ' . $firstName,
+                $firstName,
+                $firstName,
+                $faker->email(),
+                $faker->phoneNumber(),
+                $faker->date('Y_m_d'),
+                $faker->randomElement(['male', 'female']),
+                $faker->boolean(),
+                'eng',
+                false,
+                false,
+                $faker->word()
+            );
+
+            if($count!=1) {
+                $result[] = $data;
+            } else {
+                return json_encode($data);
+            }
+        }
+        
+        return $result;
     }
 }

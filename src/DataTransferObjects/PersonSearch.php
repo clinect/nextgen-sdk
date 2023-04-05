@@ -2,6 +2,7 @@
 
 namespace Clinect\NextGen\DataTransferObjects;
 
+use Faker\Factory;
 use Saloon\Contracts\Response;
 
 class PersonSearch
@@ -29,6 +30,33 @@ class PersonSearch
                 $item['dob'],
             );
         }
+        return $result;
+    }
+
+    public static function factory($count)
+    {
+        $faker = Factory::create();
+        $result = [];
+        for (
+            $i = 0;
+            $i < $count;
+            $i++
+        ) {
+            $data = new static(
+                $i,
+                $faker->randomNumber(),
+                $faker->firstName(),
+                $faker->lastName(),
+                $faker->date('Y_m_d'),
+            );
+
+            if ($count != 1) {
+                $result[] = $data;
+            } else {
+                return json_encode($data);
+            }
+        }
+
         return $result;
     }
 }
