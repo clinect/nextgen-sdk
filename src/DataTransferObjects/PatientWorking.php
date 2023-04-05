@@ -28,11 +28,11 @@ class PatientWorking
 
         foreach ($data as $item) {
             $result[] = new static(
-                $item['patientid'],
+                $item['external_id'],
                 $item['patientid'],
                 $item['lastname'],
                 $item['firstname'],
-                $item['lastName'] . ', ' . $data['firstName'],
+                $item['lastname'] . ', ' . $data['firstname'],
                 $item['email'] ?  $data['email'] : null,
                 $item['mobilephone'] ?  $data['mobilephone'] : null,
                 $item['dob']->format('Y-m-d'),

@@ -1,12 +1,11 @@
 <?php
 
-namespace Clinect\NextGen\Requests;
+namespace Clinect\NextGen\Requests\Patients;
 
-use Clinect\NextGen\DataTransferObjects\Patient;
+use Clinect\NextGen\DataTransferObjects\Person;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Contracts\Response;
-
 class GetPatientContext extends Request
 {
     protected Method $method = Method::GET;
@@ -30,6 +29,6 @@ class GetPatientContext extends Request
 
     public function createDtoFromResponse(Response $response): mixed
     {
-        return Patient::fromResponse($response);
+        return Person::fromResponse($response);
     }
 }
