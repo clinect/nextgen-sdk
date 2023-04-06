@@ -20,7 +20,4 @@ return [
 
 
     'route_uri' => env('NEXTGEN_ROUTEURI'),
-
-
-    'per_page' => 20,
 ];
