@@ -2,7 +2,6 @@
 
 namespace Clinect\NextGen\Requests\Persons;
 
-use Clinect\NextGen\Requests\HasMockResponses;
 use Clinect\NextGen\DataTransferObjects\Persons\PersonSearch;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -10,8 +9,6 @@ use Saloon\Contracts\Response;
 
 class SearchPerson extends Request
 {
-    use HasMockResponses;
-
     protected Method $method = Method::GET;
 
     public function __construct(
@@ -27,10 +24,5 @@ class SearchPerson extends Request
     protected function defaultQuery(): array
     {
         return $this->args;
-    }
-
-    public function createDtoFromResponse(Response $response): mixed
-    {
-        return PersonSearch::fromResponse($response);
     }
 }
