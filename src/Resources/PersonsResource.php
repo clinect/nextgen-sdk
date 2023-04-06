@@ -2,17 +2,14 @@
 
 namespace Clinect\NextGen\Resources;
 
-use Clinect\NextGen\Requests\HasMockResponses;
-use Clinect\NextGen\Requests\Persons\GetAllPersons;
+use Saloon\Contracts\Response;
+use Clinect\NextGen\Resources\Resource;
 use Clinect\NextGen\Requests\Persons\GetPerson;
 use Clinect\NextGen\Requests\Persons\SearchPerson;
-use Clinect\NextGen\Resources\Resource;
-use Saloon\Contracts\Response;
+use Clinect\NextGen\Requests\Persons\GetAllPersons;
 
 class PersonsResource extends Resource
 {
-    use HasMockResponses;
-
     public function all(): Response
     {
         return $this->connector->send(new GetAllPersons);
