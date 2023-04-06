@@ -1,10 +1,8 @@
 <?php
 
-namespace Clinect\NextGen;
+namespace Clinect\NextGen\Laravel;
 
-use Illuminate\Support\Facades\Facade as BaseFacade;
-
-class Facade extends BaseFacade
+class Facade extends \Illuminate\Support\Facades\Facade
 {
     /**
      * {@inheritdoc}
