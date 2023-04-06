@@ -1,11 +1,11 @@
 <?php
 
-namespace Clinect\NextGen\Requests\Encounters;
+namespace Clinect\NextGen\Requests\Balances;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class GetAllPersonEncounter extends Request
+class GetPersonAllBalances extends Request
 {
     protected Method $method = Method::GET;
 
@@ -16,6 +16,6 @@ class GetAllPersonEncounter extends Request
 
     public function resolveEndpoint(): string
     {
-        return "/persons/{$this->patientId}/chart/encounters";
+        return "/persons/{$this->patientId}/chart/balances";
     }
 }

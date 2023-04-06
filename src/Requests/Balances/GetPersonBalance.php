@@ -5,7 +5,7 @@ namespace Clinect\NextGen\Requests\Balances;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class GetPersonBalances extends Request
+class GetPersonBalance extends Request
 {
     protected Method $method = Method::GET;
 

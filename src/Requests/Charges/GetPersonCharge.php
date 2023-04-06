@@ -6,7 +6,7 @@ use Clinect\NextGen\Requests\HasMockResponses;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class GetPersonCharges extends Request
+class GetPersonCharge extends Request
 {
     use HasMockResponses;
 
@@ -15,13 +15,14 @@ class GetPersonCharges extends Request
     public function __construct(
         public array $args,
         public int|string $patientId,
-        public int|string $chargesId,
+        public int|string $chargeId,
     ) {
     }
 
     public function resolveEndpoint(): string
     {
-        return "/persons/{$this->patientId}/chart/charges/{$this->chargesId}";
+        // $nextgen->person($patientId)->charges()->find($chargeId)
+        return "/persons/{$this->patientId}/chart/charges/{$this->chargeId}";
     }
 
     protected function defaultQuery(): array

@@ -6,7 +6,7 @@ use Clinect\NextGen\Requests\HasMockResponses;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class GetAllPersonCharges extends Request
+class GetPersonAllCharges extends Request
 {
     use HasMockResponses;
 
