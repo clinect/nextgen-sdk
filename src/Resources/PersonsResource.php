@@ -32,7 +32,7 @@ class PersonsResource extends Resource
 
     public function charges(): ChargesResource
     {
-        return new ChargesResource($this->connector);
+        return new ChargesResource($this->connector, $this->id);
     }
 
     public function balance(): BalancesResource

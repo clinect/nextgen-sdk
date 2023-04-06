@@ -41,11 +41,11 @@ class ChargesTest extends TestCase
 
         $nextGen->withMockClient($mockClient);
 
-        $response = $nextGen->person(1)->charges()->find([],1);
+        $response = $nextGen->person(1)->charges()->find([],2);
         $mockClient->assertSent(GetPersonCharge::class);
         $this->assertTrue($response->successful());
 
-        $response = $nextGen->person(1)->charges()->all([],1);
+        $response = $nextGen->person(1)->charges()->find([],2);
         $mockClient->assertSent(GetPersonCharge::class);
         $this->assertTrue($response->failed());
     }

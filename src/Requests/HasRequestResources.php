@@ -15,9 +15,9 @@ trait HasRequestResources
         return new PatientsResource($this);
     }
 
-    public function person(): PersonsResource
+    public function person($personId = null): PersonsResource
     {
-        return new PersonsResource($this);
+        return new PersonsResource($this, $personId);
     }
 
     public function departments(): DepartmentsResource

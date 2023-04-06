@@ -9,7 +9,7 @@ class Resource
 {
     use HasMockResponses;
 
-    public function __construct(protected Connector $connector)
+    public function __construct(protected Connector $connector,protected $id = null)
     {
         //
     }
