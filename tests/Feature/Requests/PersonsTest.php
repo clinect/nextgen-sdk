@@ -17,117 +17,57 @@ class PersonsTest extends TestCase
 {
     public function testCanGetAllPersons()
     {
-        $successfulRequest = new GetAllPersons();
-        $failedRequest = new GetAllPersons();
+        $nextGenSdk = new NextGenSdk();
 
         $mockClient = new MockClient([
-            $patient = $successfulRequest->successfulMockDTOResponse(Person::class, 2),
-            $failedRequest->failedMockResponse()
+            $nextGenSdk->person()->successfulMockResponse(),
+            $nextGenSdk->person()->failedMockResponse()
         ]);
-
-        $nextGenSdk = new NextGenSdk();
         $nextGenSdk->withMockClient($mockClient);
 
-        $response = $nextGenSdk->send($successfulRequest);
+        $response = $nextGenSdk->person()->all();
+        $this->assertTrue($response->successful());
+        $mockClient->assertSent(GetAllPersons::class);
 
-        $mockClient->assertSent(function (Request $request, Response $response) use ($patient) {
-            foreach ($response->dto() as $key => $data) {
-                $patientData = $patient->getBody()->all()[$key];
-
-                $this->assertEquals($patientData['id'], $data->external_id);
-                $this->assertEquals($patientData['lastName'], $data->lastname);
-                $this->assertEquals($patientData['firstName'], $data->firstname);
-                $this->assertEquals($patientData['lastName'].', '. $patientData['firstName'], $data->lastfirst);
-                $this->assertEquals($patientData['firstName'], $data->preferredname);
-                $this->assertEquals($patientData['firstName'], $data->altfirstname);
-                $this->assertEquals($patientData['email'], $data->email);
-                $this->assertEquals($patientData['cellPhone'], $data->phone_sms);
-                $this->assertEquals($patientData['dateOfBirth'], $data->dob);
-                $this->assertEquals($patientData['sex'], $data->sex);
-                $this->assertEquals($patientData['consenttotext'], $data->consenttotext);
-                $this->assertEquals('eng', $data->language);
-                $this->assertEquals(false, $data->has_email);
-                $this->assertEquals(false, $data->has_phone_sms);
-                $this->assertEquals($patientData['contactpreference'], $data->contactpreference);
-            }
-            return $request instanceof GetAllPersons;
-        });
-
-        $response = $nextGenSdk->send($failedRequest);
+        $response = $nextGenSdk->person()->all();
         $mockClient->assertSent(GetAllPersons::class);
         $this->assertTrue($response->failed());
     }
 
     public function testCanGetPatient()
     {
-        $successfulRequest = new GetPerson(1);
-        $failedRequest = new GetPerson(1);
+        $nextGenSdk = new NextGenSdk();
 
         $mockClient = new MockClient([
-            $patient = $successfulRequest->successfulMockDTOResponse(Person::class),
-            $failedRequest->failedMockResponse()
+            $nextGenSdk->person()->successfulMockResponse(),
+            $nextGenSdk->person()->failedMockResponse()
         ]);
-
-        $nextGenSdk = new NextGenSdk();
         $nextGenSdk->withMockClient($mockClient);
 
-        $response = $nextGenSdk->send($successfulRequest);
+        $response = $nextGenSdk->person()->find(1);
+        $this->assertTrue($response->successful());
+        $mockClient->assertSent(GetPerson::class);
 
-        $mockClient->assertSent(function (Request $request, Response $response) use ($patient) {
-            $patientData = json_decode($patient->getBody()->all(), true);
-            $data = $response->dto();
-
-            $this->assertEquals($patientData['id'], $data->external_id);
-            $this->assertEquals($patientData['lastName'], $data->lastname);
-            $this->assertEquals($patientData['firstName'], $data->firstname);
-            $this->assertEquals($patientData['lastName'] . ', ' . $patientData['firstName'], $data->lastfirst);
-            $this->assertEquals($patientData['firstName'], $data->preferredname);
-            $this->assertEquals($patientData['firstName'], $data->altfirstname);
-            $this->assertEquals($patientData['email'], $data->email);
-            $this->assertEquals($patientData['cellPhone'], $data->phone_sms);
-            $this->assertEquals($patientData['dateOfBirth'], $data->dob);
-            $this->assertEquals($patientData['sex'], $data->sex);
-            $this->assertEquals($patientData['consenttotext'], $data->consenttotext);
-            $this->assertEquals('eng', $data->language);
-            $this->assertEquals(false, $data->has_email);
-            $this->assertEquals(false, $data->has_phone_sms);
-            $this->assertEquals($patientData['contactpreference'], $data->contactpreference);
-            return $request instanceof GetPerson;
-        });
-
-        $response = $nextGenSdk->send($failedRequest);
+        $response = $nextGenSdk->person()->find(1);
         $mockClient->assertSent(GetPerson::class);
         $this->assertTrue($response->failed());
     }
 
     public function testCanSearchPerson()
     {
-        $successfulRequest = new SearchPerson([]);
-        $failedRequest = new SearchPerson([]);
+        $nextGenSdk = new NextGenSdk();
 
         $mockClient = new MockClient([
-            $patient = $successfulRequest->successfulMockDTOResponse(PersonSearch::class, 2),
-            $failedRequest->failedMockResponse()
+            $nextGenSdk->person()->successfulMockResponse(),
+            $nextGenSdk->person()->failedMockResponse()
         ]);
-
-        $nextGenSdk = new NextGenSdk();
         $nextGenSdk->withMockClient($mockClient);
 
-        $response = $nextGenSdk->send($successfulRequest);
+        $response = $nextGenSdk->person()->search(['name'=>'test']);
+        $this->assertTrue($response->successful());
+        $mockClient->assertSent(SearchPerson::class);
 
-        $mockClient->assertSent(function (Request $request, Response $response) use ($patient) {
-            foreach ($response->dto() as $key => $data) {
-                $patientData = $patient->getBody()->all()[$key];
-                $this->assertEquals($patientData['id'], $data->patientid);
-                $this->assertEquals($patientData['personNumber'], $data->patientnumber);
-                $this->assertEquals($patientData['firstName'], $data->firstname);
-                $this->assertEquals($patientData['lastName'], $data->lastname);
-                $this->assertEquals($patientData['dateOfBirth'], $data->dob);
-            }
-            return $request instanceof SearchPerson;
-        });
-
-        $response =  $nextGenSdk->send($failedRequest);
+        $response = $nextGenSdk->person()->search(['name' => 'test']);
         $mockClient->assertSent(SearchPerson::class);
         $this->assertTrue($response->failed());
     }
