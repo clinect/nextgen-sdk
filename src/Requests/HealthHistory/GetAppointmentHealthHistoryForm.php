@@ -14,8 +14,8 @@ class GetAppointmentHealthHistoryForm extends Request
 
     public function __construct(
         public int|string $practiceId,
-        public int|string $appointmentId,
         public int|string $formId,
+        public int|string $appointmentId,
         public array $args,
     ) {
     }
