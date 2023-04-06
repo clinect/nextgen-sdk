@@ -11,15 +11,15 @@ use Clinect\NextGen\Resources\Resource;
 
 class HealthHistoryResource extends Resource
 {
-    public function all(int|string $appointmentId = null, array $args = []): Response
+    public function all(array $args = [], int|string $appointmentId = null): Response
     {
         return !$appointmentId ? $this->connector->send(new GetAllHealthHistoryForm($this->connector->practiceId))
-            : $this->connector->send(new GetAppointmentAllHealthHistoryForm($this->connector->practiceId, $appointmentId, $args));
+            : $this->connector->send(new GetAppointmentAllHealthHistoryForm($this->connector->practiceId, $appointmentId ?: $this->id, $args));
     }
 
-    public function find(int|string $formId, int|string $appointmentId = null, array $args = []): Response
+    public function find(int|string $formId, array $args = [], int|string $appointmentId = null): Response
     {
         return !$appointmentId ? $this->connector->send(new GetHealthHistoryForm($this->connector->practiceId, $formId))
-            :  $this->connector->send(new GetAppointmentHealthHistoryForm($this->connector->practiceId, $formId, $appointmentId, $args));
+            :  $this->connector->send(new GetAppointmentHealthHistoryForm($this->connector->practiceId, $formId, $appointmentId ?: $this->id, $args));
     }
 }

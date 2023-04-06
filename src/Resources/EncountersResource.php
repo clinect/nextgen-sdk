@@ -7,7 +7,7 @@ use Clinect\NextGen\Requests\Encounters\GetPersonEncounter;
 use Saloon\Contracts\Response;
 use Clinect\NextGen\Resources\Resource;
 
-class EncounterResource extends Resource
+class EncountersResource extends Resource
 {
     public function all(int|string $patientId = null): Response
     {

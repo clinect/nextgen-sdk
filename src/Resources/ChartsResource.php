@@ -9,7 +9,7 @@ use Clinect\NextGen\Requests\Charts\GetPersonChart;
 use Saloon\Contracts\Response;
 use Clinect\NextGen\Resources\Resource;
 
-class ChartResource extends Resource
+class ChartsResource extends Resource
 {
     public function all(int|string $patientId = null): Response
     {

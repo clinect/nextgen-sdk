@@ -26,6 +26,6 @@ class AppointmentsResource extends Resource
 
     public function healthHistory(): HealthHistoryResource
     {
-        return new HealthHistoryResource($this->connector);
+        return new HealthHistoryResource($this->connector, $this->id);
     }
 }

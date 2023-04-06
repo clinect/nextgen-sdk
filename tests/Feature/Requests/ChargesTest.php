@@ -15,17 +15,17 @@ class ChargesTest extends TestCase
         $nextGen = new NextGen();
 
         $mockClient = new MockClient([
-            $nextGen->person()->charges()->successfulMockResponse(),
-            $nextGen->person()->charges()->failedMockResponse()
+            $nextGen->persons()->charges()->successfulMockResponse(),
+            $nextGen->persons()->charges()->failedMockResponse()
         ]);
 
         $nextGen->withMockClient($mockClient);
 
-        $response = $nextGen->person(1)->charges()->all([]);
+        $response = $nextGen->persons(1)->charges()->all([]);
         $mockClient->assertSent(GetPersonAllCharges::class);
         $this->assertTrue($response->successful());
 
-        $response = $nextGen->person(1)->charges()->all([]);
+        $response = $nextGen->persons(1)->charges()->all([]);
         $mockClient->assertSent(GetPersonAllCharges::class);
         $this->assertTrue($response->failed());
     }
@@ -35,17 +35,17 @@ class ChargesTest extends TestCase
         $nextGen = new NextGen();
 
         $mockClient = new MockClient([
-            $nextGen->person()->charges()->successfulMockResponse(),
-            $nextGen->person()->charges()->failedMockResponse()
+            $nextGen->persons()->charges()->successfulMockResponse(),
+            $nextGen->persons()->charges()->failedMockResponse()
         ]);
 
         $nextGen->withMockClient($mockClient);
 
-        $response = $nextGen->person(1)->charges()->find([],2);
+        $response = $nextGen->persons(1)->charges()->find([],2);
         $mockClient->assertSent(GetPersonCharge::class);
         $this->assertTrue($response->successful());
 
-        $response = $nextGen->person(1)->charges()->find([],2);
+        $response = $nextGen->persons(1)->charges()->find([],2);
         $mockClient->assertSent(GetPersonCharge::class);
         $this->assertTrue($response->failed());
     }
