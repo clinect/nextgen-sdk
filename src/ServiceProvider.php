@@ -13,8 +13,8 @@ class ServiceProvider extends BaseServiceProvider
 
     public function register()
     {
-        $this->app->singleton('nextgen', function ($app) {
-            return new NextGenSdk;
+        $this->app->bind('nextgen', function ($app) {
+            return new NextGen();
         });
     }
 
