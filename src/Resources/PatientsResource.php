@@ -9,13 +9,13 @@ use Clinect\NextGen\Requests\Patients\SearchPatientWorking;
 
 class PatientsResource extends Resource
 {
-    public function getPatientContext(int $practiceId, int $patientId, array $args): Response
+    public function getPatientContext(int|string $patientId, array $args): Response
     {
-        return $this->connector->send(new GetPatientContext($practiceId, $patientId, $args));
+        return $this->connector->send(new GetPatientContext($this->connector->practiceId, $patientId, $args));
     }
 
-    public function searchPatientWorking(int $practiceId, array $args): Response
+    public function searchPatientWorking(array $args): Response
     {
-        return $this->connector->send(new SearchPatientWorking($practiceId, $args));
+        return $this->connector->send(new SearchPatientWorking($this->connector->practiceId, $args));
     }
 }
