@@ -14,7 +14,6 @@ Simply call the `send` method with the request class you would like to send. Onc
 
 ```php
 use Clinect\NextGen;
-use Clinect\NextGen\Requests\Persons\GetAllPersons;
 
 $connector = new NextGen(
     clientId: 'client-id-123',
@@ -24,7 +23,7 @@ $connector = new NextGen(
     practiceId: 'practice-id-123',
 );
 
-$results = $connector->paginator(new GetAllPersons);
+$results = $connector->persons()->paginator();
 
 foreach($results as $result) {
     // Handle result
@@ -38,11 +37,10 @@ You may prefer to retrieve all the results from the paginated requests by using 
 <?php
 
 use Clinect\NextGen;
-use Clinect\NextGen\Requests\Persons\GetAllPersons;
 
-$pokeapi = new NextGen();
+$connector = new NextGen();
 
-$results = $pokeapi->paginator(new GetAllPersons);
+$results = $connector->persons()->paginator();
 
 foreach($results as $result) {
     // Handle result
@@ -59,7 +57,7 @@ class UserController extends Controller
         $user = Cache::get('user:'.$id);
         
         return view('profile', [
-            'persons' => $nextgen->paginator(new GetAllPersons),
+            'persons' => $nextgen->persons()->paginator(),
         ]);
     }
 }
