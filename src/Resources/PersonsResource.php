@@ -27,4 +27,9 @@ class PersonsResource extends Resource
     {
         return $this->connector->send(new SearchPerson($args));
     }
+
+    public function paginate(int $pagePage = 20)
+    {
+        return $this->connector->paginate(new GetAllPersons, $pagePage);
+    }
 }
