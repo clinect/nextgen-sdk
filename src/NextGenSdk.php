@@ -2,11 +2,14 @@
 
 namespace Clinect\NextGen;
 
+use Clinect\NextGen\Requests\HasRequestResources;
 use Saloon\Http\Connector;
 use Illuminate\Support\Facades\Config;
 
 class NextGenSdk extends Connector
 {
+    use HasRequestResources;
+    
     public function resolveBaseUrl(): string
     {
         return (string) Config::get('clinect.nextgen.base_url');
