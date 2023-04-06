@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
-use Clinect\NextGen\NextGenSdk;
+use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Requests\HealthHistory\GetAllHealthHistoryForm;
 use Clinect\NextGen\Requests\HealthHistory\GetAppointmentAllHealthHistoryForm;
 use Clinect\NextGen\Requests\HealthHistory\GetAppointmentHealthHistoryForm;
@@ -24,14 +24,14 @@ class HealthHistoryTest extends TestCase
             $failedRequest->failedMockResponse()
         ]);
 
-        $nextGenSdk = new NextGenSdk();
-        $nextGenSdk->withMockClient($mockClient);
+        $nextGen = new NextGen();
+        $nextGen->withMockClient($mockClient);
 
-        $response = $nextGenSdk->send($successfulRequest);
+        $response = $nextGen->send($successfulRequest);
 
         $mockClient->assertSent(GetAllHealthHistoryForm::class);
 
-        $response = $nextGenSdk->send($failedRequest);
+        $response = $nextGen->send($failedRequest);
         $mockClient->assertSent(GetAllHealthHistoryForm::class);
         $this->assertTrue($response->failed());
     }
@@ -46,14 +46,14 @@ class HealthHistoryTest extends TestCase
             $failedRequest->failedMockResponse()
         ]);
 
-        $nextGenSdk = new NextGenSdk();
-        $nextGenSdk->withMockClient($mockClient);
+        $nextGen = new NextGen();
+        $nextGen->withMockClient($mockClient);
 
-        $response = $nextGenSdk->send($successfulRequest);
+        $response = $nextGen->send($successfulRequest);
 
         $mockClient->assertSent(GetHealthHistoryForm::class);
 
-        $response = $nextGenSdk->send($failedRequest);
+        $response = $nextGen->send($failedRequest);
         $mockClient->assertSent(GetHealthHistoryForm::class);
         $this->assertTrue($response->failed());
     }
@@ -67,16 +67,16 @@ class HealthHistoryTest extends TestCase
             $failedRequest->failedMockResponse()
         ]);
 
-        $nextGenSdk = new NextGenSdk();
-        $nextGenSdk->withMockClient($mockClient);
+        $nextGen = new NextGen();
+        $nextGen->withMockClient($mockClient);
 
-        $response = $nextGenSdk->send($successfulRequest);
+        $response = $nextGen->send($successfulRequest);
         $mockClient->assertSent(function (Request $request){
             $this->assertTrue($request->query()->all()['shownullanswers']);
             return $request instanceof GetAppointmentAllHealthHistoryForm;
         });
 
-        $response = $nextGenSdk->send($failedRequest);
+        $response = $nextGen->send($failedRequest);
         $mockClient->assertSent(function (Request $request){
             $this->assertFalse($request->query()->all()['shownullanswers']);
             return $request instanceof GetAppointmentAllHealthHistoryForm;
@@ -95,16 +95,16 @@ class HealthHistoryTest extends TestCase
             $failedRequest->failedMockResponse()
         ]);
 
-        $nextGenSdk = new NextGenSdk();
-        $nextGenSdk->withMockClient($mockClient);
+        $nextGen = new NextGen();
+        $nextGen->withMockClient($mockClient);
 
-        $response = $nextGenSdk->send($successfulRequest);
+        $response = $nextGen->send($successfulRequest);
         $mockClient->assertSent(function (Request $request) {
             $this->assertTrue($request->query()->all()['shownullanswers']);
             return $request instanceof GetAppointmentHealthHistoryForm;
         });
 
-        $response = $nextGenSdk->send($failedRequest);
+        $response = $nextGen->send($failedRequest);
         $mockClient->assertSent(function (Request $request) {
             $this->assertFalse($request->query()->all()['shownullanswers']);
             return $request instanceof GetAppointmentHealthHistoryForm;

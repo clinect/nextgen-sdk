@@ -2,11 +2,10 @@
 
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
-use Clinect\NextGen\NextGenSdk;
+use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Requests\Charges\GetPatientCharges;
 use Saloon\Http\Faking\MockClient;
 use Orchestra\Testbench\TestCase;
-use Saloon\Contracts\Request;
 
 class ChargesTest extends TestCase
 {
@@ -20,7 +19,7 @@ class ChargesTest extends TestCase
             $failedRequest->failedMockResponse()
         ]);
 
-        $nextGenSdk = new NextGenSdk();
+        $nextGenSdk = new NextGen();
         $nextGenSdk->withMockClient($mockClient);
 
         $response = $nextGenSdk->send($successfulRequest);
