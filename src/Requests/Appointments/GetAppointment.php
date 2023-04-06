@@ -10,7 +10,7 @@ class GetAppointment extends Request
     protected Method $method = Method::GET;
 
     public function __construct(
-        public int $appointmentId
+        public int|string $appointmentId
     ) {
     }
 

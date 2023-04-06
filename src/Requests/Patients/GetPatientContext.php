@@ -10,8 +10,8 @@ class GetPatientContext extends Request
     protected Method $method = Method::GET;
 
     public function __construct(
-        public int $practiceId,
-        public int $patientId,
+        public int|string $practiceId,
+        public int|string $patientId,
         public array $args
     ) {
     }

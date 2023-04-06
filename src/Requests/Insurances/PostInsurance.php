@@ -15,7 +15,7 @@ class PostInsurance extends Request implements HasBody
 
     // Multipart - add when calling the request
     public function __construct(
-        public int $patientId,
+        public int|string $patientId,
         public array $insurance,
     ) {
     }

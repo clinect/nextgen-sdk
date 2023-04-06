@@ -13,7 +13,7 @@ class GetAllHealthHistoryForm extends Request
     protected Method $method = Method::GET;
 
     public function __construct(
-        public int $practiceId,
+        public int|string $practiceId,
     ) {
     }
 

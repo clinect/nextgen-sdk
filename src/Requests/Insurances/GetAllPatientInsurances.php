@@ -11,7 +11,7 @@ class GetAllPatientInsurances extends Request
 
     // on responses, create one with insuranceSet - listPatientInsurances1() and raw - listPatientInsurances2()
     public function __construct(
-        public int $patientId
+        public int|string $patientId
     ) {
     }
 

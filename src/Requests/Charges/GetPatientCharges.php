@@ -14,7 +14,7 @@ class GetPatientCharges extends Request
 
     public function __construct(
         public array $args,
-        public int $patientId
+        public int|string $patientId
     ) {
     }
 

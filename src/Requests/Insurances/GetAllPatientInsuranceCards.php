@@ -11,8 +11,8 @@ class GetAllPatientInsuranceCards extends Request
 
     // two methods in forms-engine listPatientInsuranceCards and getPatientInsuranceCards - no difference
     public function __construct(
-        public int $patientId,
-        public int $personPayerId
+        public int|string $patientId,
+        public int|string $personPayerId
     ) {
     }
 

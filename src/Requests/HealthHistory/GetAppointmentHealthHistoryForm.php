@@ -13,9 +13,9 @@ class GetAppointmentHealthHistoryForm extends Request
     protected Method $method = Method::GET;
 
     public function __construct(
-        public int $practiceId,
-        public int $appointmentId,
-        public int $formId,
+        public int|string $practiceId,
+        public int|string $appointmentId,
+        public int|string $formId,
         public array $args,
     ) {
     }
