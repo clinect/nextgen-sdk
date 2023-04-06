@@ -23,7 +23,7 @@ class DepartmentsResource extends Resource
         );
     }
 
-    public function paginate(int $perPage = 20): Resource
+    public function paginate(int|string $perPage = 20): Resource
     {
         return $this->connector->paginate(
             new GetAllDepartment($this->connector->practiceId), $perPage
