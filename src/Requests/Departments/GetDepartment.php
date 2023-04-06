@@ -10,8 +10,8 @@ class GetDepartment extends Request
     protected Method $method = Method::GET;
 
     public function __construct(
-        public int $practiceId,
-        public int $departmentId
+        public int|string $practiceId,
+        public int|string $departmentId
     ) {
     }
 
