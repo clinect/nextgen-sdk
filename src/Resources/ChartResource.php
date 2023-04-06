@@ -14,12 +14,12 @@ class ChartResource extends Resource
     public function all(int|string $patientId = null): Response
     {
         return !$patientId ? $this->connector->send(new GetAllChart)
-         : $this->connector->send(new GetPersonAllChart($patientId));
+            : $this->connector->send(new GetPersonAllChart($patientId ?: $this->id));
     }
 
     public function find(int|string $chartId, int|string $patientId = null): Response
     {
         return !$patientId ? $this->connector->send(new GetChart($chartId))
-         : $this->connector->send(new GetPersonChart($patientId,$chartId));
+            : $this->connector->send(new GetPersonChart($patientId ?: $this->id, $chartId));
     }
 }

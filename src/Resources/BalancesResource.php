@@ -11,10 +11,10 @@ class BalancesResource extends Resource
 {
     public function all(int|string $patientId = null): Response
     {
-        return $this->connector->send(new GetPersonAllBalances($patientId));
+        return $this->connector->send(new GetPersonAllBalances($patientId ?: $this->id));
     }
-    public function find(int|string $patientId = null, int|string $balanceId = null): Response
+    public function find(int|string $balanceId, int|string $patientId = null): Response
     {
-        return $this->connector->send(new GetPersonBalance($patientId, $balanceId));
+        return $this->connector->send(new GetPersonBalance($patientId ?: $this->id, $balanceId));
     }
 }

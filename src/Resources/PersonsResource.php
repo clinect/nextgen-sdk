@@ -37,16 +37,16 @@ class PersonsResource extends Resource
 
     public function balance(): BalancesResource
     {
-        return new BalancesResource($this->connector);
+        return new BalancesResource($this->connector, $this->id);
     }
 
     public function encounter() : EncounterResource
     {
-        return new EncounterResource($this->connector);
+        return new EncounterResource($this->connector, $this->id);
     }
 
     public function chart(): ChartResource
     {
-        return new ChartResource($this->connector);
+        return new ChartResource($this->connector, $this->id);
     }
 }

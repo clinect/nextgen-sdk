@@ -11,11 +11,11 @@ class EncounterResource extends Resource
 {
     public function all(int|string $patientId = null): Response
     {
-        return $this->connector->send(new GetPersonAllEncounters($patientId));
+        return $this->connector->send(new GetPersonAllEncounters($patientId ?: $this->id));
     }
 
-    public function find(int|string $patientId = null, int|string $encounterId = null): Response
+    public function find(int|string $encounterId, int|string $patientId = null): Response
     {
-        return $this->connector->send(new GetPersonEncounter($patientId, $encounterId));
+        return $this->connector->send(new GetPersonEncounter($patientId ?: $this->id, $encounterId));
     }
 }
