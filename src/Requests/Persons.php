@@ -2,10 +2,9 @@
 
 namespace Clinect\NextGen\Requests;
 
-use Clinect\NextGen\Requests\BaseRequests\SearchRequest;
 use Clinect\NextGen\Requests\Request;
 
-class Person extends Request
+class Persons extends Request
 {
     public function __construct(
         public int|string|null $id = null
@@ -38,19 +37,18 @@ class Person extends Request
         return $this->addEndpoint('/chart/encounters')->withUriParamId($id);
     }
 
-    public function search(array $queries)
-    {
-        return new SearchRequest('/persons/lookup', $queries, $this->configs);
-    }
-
-    public function insurance(int|string|null $id = null): static
+    public function insurances(int|string|null $id = null): static
     {
         return $this->addEndpoint('/insurance')->withUriParamId($id);
     }
 
-    public function card(int|string|null $id = null): static
+    public function cards(int|string|null $id = null): static
     {
-        return str_contains($this->endpoint,'insurance') ?
-         $this->addEndpoint('/card')->withUriParamId($id) : $this->throw();
+        return $this->addEndpoint('/card')->withUriParamId($id);
+    }
+
+    public function search(array $queries): \Saloon\Http\Request
+    {
+        return $this->addEndpoint('/lookup')->withQuery($queries)->get();
     }
 }

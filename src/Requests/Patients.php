@@ -2,11 +2,8 @@
 
 namespace Clinect\NextGen\Requests;
 
-use Clinect\NextGen\Requests\BaseRequests\SearchRequest;
-
-class Patient extends Request
+class Patients extends Request
 {
-    //includes practiceId
     public function __construct(
         public int|string|null $id = null,
     ) {
@@ -17,9 +14,9 @@ class Patient extends Request
     {
         return '/patients';
     }
-    
-    public function search(array $queries)
+
+    public function search(array $queries): \Saloon\Http\Request
     {
-        return new SearchRequest('/patients/search', $queries, $this->configs);
+        return $this->addEndpoint('/search')->withQuery($queries)->get();
     }
 }
