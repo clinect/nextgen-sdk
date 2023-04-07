@@ -42,6 +42,6 @@ class NextGenServiceProvider extends ServiceProvider
 
     protected function packagePath($path = '')
     {
-        return sprintf('%s/../%s', __DIR__, $path);
+        return sprintf('%s/../../%s', __DIR__, $path);
     }
 }
