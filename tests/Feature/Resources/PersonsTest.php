@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Requests;
+namespace Clinect\NextGen\Tests\Feature\Resources;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Requests\Persons\GetAllPersons;
