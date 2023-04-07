@@ -52,7 +52,7 @@ abstract class Request
         $endpoint = rtrim($this->defaultEndpoint(), '/') . rtrim($this->endpoint, '/');
 
         if (!is_null($this->practiceId) || (is_string($this->practiceId) && strlen($this->practiceId) > 0)) {
-            $endpoint =  "/{$this->practiceId}{$endpoint}";
+            $endpoint =  "/{$this->practiceId}/{$endpoint}";
         }
 
         $this->endpoint = $endpoint;
@@ -96,7 +96,7 @@ abstract class Request
     }
 
     public static function __callStatic($method, $arguments)
-    {
+    { 
         if (in_array($method, ['withPracticeId'])) {
             return call_user_func([new static, 'setPracticeId'], $arguments[0]);
         }
