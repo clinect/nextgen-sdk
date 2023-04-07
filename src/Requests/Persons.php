@@ -39,12 +39,22 @@ class Persons extends Request
 
     public function insurances(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/insurance')->withUriParamId($id);
+        return $this->addEndpoint('/insurances')->withUriParamId($id);
     }
 
     public function cards(int|string|null $id = null): static
     {
         return $this->addEndpoint('/card')->withUriParamId($id);
+    }
+
+    public function back(): static
+    {
+        return $this->addEndpoint('/back');
+    }
+
+    public function front(): static
+    {
+        return $this->addEndpoint('/front');
     }
 
     public function search(array $queries): \Saloon\Http\Request
