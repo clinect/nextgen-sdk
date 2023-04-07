@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Requests\Chart;
+use Clinect\NextGen\Requests\Charts;
 use Clinect\NextGen\Tests\Stubs\Chart as ChartStub;
 
 class ChartTests extends TestCase
@@ -19,7 +19,7 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Chart)->get();
+        $request = (new Charts)->get();
 
         $response = $connector->send($request);
 
@@ -39,7 +39,7 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Chart('id-3'))->get();
+        $request = (new Charts('id-3'))->get();
 
         $response = $connector->send($request);
 
@@ -56,7 +56,7 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Chart('id-4'))->get();
+        $request = (new Charts('id-4'))->get();
 
         $response = $connector->send($request);
 

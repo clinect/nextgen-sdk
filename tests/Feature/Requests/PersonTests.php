@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Requests\Person;
+use Clinect\NextGen\Requests\Persons;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class PersonTests extends TestCase
@@ -19,7 +19,7 @@ class PersonTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Person)->get();
+        $request = (new Persons)->get();
 
         $response = $connector->send($request);
 
@@ -39,7 +39,7 @@ class PersonTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Person('id-3'))->get();
+        $request = (new Persons('id-3'))->get();
 
         $response = $connector->send($request);
 
@@ -56,7 +56,7 @@ class PersonTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Person('id-4'))->get();
+        $request = (new Persons('id-4'))->get();
 
         $response = $connector->send($request);
 
