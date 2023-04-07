@@ -21,7 +21,6 @@ class GetPersonCharge extends Request
 
     public function resolveEndpoint(): string
     {
-        // $nextgen->person($patientId)->charges()->find($chargeId)
         return "/persons/{$this->patientId}/chart/charges/{$this->chargeId}";
     }
 
