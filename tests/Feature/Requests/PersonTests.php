@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Requests\Persons;
+use Clinect\NextGen\Requests\PersonRequests;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class PersonTests extends TestCase
@@ -19,7 +19,7 @@ class PersonTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Persons)->get();
+        $request = (new PersonRequests)->get();
 
         $response = $connector->send($request);
 
@@ -39,7 +39,7 @@ class PersonTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Persons('id-3'))->get();
+        $request = (new PersonRequests('id-3'))->get();
 
         $response = $connector->send($request);
 
@@ -48,7 +48,7 @@ class PersonTests extends TestCase
         $this->assertSame($response->json('category'), 'person-3');
     }
 
-    public function testAppointmentNotFound()
+    public function testPersonNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -56,7 +56,7 @@ class PersonTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Persons('id-4'))->get();
+        $request = (new PersonRequests('id-4'))->get();
 
         $response = $connector->send($request);
 

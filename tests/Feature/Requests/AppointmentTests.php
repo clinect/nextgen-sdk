@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Requests\Appointment;
+use Clinect\NextGen\Requests\AppointmentRequests;
 use Clinect\NextGen\Tests\Stubs\Appointment as AppointmentStub;
 
 class AppointmentTests extends TestCase
@@ -19,7 +19,7 @@ class AppointmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Appointment)->get();
+        $request = (new AppointmentRequests)->get();
 
         $response = $connector->send($request);
 
@@ -39,7 +39,7 @@ class AppointmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Appointment('id-3'))->get();
+        $request = (new AppointmentRequests('id-3'))->get();
 
         $response = $connector->send($request);
 
@@ -56,7 +56,7 @@ class AppointmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = (new Appointment('id-4'))->get();
+        $request = (new AppointmentRequests('id-4'))->get();
 
         $response = $connector->send($request);
 
