@@ -17,7 +17,14 @@ trait Appointment
                 'category' => 'appointment-3',
             ], 200),
 
-            "{$baseUrl}/appointments/*" => MockResponse::make([
+            "{$baseUrl}/*/appointments/*/healthhistoryforms" => MockResponse::make($this->healthHistoryForms(), 200),
+
+            "{$baseUrl}/*/appointments/*/healthhistoryforms/id-3" => MockResponse::make([
+                'name' => 'Appointment health history 3',
+                'category' => 'appointment-health-history-3',
+            ], 200),
+
+            "*" => MockResponse::make([
                 'error' => 'No data available'
             ], 404),
         ]);
@@ -32,6 +39,19 @@ trait Appointment
             ], [
                 'name' => 'Appointment 2',
                 'category' => 'appointment-2',
+            ]
+        ];
+    }
+
+    protected function healthHistoryForms(): array
+    {
+        return [
+            [
+                'name' => 'Appointment health history 1',
+                'category' => 'appointment-health-history-1',
+            ], [
+                'name' => 'Appointment health history 2',
+                'category' => 'appointment-health-history-2',
             ]
         ];
     }
