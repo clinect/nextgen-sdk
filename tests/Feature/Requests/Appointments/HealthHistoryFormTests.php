@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Requests;
+namespace Clinect\NextGen\Tests\Feature\Requests\Appointments;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
