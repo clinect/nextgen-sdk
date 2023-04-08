@@ -13,7 +13,8 @@ composer require clinect/nextgen-sdk
 Simply call the `send` method with the request class you would like to send. Once sent, a `Response` is returned.
 
 ```php
-use Clinect\NextGen;
+use Clinect\NextGen\NextGen;
+use Clinect\NextGen\Requests\PersonRequests;
 
 $connector = new NextGen(
     clientId: 'client-id-123',
@@ -23,7 +24,9 @@ $connector = new NextGen(
     practiceId: 'practice-id-123',
 );
 
-$results = $connector->persons()->paginator();
+$request = (new PersonRequests)->get();
+
+$results = $connector->send($request);
 
 foreach($results as $result) {
     // Handle result
@@ -31,16 +34,19 @@ foreach($results as $result) {
 ```
 
 ## Paginated Results
-You may prefer to retrieve all the results from the paginated requests by using the `paginator` method on the connector.
+You may prefer to retrieve all the results from the paginated requests by using the `paginate` method on the connector.
 
 ```php
 <?php
 
-use Clinect\NextGen;
+use Clinect\NextGen\NextGen;
+use Clinect\NextGen\Requests\PersonRequests;
 
 $connector = new NextGen();
 
-$results = $connector->persons()->paginator();
+$request = (new PersonRequests)->get();
+
+$results = $connector->paginate($request);
 
 foreach($results as $result) {
     // Handle result
@@ -50,14 +56,19 @@ foreach($results as $result) {
 ## Laravel usage
 
 ```php
+<?php
+
+use Clinect\NextGen\NextGen;
+use Clinect\NextGen\Requests\PersonRequests;
+
 class UserController extends Controller
 {
-    public function showProfile($id, NextGen $nextgen)
+    public function show($id, NextGen $connector)
     {
-        $user = Cache::get('user:'.$id);
-        
+        $request = (new PersonRequests)->get();
+
         return view('profile', [
-            'persons' => $nextgen->persons()->paginator(),
+            'persons' => $connector->paginate($request),
         ]);
     }
 }
