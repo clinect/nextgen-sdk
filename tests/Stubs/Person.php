@@ -50,6 +50,32 @@ trait Person
                 'category' => 'person-encounter-3',
             ], 200),
 
+            // Person insurances
+            "{$baseUrl}/persons/*/insurances" => MockResponse::make($this->insurances(), 200),
+
+            "{$baseUrl}/persons/*/insurances/id-3" => MockResponse::make([
+                'name' => 'Person insurance 3',
+                'category' => 'person-insurance-3',
+            ], 200),
+
+            // Person insurance cards
+            "{$baseUrl}/persons/*/insurances/*/cards" => MockResponse::make($this->insuranceCards(), 200),
+
+            "{$baseUrl}/persons/*/insurances/*/cards/id-3" => MockResponse::make([
+                'name' => 'Person insurance card 3',
+                'category' => 'person-insurance-card-3',
+            ], 200),
+
+            "{$baseUrl}/persons/*/insurances/*/cards/*/back" => MockResponse::make([
+                'name' => 'Person insurance card back 3',
+                'category' => 'person-insurance-card-back-3',
+            ], 200),
+
+            "{$baseUrl}/persons/*/insurances/*/cards/*/front" => MockResponse::make([
+                'name' => 'Person insurance card front 3',
+                'category' => 'person-insurance-card-front-3',
+            ], 200),
+
             // Error 404: Not found
             "*" => MockResponse::make([
                 'error' => 'No data available'
@@ -118,6 +144,32 @@ trait Person
             ], [
                 'name' => 'Person encounter 2',
                 'category' => 'person-encounter-2',
+            ]
+        ];
+    }
+
+    protected function insurances(): array
+    {
+        return [
+            [
+                'name' => 'Person insurance 1',
+                'category' => 'person-insurance-1',
+            ], [
+                'name' => 'Person insurance 2',
+                'category' => 'person-insurance-2',
+            ]
+        ];
+    }
+
+    protected function insuranceCards(): array
+    {
+        return [
+            [
+                'name' => 'Person insurance card 1',
+                'category' => 'person-insurance-card-1',
+            ], [
+                'name' => 'Person insurance card 2',
+                'category' => 'person-insurance-card-2',
             ]
         ];
     }
