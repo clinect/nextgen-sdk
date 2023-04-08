@@ -55,7 +55,7 @@ abstract class Request
             $endpoint =  "/{$this->practiceId}/{$endpoint}";
         }
 
-        $this->endpoint = $endpoint;
+        $this->endpoint = str_replace('//', '/', $endpoint);
     }
 
     public function get(): BaseRequest
