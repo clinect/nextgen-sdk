@@ -44,7 +44,7 @@ class PersonRequests extends Request
 
     public function cards(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/card')->withUriParamId($id);
+        return $this->addEndpoint('/cards')->withUriParamId($id);
     }
 
     public function back(): static
