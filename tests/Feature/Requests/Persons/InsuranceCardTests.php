@@ -54,6 +54,48 @@ class InsuranceCardTests extends TestCase
         $this->assertSame($response->json('category'), 'person-insurance-card-3');
     }
 
+    public function testCanSeeInsuranceCardBack()
+    {
+        $baseUrl = 'test.clinect.com';
+
+        $connector = new NextGen(baseUrl: $baseUrl);
+
+        $connector->withMockClient($this->client($baseUrl));
+
+        $request = (new PersonRequests('person-id'))
+            ->insurances('insurance-id')
+            ->cards('card-id')
+            ->back()
+            ->get();
+
+        $response = $connector->send($request);
+
+        $this->assertSame($response->status(), 200);
+        $this->assertSame($response->json('name'), 'Person insurance card back 3');
+        $this->assertSame($response->json('category'), 'person-insurance-card-back-3');
+    }
+
+    public function testCanSeeInsuranceCardFront()
+    {
+        $baseUrl = 'test.clinect.com';
+
+        $connector = new NextGen(baseUrl: $baseUrl);
+
+        $connector->withMockClient($this->client($baseUrl));
+
+        $request = (new PersonRequests('person-id'))
+            ->insurances('insurance-id')
+            ->cards('card-id')
+            ->front()
+            ->get();
+
+        $response = $connector->send($request);
+
+        $this->assertSame($response->status(), 200);
+        $this->assertSame($response->json('name'), 'Person insurance card front 3');
+        $this->assertSame($response->json('category'), 'person-insurance-card-front-3');
+    }
+
     public function testInsuranceCardNotFound()
     {
         $baseUrl = 'test.clinect.com';
