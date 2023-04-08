@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
-class Master extends Request
+class MasterRequests extends Request
 {
     public function defaultEndpoint(): string
     {

@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
-class Patients extends Request
+class PatientRequests extends Request
 {
     public function __construct(
         public int|string|null $id = null,

@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Requests;
 
 use Clinect\NextGen\Requests\Request;
 
-class Insurance extends Request
+class InsuranceRequests extends Request
 {
     public function __construct(
         public int|string|null $id = null
@@ -17,7 +17,6 @@ class Insurance extends Request
         return '/insurances';
     }
 
-    // sendasync
     public function details(string $href)
     {
         return $this->addEndpoint($href);

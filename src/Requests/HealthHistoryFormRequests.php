@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
-class HealthHistoryForms extends Request
+class HealthHistoryFormRequests extends Request
 {
     public function __construct(
         public int|string|null $id = null,
