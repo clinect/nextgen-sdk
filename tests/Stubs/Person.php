@@ -19,33 +19,33 @@ trait Person
             ], 200),
 
             // Person balances
-            "{$baseUrl}/persons/chart/balances" => MockResponse::make($this->balances(), 200),
+            "{$baseUrl}/persons/*/chart/balances" => MockResponse::make($this->balances(), 200),
 
-            "{$baseUrl}/persons/chart/balances/id-3" => MockResponse::make([
+            "{$baseUrl}/persons/*/chart/balances/id-3" => MockResponse::make([
                 'name' => 'Person balance 3',
                 'category' => 'person-balance-3',
             ], 200),
 
             // Person charges
-            "{$baseUrl}/persons/chart/charges" => MockResponse::make($this->charges(), 200),
+            "{$baseUrl}/persons/*/chart/charges" => MockResponse::make($this->charges(), 200),
 
-            "{$baseUrl}/persons/chart/charges/id-3" => MockResponse::make([
+            "{$baseUrl}/persons/*/chart/charges/id-3" => MockResponse::make([
                 'name' => 'Person charge 3',
                 'category' => 'person-charge-3',
             ], 200),
 
             // Person charts
-            "{$baseUrl}/persons/chart" => MockResponse::make($this->charts(), 200),
+            "{$baseUrl}/persons/*/chart" => MockResponse::make($this->charts(), 200),
 
-            "{$baseUrl}/persons/chart/id-3" => MockResponse::make([
+            "{$baseUrl}/persons/*/chart/id-3" => MockResponse::make([
                 'name' => 'Person chart 3',
                 'category' => 'person-chart-3',
             ], 200),
 
             // Person encounters
-            "{$baseUrl}/persons/chart/encounters" => MockResponse::make($this->encounters(), 200),
+            "{$baseUrl}/persons/*/chart/encounters" => MockResponse::make($this->encounters(), 200),
 
-            "{$baseUrl}/persons/chart/encounters/id-3" => MockResponse::make([
+            "{$baseUrl}/persons/*/chart/encounters/id-3" => MockResponse::make([
                 'name' => 'Person encounter 3',
                 'category' => 'person-encounter-3',
             ], 200),
