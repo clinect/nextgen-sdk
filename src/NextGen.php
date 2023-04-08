@@ -5,12 +5,9 @@ namespace Clinect\NextGen;
 use Saloon\Http\Request;
 use Saloon\Http\Connector;
 use Saloon\Http\Paginators\PagedPaginator;
-use Clinect\NextGen\Requests\HasRequestResources;
 
 class NextGen extends Connector
 {
-    use HasRequestResources;
-
     public int $perPage = 20;
 
     public function __construct(
