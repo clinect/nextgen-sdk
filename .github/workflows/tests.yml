@@ -11,7 +11,7 @@ on:
       - dev-master
 
 jobs:
-  laravel-tests:
+  tests:
     runs-on: ubuntu-latest
     
     steps:
