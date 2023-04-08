@@ -58,12 +58,6 @@ abstract class Request
         $this->endpoint = $endpoint;
     }
 
-    public function sample()
-    {
-        $this->cleanUpEndpoint();
-        return $this;
-    }
-
     public function get(): BaseRequest
     {
         $this->cleanUpEndpoint();
