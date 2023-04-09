@@ -11,7 +11,7 @@ class ChartTests extends TestCase
 {
     use PersonStub;
 
-    public function testCanSeeAllCharges()
+    public function testCanSeePersonAllCharts()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -31,7 +31,7 @@ class ChartTests extends TestCase
         }
     }
 
-    public function testCanSeeCharge()
+    public function testCanSeePersonChart()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -48,7 +48,7 @@ class ChartTests extends TestCase
         $this->assertSame($response->json('category'), 'person-chart-3');
     }
 
-    public function testChargeNotFound()
+    public function testPersonChartNotFound()
     {
         $baseUrl = 'test.clinect.com';
 

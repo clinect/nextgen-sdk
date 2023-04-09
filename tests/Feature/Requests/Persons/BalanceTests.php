@@ -11,7 +11,7 @@ class BalanceTests extends TestCase
 {
     use PersonStub;
 
-    public function testCanSeeAllBalances()
+    public function testCanSeePersonAllBalances()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -31,7 +31,7 @@ class BalanceTests extends TestCase
         }
     }
 
-    public function testCanSeeBalance()
+    public function testCanSeePersonBalance()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -48,7 +48,7 @@ class BalanceTests extends TestCase
         $this->assertSame($response->json('category'), 'person-balance-3');
     }
 
-    public function testBalanceNotFound()
+    public function testPersonBalanceNotFound()
     {
         $baseUrl = 'test.clinect.com';
 

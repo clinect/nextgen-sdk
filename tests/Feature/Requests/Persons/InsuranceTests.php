@@ -11,7 +11,7 @@ class InsuranceTests extends TestCase
 {
     use PersonStub;
 
-    public function testCanSeeAllInsurances()
+    public function testCanSeePersonAllInsurances()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -33,7 +33,7 @@ class InsuranceTests extends TestCase
         }
     }
 
-    public function testCanSeeInsurance()
+    public function testCanSeePersonInsurance()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -52,7 +52,7 @@ class InsuranceTests extends TestCase
         $this->assertSame($response->json('category'), 'person-insurance-3');
     }
 
-    public function testInsuranceNotFound()
+    public function testPersonInsuranceNotFound()
     {
         $baseUrl = 'test.clinect.com';
 

@@ -11,7 +11,7 @@ class HealthHistoryFormTests extends TestCase
 {
     use HealthHistoryFormStub;
 
-    public function testCanSeeAllAppointments()
+    public function testCanSeeAllHealthHistoryForms()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -31,7 +31,7 @@ class HealthHistoryFormTests extends TestCase
         }
     }
 
-    public function testCanSeeAppointment()
+    public function testCanSeeHealthHistoryForm()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -48,7 +48,7 @@ class HealthHistoryFormTests extends TestCase
         $this->assertSame($response->json('category'), 'health-history-3');
     }
 
-    public function testAppointmentNotFound()
+    public function testHealthHistoryFormNotFound()
     {
         $baseUrl = 'test.clinect.com';
 

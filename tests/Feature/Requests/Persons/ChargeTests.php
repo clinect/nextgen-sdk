@@ -11,7 +11,7 @@ class ChargeTests extends TestCase
 {
     use PersonStub;
 
-    public function testCanSeeAllCharges()
+    public function testCanSeePersonAllCharges()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -31,7 +31,7 @@ class ChargeTests extends TestCase
         }
     }
 
-    public function testCanSeeCharge()
+    public function testCanSeePersonCharge()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -48,7 +48,7 @@ class ChargeTests extends TestCase
         $this->assertSame($response->json('category'), 'person-charge-3');
     }
 
-    public function testChargeNotFound()
+    public function testPersonChargeNotFound()
     {
         $baseUrl = 'test.clinect.com';
 

@@ -48,7 +48,7 @@ class ChartTests extends TestCase
         $this->assertSame($response->json('category'), 'chart-3');
     }
 
-    public function testAppointmentNotFound()
+    public function testChartNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
