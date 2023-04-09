@@ -11,7 +11,7 @@ class InsuranceCardTests extends TestCase
 {
     use PersonStub;
 
-    public function testCanSeeAllInsuranceCards()
+    public function testCanSeePersonAllInsuranceCards()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -34,7 +34,7 @@ class InsuranceCardTests extends TestCase
         }
     }
 
-    public function testCanSeeInsuranceCard()
+    public function testCanSeePersonInsuranceCard()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -54,7 +54,7 @@ class InsuranceCardTests extends TestCase
         $this->assertSame($response->json('category'), 'person-insurance-card-3');
     }
 
-    public function testCanSeeInsuranceCardBack()
+    public function testCanSeePersonInsuranceCardBack()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -75,7 +75,7 @@ class InsuranceCardTests extends TestCase
         $this->assertSame($response->json('category'), 'person-insurance-card-back-3');
     }
 
-    public function testCanSeeInsuranceCardFront()
+    public function testCanSeePersonInsuranceCardFront()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -96,7 +96,7 @@ class InsuranceCardTests extends TestCase
         $this->assertSame($response->json('category'), 'person-insurance-card-front-3');
     }
 
-    public function testInsuranceCardNotFound()
+    public function testPersonInsuranceCardNotFound()
     {
         $baseUrl = 'test.clinect.com';
 

@@ -11,7 +11,7 @@ class PatientTests extends TestCase
 {
     use PatientStub;
 
-    public function testCanSeePerson()
+    public function testCanSeePatient()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -28,7 +28,7 @@ class PatientTests extends TestCase
         $this->assertSame($response->json('category'), 'patient-3');
     }
 
-    public function testPersonNotFound()
+    public function testPatientNotFound()
     {
         $baseUrl = 'test.clinect.com';
 

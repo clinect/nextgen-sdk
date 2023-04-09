@@ -11,7 +11,7 @@ class DepartmentTests extends TestCase
 {
     use DepartmentStub;
 
-    public function testCanSeeAllCharges()
+    public function testCanSeeAllDepartments()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -31,7 +31,7 @@ class DepartmentTests extends TestCase
         }
     }
 
-    public function testCanSeeCharge()
+    public function testCanSeeDepartment()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -48,7 +48,7 @@ class DepartmentTests extends TestCase
         $this->assertSame($response->json('category'), 'department-3');
     }
 
-    public function testChargeNotFound()
+    public function testDepartmentNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
