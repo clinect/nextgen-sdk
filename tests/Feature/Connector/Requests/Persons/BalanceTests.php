@@ -1,16 +1,16 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Resources\Requests;
+namespace Clinect\NextGen\Tests\Feature\Connector\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Tests\Stubs\Appointment as AppointmentStub;
+use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
-class AppointmentTests extends TestCase
+class BalanceTests extends TestCase
 {
-    use AppointmentStub;
+    use PersonStub;
 
-    public function testCanSeeAllAppointments()
+    public function testCanSeeAllBalances()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -18,19 +18,19 @@ class AppointmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->appointments()->get();
+        $request = $connector->persons('person-id')->balances()->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
 
         foreach ($response->json() as $key => $result) {
-            $this->assertSame($this->all()[$key]['name'], $result['name']);
-            $this->assertSame($this->all()[$key]['category'], $result['category']);
+            $this->assertSame($this->balances()[$key]['name'], $result['name']);
+            $this->assertSame($this->balances()[$key]['category'], $result['category']);
         }
     }
 
-    public function testCanSeeAppointment()
+    public function testCanSeeBalance()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -38,16 +38,16 @@ class AppointmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->appointments('id-3')->get();
+        $request = $connector->persons('person-id')->balances('id-3')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
-        $this->assertSame($response->json('name'), 'Appointment 3');
-        $this->assertSame($response->json('category'), 'appointment-3');
+        $this->assertSame($response->json('name'), 'Person balance 3');
+        $this->assertSame($response->json('category'), 'person-balance-3');
     }
 
-    public function testAppointmentNotFound()
+    public function testBalanceNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -55,7 +55,7 @@ class AppointmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->appointments('id-4')->get();
+        $request = $connector->persons('person-id')->balances('id-4')->get();
 
         $response = $connector->send($request);
 

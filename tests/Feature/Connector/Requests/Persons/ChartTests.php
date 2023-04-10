@@ -1,16 +1,16 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Resources\Requests;
+namespace Clinect\NextGen\Tests\Feature\Connector\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Tests\Stubs\HealthHistoryForm as HealthHistoryFormStub;
+use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
-class HealthHistoryFormTests extends TestCase
+class ChartTests extends TestCase
 {
-    use HealthHistoryFormStub;
+    use PersonStub;
 
-    public function testCanSeeAllAppointments()
+    public function testCanSeeAllCharges()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -18,19 +18,19 @@ class HealthHistoryFormTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->healthHistoryForms()->withPracticeId('practice-id')->get();
+        $request = $connector->persons('person-id')->charts()->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
 
         foreach ($response->json() as $key => $result) {
-            $this->assertSame($this->all()[$key]['name'], $result['name']);
-            $this->assertSame($this->all()[$key]['category'], $result['category']);
+            $this->assertSame($this->charts()[$key]['name'], $result['name']);
+            $this->assertSame($this->charts()[$key]['category'], $result['category']);
         }
     }
 
-    public function testCanSeeAppointment()
+    public function testCanSeeCharge()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -38,16 +38,16 @@ class HealthHistoryFormTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->healthHistoryForms('id-3')->withPracticeId('practice-id')->get();
+        $request = $connector->persons('person-id')->charts('id-3')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
-        $this->assertSame($response->json('name'), 'Health history 3');
-        $this->assertSame($response->json('category'), 'health-history-3');
+        $this->assertSame($response->json('name'), 'Person chart 3');
+        $this->assertSame($response->json('category'), 'person-chart-3');
     }
 
-    public function testAppointmentNotFound()
+    public function testChargeNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -55,7 +55,7 @@ class HealthHistoryFormTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->healthHistoryForms('id-4')->withPracticeId('practice-id')->get();
+        $request = $connector->persons('person-id')->charts('id-4')->get();
 
         $response = $connector->send($request);
 

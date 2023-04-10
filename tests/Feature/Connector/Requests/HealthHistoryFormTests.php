@@ -1,16 +1,16 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Resources\Requests\Persons;
+namespace Clinect\NextGen\Tests\Feature\Connector\Requests;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Tests\Stubs\Department as DepartmentStub;
+use Clinect\NextGen\Tests\Stubs\HealthHistoryForm as HealthHistoryFormStub;
 
-class DepartmentTests extends TestCase
+class HealthHistoryFormTests extends TestCase
 {
-    use DepartmentStub;
+    use HealthHistoryFormStub;
 
-    public function testCanSeeAllCharges()
+    public function testCanSeeAllAppointments()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -18,7 +18,7 @@ class DepartmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->departments()->withPracticeId('practice-id')->get();
+        $request = $connector->healthHistoryForms()->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
@@ -30,7 +30,7 @@ class DepartmentTests extends TestCase
         }
     }
 
-    public function testCanSeeCharge()
+    public function testCanSeeAppointment()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -38,16 +38,16 @@ class DepartmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->departments('id-3')->withPracticeId('practice-id')->get();
+        $request = $connector->healthHistoryForms('id-3')->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
-        $this->assertSame($response->json('name'), 'Department 3');
-        $this->assertSame($response->json('category'), 'department-3');
+        $this->assertSame($response->json('name'), 'Health history 3');
+        $this->assertSame($response->json('category'), 'health-history-3');
     }
 
-    public function testChargeNotFound()
+    public function testAppointmentNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -55,7 +55,7 @@ class DepartmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->departments('department-id')->withPracticeId('practice-id')->get();
+        $request = $connector->healthHistoryForms('id-4')->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 

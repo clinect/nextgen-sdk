@@ -1,14 +1,14 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Resources\Requests\Persons;
+namespace Clinect\NextGen\Tests\Feature\Connector\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
+use Clinect\NextGen\Tests\Stubs\Department as DepartmentStub;
 
-class ChargeTests extends TestCase
+class DepartmentTests extends TestCase
 {
-    use PersonStub;
+    use DepartmentStub;
 
     public function testCanSeeAllCharges()
     {
@@ -18,15 +18,15 @@ class ChargeTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->persons('person-id')->charges()->get();
+        $request = $connector->departments()->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
 
         foreach ($response->json() as $key => $result) {
-            $this->assertSame($this->charges()[$key]['name'], $result['name']);
-            $this->assertSame($this->charges()[$key]['category'], $result['category']);
+            $this->assertSame($this->all()[$key]['name'], $result['name']);
+            $this->assertSame($this->all()[$key]['category'], $result['category']);
         }
     }
 
@@ -38,13 +38,13 @@ class ChargeTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->persons('person-id')->charges('id-3')->get();
+        $request = $connector->departments('id-3')->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
-        $this->assertSame($response->json('name'), 'Person charge 3');
-        $this->assertSame($response->json('category'), 'person-charge-3');
+        $this->assertSame($response->json('name'), 'Department 3');
+        $this->assertSame($response->json('category'), 'department-3');
     }
 
     public function testChargeNotFound()
@@ -55,7 +55,7 @@ class ChargeTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->persons('person-id')->charges('id-4')->get();
+        $request = $connector->departments('department-id')->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 

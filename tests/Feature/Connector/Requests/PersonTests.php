@@ -1,16 +1,16 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Resources\Requests\Persons;
+namespace Clinect\NextGen\Tests\Feature\Connector\Requests;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
-class BalanceTests extends TestCase
+class PersonTests extends TestCase
 {
     use PersonStub;
 
-    public function testCanSeeAllBalances()
+    public function testCanSeeAllPersons()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -18,19 +18,19 @@ class BalanceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->persons('person-id')->balances()->get();
+        $request = $connector->persons()->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
 
         foreach ($response->json() as $key => $result) {
-            $this->assertSame($this->balances()[$key]['name'], $result['name']);
-            $this->assertSame($this->balances()[$key]['category'], $result['category']);
+            $this->assertSame($this->persons()[$key]['name'], $result['name']);
+            $this->assertSame($this->persons()[$key]['category'], $result['category']);
         }
     }
 
-    public function testCanSeeBalance()
+    public function testCanSeePerson()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -38,16 +38,16 @@ class BalanceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->persons('person-id')->balances('id-3')->get();
+        $request = $connector->persons('id-3')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
-        $this->assertSame($response->json('name'), 'Person balance 3');
-        $this->assertSame($response->json('category'), 'person-balance-3');
+        $this->assertSame($response->json('name'), 'Person 3');
+        $this->assertSame($response->json('category'), 'person-3');
     }
 
-    public function testBalanceNotFound()
+    public function testPersonNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -55,7 +55,7 @@ class BalanceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->persons('person-id')->balances('id-4')->get();
+        $request = $connector->persons('id-4')->get();
 
         $response = $connector->send($request);
 

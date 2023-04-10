@@ -1,12 +1,12 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Resources\Requests\Persons;
+namespace Clinect\NextGen\Tests\Feature\Connector\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
-class ChartTests extends TestCase
+class EncounterTests extends TestCase
 {
     use PersonStub;
 
@@ -18,15 +18,15 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->persons('person-id')->charts()->get();
+        $request = $connector->persons('person-id')->encounters()->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
 
         foreach ($response->json() as $key => $result) {
-            $this->assertSame($this->charts()[$key]['name'], $result['name']);
-            $this->assertSame($this->charts()[$key]['category'], $result['category']);
+            $this->assertSame($this->encounters()[$key]['name'], $result['name']);
+            $this->assertSame($this->encounters()[$key]['category'], $result['category']);
         }
     }
 
@@ -38,13 +38,13 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->persons('person-id')->charts('id-3')->get();
+        $request = $connector->persons('person-id')->encounters('id-3')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
-        $this->assertSame($response->json('name'), 'Person chart 3');
-        $this->assertSame($response->json('category'), 'person-chart-3');
+        $this->assertSame($response->json('name'), 'Person encounter 3');
+        $this->assertSame($response->json('category'), 'person-encounter-3');
     }
 
     public function testChargeNotFound()
@@ -55,7 +55,7 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->persons('person-id')->charts('id-4')->get();
+        $request = $connector->persons('person-id')->encounters('id-4')->get();
 
         $response = $connector->send($request);
 
