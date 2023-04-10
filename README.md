@@ -50,10 +50,17 @@ Master          - (new MasterRequests)              - $nextGenConnector->master(
     
 In order to use a get request you just have to append ``->get()`` to the request
 ```php
+// This retrieves all of the persons data. Endpoint:  '/persons/{$personId}
+    
 // Via Request
-$request = (new AppointmentRequests)->get();
+    $request = (new PersonRequests)->get();
+    // With Id
+    $request = (new PersonRequests($personId))->get();
+    
 // Via Connector
-$request = $nextGenConnector->appointments()->get();
+    $request = $nextGenConnector->persons()->get();
+    // With Id
+    $request = $nextGenConnector->persons($personId)->get();
 ```
 
 <details>
@@ -62,29 +69,29 @@ $request = $nextGenConnector->appointments()->get();
 Requests can also be connected dependent on their api endpoints.
  
 ```php
-// endpoint: '/persons/{$personId}/chart/balances/{$balanceId - this is optional}'
-// this request retrieves person's/patient's balances
+// Endpoint: '/persons/{$personId}/chart/balances/{$balanceId - this is optional}'
+// This request retrieves person's/patient's balances
 
-//Via Request:
+// Via Request:
 $request = (new PersonRequests($personId))->balances($balanceId)->get();
 
-//Via Connector:
+// Via Connector:
 $request = $connector->persons($personId)->balances($balanceId)->get();
 ```
   
  ```php
  
-// endpoint: '/persons/{$personId}/insurances/{insuranceId}/cards/{cardId}/front'
-// this request retrieves the front part of the person's insurance card
+// Endpoint: '/persons/{$personId}/insurances/{insuranceId}/cards/{cardId}/front'
+// This request retrieves the front part of the person's insurance card
 
-//Via Request:
+// Via Request:
 $request = (new PersonRequests($personId))
             ->insurances($insuranceId)
             ->cards($cardId)
             ->front()
             ->get();
 
-//Via Connector:
+// Via Connector:
 $request = $connector->persons($personId)
             ->insurances($insuranceId)
             ->cards($cardId)
@@ -92,11 +99,11 @@ $request = $connector->persons($personId)
             ->get();
 ```
 
-For detailed use of the requests, please check out our tests located in:
+You can also check our tests to see more examples:
 
 ``Via Request: /tests/Feature/Requests/``
 
-``Via Connector: /tests/Feature/Resources/Requests/``
+``Via Connector: /tests/Feature/Connector/Requests/``
     
 All tests corresponds to a specific api endpoint, the id's are all **optional**. If you want to retrieve all of the data; skip the id's, and if you want to retrieve a specific data of the request; pass the id to the request.
     
