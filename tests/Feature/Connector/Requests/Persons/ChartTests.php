@@ -10,7 +10,7 @@ class ChartTests extends TestCase
 {
     use PersonStub;
 
-    public function testCanSeeAllCharges()
+    public function testCanSeePersonAllCharts()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -18,6 +18,7 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/chart
         $request = $connector->persons('person-id')->charts()->get();
 
         $response = $connector->send($request);
@@ -30,7 +31,7 @@ class ChartTests extends TestCase
         }
     }
 
-    public function testCanSeeCharge()
+    public function testCanSeePersonChart()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -38,6 +39,7 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/chart/{$chartId}
         $request = $connector->persons('person-id')->charts('id-3')->get();
 
         $response = $connector->send($request);
@@ -47,7 +49,7 @@ class ChartTests extends TestCase
         $this->assertSame($response->json('category'), 'person-chart-3');
     }
 
-    public function testChargeNotFound()
+    public function testPersonChartNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -55,6 +57,7 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/chart/{$chartId}
         $request = $connector->persons('person-id')->charts('id-4')->get();
 
         $response = $connector->send($request);

@@ -19,6 +19,7 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/chart
         $request = (new PersonRequests('person-id'))->charts()->get();
 
         $response = $connector->send($request);
@@ -39,6 +40,7 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/chart/{$chartId}
         $request = (new PersonRequests('person-id'))->charts('id-3')->get();
 
         $response = $connector->send($request);
@@ -56,6 +58,7 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/chart/{$chartId}
         $request = (new PersonRequests('person-id'))->charts('id-4')->get();
 
         $response = $connector->send($request);

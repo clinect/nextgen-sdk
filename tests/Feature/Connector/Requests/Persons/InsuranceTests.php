@@ -10,7 +10,7 @@ class InsuranceTests extends TestCase
 {
     use PersonStub;
 
-    public function testCanSeeAllInsurances()
+    public function testCanSeePersonAllInsurances()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -18,6 +18,7 @@ class InsuranceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/insurances
         $request = $connector->persons('person-id')
             ->insurances()
             ->get();
@@ -32,7 +33,7 @@ class InsuranceTests extends TestCase
         }
     }
 
-    public function testCanSeeInsurance()
+    public function testCanSeePersonInsurance()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -40,6 +41,7 @@ class InsuranceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/insurances/{$insuranceId}
         $request = $connector->persons('person-id')
             ->insurances('id-3')
             ->get();
@@ -51,7 +53,7 @@ class InsuranceTests extends TestCase
         $this->assertSame($response->json('category'), 'person-insurance-3');
     }
 
-    public function testInsuranceNotFound()
+    public function testPersonInsuranceNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -59,6 +61,7 @@ class InsuranceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/insurances/{$insuranceId}
         $request = $connector->persons('person-id')
             ->insurances('id-4')
             ->get();

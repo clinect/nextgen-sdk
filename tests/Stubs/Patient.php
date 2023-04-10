@@ -12,6 +12,8 @@ trait Patient
         return new MockClient([
             "{$baseUrl}/*/patients" => MockResponse::make($this->all(), 200),
 
+            "{$baseUrl}/patients/search" => MockResponse::make($this->search(), 200),
+
             "{$baseUrl}/*/patients/id-3" => MockResponse::make([
                 'name' => 'Patient 3',
                 'category' => 'patient-3',
@@ -32,6 +34,21 @@ trait Patient
             ], [
                 'name' => 'Patient 2',
                 'category' => 'patient-2',
+            ]
+        ];
+    }
+
+    protected function search(): array
+    {
+        return [
+            [
+                'name' => 'Patient Search 1',
+                'category' => 'patient-search-1',
+            ],
+
+            [
+                'name' => 'Patient Search 2',
+                'category' => 'patient-search-2',
             ]
         ];
     }

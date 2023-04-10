@@ -19,6 +19,7 @@ class DepartmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /{$practiceId}/departments
         $request = (new DepartmentRequests)->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
@@ -39,6 +40,7 @@ class DepartmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /{$practiceId}/departments/{$departmentId}
         $request = (new DepartmentRequests('id-3'))->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
@@ -56,6 +58,7 @@ class DepartmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /{$practiceId}/departments/{$departmentId}
         $request = (new DepartmentRequests('department-id'))->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
