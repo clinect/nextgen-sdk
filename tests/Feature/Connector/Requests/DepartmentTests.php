@@ -1,16 +1,16 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Resources\Requests;
+namespace Clinect\NextGen\Tests\Feature\Connector\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Tests\Stubs\Chart as ChartStub;
+use Clinect\NextGen\Tests\Stubs\Department as DepartmentStub;
 
-class ChartTests extends TestCase
+class DepartmentTests extends TestCase
 {
-    use ChartStub;
+    use DepartmentStub;
 
-    public function testCanSeeAllCharts()
+    public function testCanSeeAllDepartments()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -18,7 +18,8 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->charts()->get();
+        // Endpoint: /{$practiceId}/departments
+        $request = $connector->departments()->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
@@ -30,7 +31,7 @@ class ChartTests extends TestCase
         }
     }
 
-    public function testCanSeeChart()
+    public function testCanSeeDepartment()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -38,16 +39,17 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->charts('id-3')->get();
+        // Endpoint: /{$practiceId}/departments/{$departmentId}
+        $request = $connector->departments('id-3')->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
-        $this->assertSame($response->json('name'), 'Chart 3');
-        $this->assertSame($response->json('category'), 'chart-3');
+        $this->assertSame($response->json('name'), 'Department 3');
+        $this->assertSame($response->json('category'), 'department-3');
     }
 
-    public function testAppointmentNotFound()
+    public function testDepartmentNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -55,7 +57,8 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->charts('id-4')->get();
+        // Endpoint: /{$practiceId}/departments/{$departmentId}
+        $request = $connector->departments('department-id')->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 

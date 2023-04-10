@@ -1,16 +1,16 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Resources\Requests\Persons;
+namespace Clinect\NextGen\Tests\Feature\Connector\Requests;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Tests\Stubs\Department as DepartmentStub;
+use Clinect\NextGen\Tests\Stubs\Master as MasterStub;
 
-class DepartmentTests extends TestCase
+class MasterTest extends TestCase
 {
-    use DepartmentStub;
+    use MasterStub;
 
-    public function testCanSeeAllCharges()
+    public function testCanSeeAllMaster()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -18,7 +18,8 @@ class DepartmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->departments()->withPracticeId('practice-id')->get();
+        // Endpoint: /master
+        $request = $connector->master()->get();
 
         $response = $connector->send($request);
 
@@ -30,7 +31,7 @@ class DepartmentTests extends TestCase
         }
     }
 
-    public function testCanSeeCharge()
+    public function testCanSeeAllMasterPayer()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -38,16 +39,20 @@ class DepartmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->departments('id-3')->withPracticeId('practice-id')->get();
+        // Endpoint: /master/payers
+        $request = $connector->master()->payers()->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
-        $this->assertSame($response->json('name'), 'Department 3');
-        $this->assertSame($response->json('category'), 'department-3');
+
+        foreach ($response->json() as $key => $result) {
+            $this->assertSame($this->all('payer')[$key]['name'], $result['name']);
+            $this->assertSame($this->all('payer')[$key]['category'], $result['category']);
+        }
     }
 
-    public function testChargeNotFound()
+    public function testCanSeeMasterPayer()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -55,11 +60,13 @@ class DepartmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        $request = $connector->departments('department-id')->withPracticeId('practice-id')->get();
+        // Endpoint: /master/payers/{$payersId}
+        $request = $connector->master()->payers('id-2')->get();
 
         $response = $connector->send($request);
 
-        $this->assertSame($response->status(), 404);
-        $this->assertSame($response->json('error'), 'No data available');
+        $this->assertSame($response->status(), 200);
+        $this->assertSame($response->json('name'), 'Master Payer 2');
+        $this->assertSame($response->json('category'), 'master-payer-2');
     }
 }

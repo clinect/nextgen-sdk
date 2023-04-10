@@ -19,6 +19,7 @@ class InsuranceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/insurances
         $request = (new PersonRequests('person-id'))
             ->insurances()
             ->get();
@@ -41,6 +42,7 @@ class InsuranceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/insurances/{$insuranceId}
         $request = (new PersonRequests('person-id'))
             ->insurances('id-3')
             ->get();
@@ -60,6 +62,7 @@ class InsuranceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/insurances/{$insuranceId}
         $request = (new PersonRequests('person-id'))
             ->insurances('id-4')
             ->get();

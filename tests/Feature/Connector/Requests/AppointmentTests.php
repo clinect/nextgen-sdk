@@ -1,17 +1,16 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Requests;
+namespace Clinect\NextGen\Tests\Feature\Connector\Requests;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Requests\ChartRequests;
-use Clinect\NextGen\Tests\Stubs\Chart as ChartStub;
+use Clinect\NextGen\Tests\Stubs\Appointment as AppointmentStub;
 
-class ChartTests extends TestCase
+class AppointmentTests extends TestCase
 {
-    use ChartStub;
+    use AppointmentStub;
 
-    public function testCanSeeAllCharts()
+    public function testCanSeeAllAppointments()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -19,8 +18,8 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        // Endpoint: /charts
-        $request = (new ChartRequests)->get();
+        // Endpoint: /appointments
+        $request = $connector->appointments()->get();
 
         $response = $connector->send($request);
 
@@ -32,7 +31,7 @@ class ChartTests extends TestCase
         }
     }
 
-    public function testCanSeeChart()
+    public function testCanSeeAppointment()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -40,17 +39,17 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        // Endpoint: /charts/{$chartId}
-        $request = (new ChartRequests('id-3'))->get();
+        // Endpoint: /appointments/{$appointmentId}
+        $request = $connector->appointments('id-3')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
-        $this->assertSame($response->json('name'), 'Chart 3');
-        $this->assertSame($response->json('category'), 'chart-3');
+        $this->assertSame($response->json('name'), 'Appointment 3');
+        $this->assertSame($response->json('category'), 'appointment-3');
     }
 
-    public function testChartNotFound()
+    public function testAppointmentNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -58,8 +57,8 @@ class ChartTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
-        // Endpoint: /charts/{$chartId}
-        $request = (new ChartRequests('id-4'))->get();
+        // Endpoint: /appointments/{$appointmentId}
+        $request = $connector->appointments('id-4')->get();
 
         $response = $connector->send($request);
 

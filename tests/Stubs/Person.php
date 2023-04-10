@@ -13,6 +13,8 @@ trait Person
             // Person
             "{$baseUrl}/persons" => MockResponse::make($this->persons(), 200),
 
+            "{$baseUrl}/persons/lookup" => MockResponse::make($this->search(), 200),
+
             "{$baseUrl}/persons/id-3" => MockResponse::make([
                 'name' => 'Person 3',
                 'category' => 'person-3',
@@ -170,6 +172,21 @@ trait Person
             ], [
                 'name' => 'Person insurance card 2',
                 'category' => 'person-insurance-card-2',
+            ]
+        ];
+    }
+    
+    protected function search(): array
+    {
+        return [
+            [
+                'name' => 'Person Search 1',
+                'category' => 'person-search-1',
+            ],
+
+            [
+                'name' => 'Person Search 2',
+                'category' => 'person-search-2',
             ]
         ];
     }
