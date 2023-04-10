@@ -1,6 +1,6 @@
 # NextGen SDK
 
-## Installation
+## • Installation
 
 Use Composer to install this SDK.
 
@@ -8,7 +8,7 @@ Use Composer to install this SDK.
 composer require clinect/nextgen-sdk
 ```
 
-## Connector
+## • Connector
 
 Instantiate the connector by passing the required parameters, with that you can now retrieve and send the requests.
 
@@ -24,10 +24,10 @@ $nextGenConnector = new NextGen(
     practiceId: 'practice-id-123',
 );
 ```
-## Configuration
+## • Configuration
 
 
-## Requests
+## • Requests
 Currently, there are 8 request classes, you have two options to retrieve them:
 ```php
 Request         | Via Request                               | Via Connector
@@ -153,7 +153,7 @@ $promise = $nextGenConnector->sendAsync($request);
 
 </details>
 
-## Response
+## • Response
 You can handle the response of your request depending on what method you've used in sending the request
 
 <details>
