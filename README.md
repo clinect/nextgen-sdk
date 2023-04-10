@@ -30,7 +30,7 @@ $nextGenConnector = new NextGen(
 ## Requests
 Currently, there are 8 request classes, you have two options to retrieve them:
 ```php
-Request         | Directly via instantiating the request    | Via Connector
+Request         | Via Request                               | Via Connector
 Appointment     - (new AppointmentRequests)->get()          - $nextGenConnector->appointments()->get()
 Chart           - (new ChartRequests)->get()                - $nextGenConnector->charts()->get()
 Department      - (new DepartmentRequests)->get()           - $nextGenConnector->departments()->get()
@@ -43,12 +43,16 @@ Master          - (new MasterRequests)->get()               - $nextGenConnector-
 
 Requests can also be connected dependent on their api endpoints.
 
-**Example nested requests:**
-```php
+<details>
+  <summary>Example nested requests:</summary>
+ 
+  
+ ```php
+ 
 // endpoint: '/persons/{$personId}/insurances/{insuranceId}/cards/{cardId}/front'
 // this request retrieves the front part of the person's insurance card
 
-//Via Instantiated Request:
+//Via Request:
 $request = (new PersonRequests($personId))
             ->insurances($insuranceId)
             ->cards($cardId)
@@ -67,7 +71,7 @@ $request = $connector->persons($personId)
 // endpoint: '/persons/{$personId}/chart/balances/{$balanceId - this is optional}'
 // this request retrieves person's/patient's balances
 
-//Via Instantiated Request:
+//Via Request:
 $request = (new PersonRequests($personId))->balances($balanceId)->get();
 
 //Via Connector:
@@ -76,22 +80,22 @@ $request = $connector->persons($personId)->balances($balanceId)->get();
 
 For all the possible requests, please check out our tests located in:
 
-``Via Instantiated Request: /tests/Feature/Requests/``
+``Via Request: /tests/Feature/Requests/``
 
 ``Via Connector: /tests/Feature/Resources/Requests/``
+</details
 
-All tests corresponds to a specific api endpoint, the id's are all **optional**.
+All tests corresponds to a specific api endpoint, the id's are all **optional**. If you want to retrieve all of the data; skip the id's, and if you want to retrieve a specific data of the request; pass the id to the request.
 
-if you want to retrieve all of the data; skip the id's.
-
-if you want to retrieve a specific data of the request; pass the id to the request.
-
-## Sending the Request
+### Sending the Request
 Once you have the request class and the connector class, you can now start sending the request using the ``send()`` or ``sendAsync()`` methods from your ``$nextGenConnector``.
 
 When using the ``send()`` method, you will receive a response class.
 
-Via Instantiated request:
+
+<details>
+  <summary>Via Request:</summary>
+ 
 ```php
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Requests\PersonRequests;
@@ -104,7 +108,11 @@ $request = (new PersonRequests($personId))->get();
 $response = $nextGenConnector->send($request);
 ```
 
-Via Connector:
+</details>
+
+<details>
+  <summary>Via Connector:</summary>
+ 
 ```php
 use Clinect\NextGen\NextGen;
 
@@ -116,9 +124,13 @@ $request = $nextGenConnector->persons($personId)->get();
 $response = $nextGenConnector->send($request);
 ```
 
+</details>
+
 Saloon supports asynchronous requests, to send those you will have to use the ``sendAsync()`` method, and you will receive an instance of PromiseInterface. _Please see Response chapter to see how the promise should be handled_.
 
-Via Instantiated request:
+<details>
+  <summary>Via Request:</summary>
+  
 ```php
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Requests\PersonRequests;
@@ -127,7 +139,11 @@ $request = (new PersonRequests($personId))->get();
 $promise = $nextGenConnector->sendAsync($request);
 ```
 
-Via Connector:
+</details>
+
+<details>
+  <summary>Via Connector:</summary>
+  
 ```php
 use Clinect\NextGen\NextGen;
 
@@ -135,9 +151,14 @@ $request = $nextGenConnector->persons($personId)->get();
 $promise = $nextGenConnector->sendAsync($request);
 ```
 
-## Response
+</details>
 
-From the ``send()`` method:
+## Response
+You can handle the response of your request depending on what method you've used in sending the request
+
+<details>
+  <summary>send(): Response</summary>
+
 ```php
 $response = $nextGenConnector->send($request);
 
@@ -145,7 +166,11 @@ $body = $response->body();
 $decodedBody = $response->json();
 ```
 
-From the ``sendAsync()`` method:
+</details>
+
+<details>
+  <summary>sendAsync(): PromiseInterface</summary>
+
 ```php
 $promise = $nextGenConnector->sendAsync($request);
 $promise
@@ -156,3 +181,5 @@ $promise
         // Handle failed request
     });
 ```
+
+</details>
