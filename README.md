@@ -28,38 +28,70 @@ $nextGenConnector = new NextGen(
 
 
 ## • Requests
-Currently, there are 8 request classes, you have two options to retrieve them:
+Currently, there are 8 request classes, you have two options to use them:
 ```php
-Request         | Via Request                               | Via Connector
-Appointment     - (new AppointmentRequests)->get()          - $nextGenConnector->appointments()->get()
-Chart           - (new ChartRequests)->get()                - $nextGenConnector->charts()->get()
-Department      - (new DepartmentRequests)->get()           - $nextGenConnector->departments()->get()
-Health History  - (new HealthHistoryFormRequests)->get()    - $nextGenConnector->healthHistoryForms()->get()
-Insurance       - (new InsuranceRequests)->get()            - $nextGenConnector->insurances()->get()
-Patient         - (new PatientRequests)->get()              - $nextGenConnector->patients()->get()
-Person          - (new PersonRequests)->get()               - $nextGenConnector->persons()->get()
-Master          - (new MasterRequests)->get()               - $nextGenConnector->master()->get()
+Request         | Via Request                       | Via Connector
+Appointment     - (new AppointmentRequests)         - $nextGenConnector->appointments()
+Chart           - (new ChartRequests)               - $nextGenConnector->charts()
+Department      - (new DepartmentRequests)          - $nextGenConnector->departments()
+Health History  - (new HealthHistoryFormRequests)   - $nextGenConnector->healthHistoryForms()
+Insurance       - (new InsuranceRequests)           - $nextGenConnector->insurances()
+Patient         - (new PatientRequests)             - $nextGenConnector->patients()
+Person          - (new PersonRequests)              - $nextGenConnector->persons()
+Master          - (new MasterRequests)              - $nextGenConnector->master()
 ```
 
-Requests can also be connected dependent on their api endpoints.
+
+### Requests methods
+
+#### • GET Method
+<details>
+  <summary>Usage</summary>
+    
+In order to use a get request you just have to append ``->get()`` to the request
+```php
+// This retrieves all of the persons data. Endpoint:  '/persons/{$personId}
+    
+// Via Request
+    $request = (new PersonRequests)->get();
+    // With Id
+    $request = (new PersonRequests($personId))->get();
+    
+// Via Connector
+    $request = $nextGenConnector->persons()->get();
+    // With Id
+    $request = $nextGenConnector->persons($personId)->get();
+```
 
 <details>
-  <summary>Example nested requests:</summary>
+  <summary>Nested get() requests:</summary>
+    
+Requests can also be connected dependent on their api endpoints.
  
+```php
+// Endpoint: '/persons/{$personId}/chart/balances/{$balanceId - this is optional}'
+// This request retrieves person's/patient's balances
+
+// Via Request:
+$request = (new PersonRequests($personId))->balances($balanceId)->get();
+
+// Via Connector:
+$request = $connector->persons($personId)->balances($balanceId)->get();
+```
   
  ```php
  
-// endpoint: '/persons/{$personId}/insurances/{insuranceId}/cards/{cardId}/front'
-// this request retrieves the front part of the person's insurance card
+// Endpoint: '/persons/{$personId}/insurances/{insuranceId}/cards/{cardId}/front'
+// This request retrieves the front part of the person's insurance card
 
-//Via Request:
+// Via Request:
 $request = (new PersonRequests($personId))
             ->insurances($insuranceId)
             ->cards($cardId)
             ->front()
             ->get();
 
-//Via Connector:
+// Via Connector:
 $request = $connector->persons($personId)
             ->insurances($insuranceId)
             ->cards($cardId)
@@ -67,25 +99,42 @@ $request = $connector->persons($personId)
             ->get();
 ```
 
-```php
-// endpoint: '/persons/{$personId}/chart/balances/{$balanceId - this is optional}'
-// this request retrieves person's/patient's balances
-
-//Via Request:
-$request = (new PersonRequests($personId))->balances($balanceId)->get();
-
-//Via Connector:
-$request = $connector->persons($personId)->balances($balanceId)->get();
-```
-
-For all the possible requests, please check out our tests located in:
+You can also check our tests to see more examples:
 
 ``Via Request: /tests/Feature/Requests/``
 
-``Via Connector: /tests/Feature/Resources/Requests/``
-</details
-
+``Via Connector: /tests/Feature/Connector/Requests/``
+    
 All tests corresponds to a specific api endpoint, the id's are all **optional**. If you want to retrieve all of the data; skip the id's, and if you want to retrieve a specific data of the request; pass the id to the request.
+    
+    
+</details>
+    
+<details>
+  <summary>All GET Requests</summary>
+</details>
+    
+</details>
+
+#### • POST Method
+<details>
+  <summary>Usage</summary>
+</details>
+
+#### • PUT Method
+<details>
+  <summary>Usage</summary>
+</details>
+
+#### • PATCH Method
+<details>
+  <summary>Usage</summary>
+</details>
+
+#### • DELETE Method
+<details>
+  <summary>Usage</summary>
+</details>
 
 ### Sending the Request
 Once you have the request class and the connector class, you can now start sending the request using the ``send()`` or ``sendAsync()`` methods from your ``$nextGenConnector``.
