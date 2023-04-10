@@ -19,6 +19,7 @@ class AppointmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /appointments
         $request = (new AppointmentRequests)->get();
 
         $response = $connector->send($request);
@@ -39,6 +40,7 @@ class AppointmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /appointments/{$appointmentId}
         $request = (new AppointmentRequests('id-3'))->get();
 
         $response = $connector->send($request);
@@ -56,6 +58,7 @@ class AppointmentTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /appointments/{$appointmentId}
         $request = (new AppointmentRequests('id-4'))->get();
 
         $response = $connector->send($request);

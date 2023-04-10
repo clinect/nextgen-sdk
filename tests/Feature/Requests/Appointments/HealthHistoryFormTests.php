@@ -19,6 +19,7 @@ class HealthHistoryFormTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms
         $request = (new AppointmentRequests('appointment-id'))->withPracticeId('practice-id')->healthHistoryForms()->get();
 
         $response = $connector->send($request);
@@ -39,6 +40,7 @@ class HealthHistoryFormTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms/{$healthHistoryFormId}
         $request = (new AppointmentRequests('appointment-id'))->withPracticeId('practice-id')->healthHistoryForms('id-3')->get();
 
         $response = $connector->send($request);
@@ -56,6 +58,7 @@ class HealthHistoryFormTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms/{$healthHistoryFormId}
         $request = (new AppointmentRequests('appointment-id'))->withPracticeId('practice-id')->healthHistoryForms('id-4')->get();
 
         $response = $connector->send($request);

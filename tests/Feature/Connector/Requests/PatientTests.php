@@ -10,7 +10,7 @@ class PatientTests extends TestCase
 {
     use PatientStub;
 
-    public function testCanSeePerson()
+    public function testCanSeeAllPatients()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -18,6 +18,26 @@ class PatientTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /{$practiceId}/patients
+        $request = $connector->patients()->withPracticeId('practice-id')->get();
+
+        $response = $connector->send($request);
+
+        foreach ($response->json() as $key => $result) {
+            $this->assertSame($this->all()[$key]['name'], $result['name']);
+            $this->assertSame($this->all()[$key]['category'], $result['category']);
+        }
+    }
+
+    public function testCanSeePatient()
+    {
+        $baseUrl = 'test.clinect.com';
+
+        $connector = new NextGen(baseUrl: $baseUrl);
+
+        $connector->withMockClient($this->client($baseUrl));
+
+        // Endpoint: /{$practiceId}/patients/{$patientId}
         $request = $connector->patients('id-3')->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
@@ -27,7 +47,7 @@ class PatientTests extends TestCase
         $this->assertSame($response->json('category'), 'patient-3');
     }
 
-    public function testPersonNotFound()
+    public function testPatientNotFound()
     {
         $baseUrl = 'test.clinect.com';
 
@@ -35,11 +55,34 @@ class PatientTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /{$practiceId}/patients/{$patientId}
         $request = $connector->patients('id-4')->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 404);
         $this->assertSame($response->json('error'), 'No data available');
+    }
+
+    public function testCanSearch()
+    {
+        $baseUrl = 'test.clinect.com';
+
+        $connector = new NextGen(baseUrl: $baseUrl);
+
+        $connector->withMockClient($this->client($baseUrl));
+
+        $queryParams = ['filter'  => "",  'skip' => 300, 'orderby' => 'modifyTimestamp'];
+
+        // Endpoint: /{$practiceId}/patients/search
+        $request = $connector->patients()->search($queryParams);
+
+        $response = $connector->send($request);
+        $this->assertSame($response->status(), 200);
+
+        foreach ($response->json() as $key => $result) {
+            $this->assertSame($this->search()[$key]['name'], $result['name']);
+            $this->assertSame($this->search()[$key]['category'], $result['category']);
+        }
     }
 }

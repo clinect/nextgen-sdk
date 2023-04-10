@@ -19,6 +19,7 @@ class BalanceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/chart/balances
         $request = (new PersonRequests('person-id'))->balances()->get();
 
         $response = $connector->send($request);
@@ -39,6 +40,7 @@ class BalanceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/chart/balances/{$balanceId}
         $request = (new PersonRequests('person-id'))->balances('id-3')->get();
 
         $response = $connector->send($request);
@@ -56,6 +58,7 @@ class BalanceTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}/chart/balances/{$balanceId}
         $request = (new PersonRequests('person-id'))->balances('id-4')->get();
 
         $response = $connector->send($request);

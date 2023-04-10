@@ -18,6 +18,7 @@ class PersonTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons
         $request = $connector->persons()->get();
 
         $response = $connector->send($request);
@@ -38,6 +39,7 @@ class PersonTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}
         $request = $connector->persons('id-3')->get();
 
         $response = $connector->send($request);
@@ -55,11 +57,35 @@ class PersonTests extends TestCase
 
         $connector->withMockClient($this->client($baseUrl));
 
+        // Endpoint: /persons/{$personId}
         $request = $connector->persons('id-4')->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 404);
         $this->assertSame($response->json('error'), 'No data available');
+    }
+
+    public function testCanSearch()
+    {
+
+        $baseUrl = 'test.clinect.com';
+
+        $connector = new NextGen(baseUrl: $baseUrl);
+
+        $connector->withMockClient($this->client($baseUrl));
+
+        $queryParams = ['filter'  => "",  'skip' => 300, 'orderby' => 'modifyTimestamp'];
+
+        // Endpoint: /persons/lookup
+        $request = $connector->persons()->search($queryParams);
+
+        $response = $connector->send($request);
+        $this->assertSame($response->status(), 200);
+
+        foreach ($response->json() as $key => $result) {
+            $this->assertSame($this->search()[$key]['name'], $result['name']);
+            $this->assertSame($this->search()[$key]['category'], $result['category']);
+        }
     }
 }
