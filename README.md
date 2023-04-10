@@ -48,7 +48,7 @@ Master          - (new MasterRequests)              - $nextGenConnector->master(
 <details>
   <summary>Usage</summary>
     
-In order to use a get request you just have to append ``->get()`` to the request
+In order to use a get request you just have to append ``->get()`` to the request. The id's are all **optional**. If you want to retrieve all of the data; skip the id's, and if you want to retrieve a specific data of the request; pass the id to the request.
 ```php
 // This retrieves all of the persons data. Endpoint:  '/persons/{$personId}
     
@@ -99,14 +99,11 @@ $request = $connector->persons($personId)
             ->get();
 ```
 
-You can also check our tests to see more examples:
+You can also check our tests to see more examples, All tests corresponds to a specific api endpoint.
 
 ``Via Request: /tests/Feature/Requests/``
 
 ``Via Connector: /tests/Feature/Connector/Requests/``
-    
-All tests corresponds to a specific api endpoint, the id's are all **optional**. If you want to retrieve all of the data; skip the id's, and if you want to retrieve a specific data of the request; pass the id to the request.
-    
     
 </details>
     
@@ -140,8 +137,7 @@ All tests corresponds to a specific api endpoint, the id's are all **optional**.
 Once you have the request class and the connector class, you can now start sending the request using the ``send()`` or ``sendAsync()`` methods from your ``$nextGenConnector``.
 
 When using the ``send()`` method, you will receive a response class.
-
-
+ 
 <details>
   <summary>Via Request:</summary>
  
@@ -149,10 +145,6 @@ When using the ``send()`` method, you will receive a response class.
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Requests\PersonRequests;
 
-$request = (new PersonRequests)->get();
-$response = $nextGenConnector->send($request);
-
-// With ID's - To get only the specific data, simply pass the id to the request.
 $request = (new PersonRequests($personId))->get();
 $response = $nextGenConnector->send($request);
 ```
@@ -165,10 +157,6 @@ $response = $nextGenConnector->send($request);
 ```php
 use Clinect\NextGen\NextGen;
 
-$request = $nextGenConnector->persons()->get();
-$response = $nextGenConnector->send($request);
-
-// With ID's - To get only the specific data, simply pass the id to the request.
 $request = $nextGenConnector->persons($personId)->get();
 $response = $nextGenConnector->send($request);
 ```
