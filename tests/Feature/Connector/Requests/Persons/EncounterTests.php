@@ -19,7 +19,7 @@ class EncounterTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/chart/encounters
-        $request = $connector->persons('person-id')->encounters()->get();
+        $request = $connector->persons('person-id')->chart()->encounters()->get();
 
         $response = $connector->send($request);
 
@@ -40,7 +40,7 @@ class EncounterTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/chart/encounters/{$encounterId}
-        $request = $connector->persons('person-id')->encounters('id-3')->get();
+        $request = $connector->persons('person-id')->chart()->encounters('id-3')->get();
 
         $response = $connector->send($request);
 
@@ -58,7 +58,7 @@ class EncounterTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/chart/encounters/{$encounterId}
-        $request = $connector->persons('person-id')->encounters('id-4')->get();
+        $request = $connector->persons('person-id')->chart()->encounters('id-4')->get();
 
         $response = $connector->send($request);
 

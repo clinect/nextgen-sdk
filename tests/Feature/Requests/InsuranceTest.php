@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
-use Clinect\NextGen\Requests\InsuranceRequests;
+use Clinect\NextGen\Requests\InsurancesRequest;
 use Orchestra\Testbench\TestCase;
 use Clinect\NextGen\Tests\Stubs\Insurance as InsuranceStub;
 
@@ -20,7 +20,7 @@ class InsuranceTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /insurances
-        $request = (new InsuranceRequests)->get();
+        $request = (new InsurancesRequest)->get();
 
         $response = $connector->send($request);
 
@@ -41,7 +41,7 @@ class InsuranceTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /insurances/{$insuranceId}
-        $request = (new InsuranceRequests('id-2'))->get();
+        $request = (new InsurancesRequest('id-2'))->get();
 
         $response = $connector->send($request);
 
@@ -60,7 +60,7 @@ class InsuranceTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /insurances/{$insuranceId}/{$href}
-        $request = (new InsuranceRequests('id-3'))->details('href_insurance')->get();
+        $request = (new InsurancesRequest('id-3'))->details('href_insurance')->get();
 
         $response = $connector->send($request);
 
@@ -78,7 +78,7 @@ class InsuranceTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /insurances/{$insuranceId}
-        $request = (new InsuranceRequests('insurance-id'))->get();
+        $request = (new InsurancesRequest('insurance-id'))->get();
 
         $response = $connector->send($request);
 

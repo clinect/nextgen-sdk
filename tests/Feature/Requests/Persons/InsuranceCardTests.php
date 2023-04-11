@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Requests\PersonRequests;
+use Clinect\NextGen\Requests\PersonsRequest;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class InsuranceCardTests extends TestCase
@@ -20,7 +20,7 @@ class InsuranceCardTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}/cards
-        $request = (new PersonRequests('person-id'))
+        $request = (new PersonsRequest('person-id'))
             ->insurances('insurance-id')
             ->cards()
             ->get();
@@ -44,7 +44,7 @@ class InsuranceCardTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}/cards/{$cardId}
-        $request = (new PersonRequests('person-id'))
+        $request = (new PersonsRequest('person-id'))
             ->insurances('insurance-id')
             ->cards('id-3')
             ->get();
@@ -65,7 +65,7 @@ class InsuranceCardTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}/cards/{$cardId}/back
-        $request = (new PersonRequests('person-id'))
+        $request = (new PersonsRequest('person-id'))
             ->insurances('insurance-id')
             ->cards('card-id')
             ->back()
@@ -87,7 +87,7 @@ class InsuranceCardTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}/cards/{$cardId}/front
-        $request = (new PersonRequests('person-id'))
+        $request = (new PersonsRequest('person-id'))
             ->insurances('insurance-id')
             ->cards('card-id')
             ->front()
@@ -109,7 +109,7 @@ class InsuranceCardTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}/cards/{$cardId}
-        $request = (new PersonRequests('person-id'))
+        $request = (new PersonsRequest('person-id'))
             ->insurances('insurance-id')
             ->cards('id-4')
             ->get();

@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Requests\PersonRequests;
+use Clinect\NextGen\Requests\PersonsRequest;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class ChargeTests extends TestCase
@@ -20,7 +20,7 @@ class ChargeTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/chart/charges
-        $request = (new PersonRequests('person-id'))->charges()->get();
+        $request = (new PersonsRequest('person-id'))->chart()->charges()->get();
 
         $response = $connector->send($request);
 
@@ -41,7 +41,7 @@ class ChargeTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/chart/charges/{$chargesId}
-        $request = (new PersonRequests('person-id'))->charges('id-3')->get();
+        $request = (new PersonsRequest('person-id'))->chart()->charges('id-3')->get();
 
         $response = $connector->send($request);
 
@@ -59,7 +59,7 @@ class ChargeTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /persons/{$personId}/chart/charges/{$chargesId}
-        $request = (new PersonRequests('person-id'))->charges('id-4')->get();
+        $request = (new PersonsRequest('person-id'))->chart()->charges('id-4')->get();
 
         $response = $connector->send($request);
 

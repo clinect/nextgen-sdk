@@ -12,12 +12,12 @@ trait Chart
         return new MockClient([
             "{$baseUrl}/chart" => MockResponse::make($this->all(), 200),
 
-            "{$baseUrl}/chart/id-3" => MockResponse::make([
-                'name' => 'Chart 3',
-                'category' => 'chart-3',
+            "{$baseUrl}/chart" => MockResponse::make([
+                'name' => 'Person chart 3',
+                'category' => 'person-chart-3',
             ], 200),
 
-            "{$baseUrl}/chart/*" => MockResponse::make([
+            "{$baseUrl}/chart" => MockResponse::make([
                 'error' => 'No data available'
             ], 404),
         ]);

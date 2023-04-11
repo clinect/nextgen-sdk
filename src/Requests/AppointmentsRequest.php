@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
-class AppointmentRequests extends Request
+class AppointmentsRequest extends Request
 {
     public function __construct(
         public int|string|null $id = null

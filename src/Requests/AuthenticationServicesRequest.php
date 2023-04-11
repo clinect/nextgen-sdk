@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
-class AuthenticationServiceRequest extends Request
+class AuthenticationServicesRequest extends Request
 {
     public function defaultEndpoint(): string
     {

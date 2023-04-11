@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
-class LabRequests extends Request
+class LabRequest extends Request
 {
     public function defaultEndpoint(): string
     {

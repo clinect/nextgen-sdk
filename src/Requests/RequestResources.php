@@ -4,38 +4,38 @@ namespace Clinect\NextGen\Requests;
 
 trait RequestResources
 {
-    public function appointments(int|string|null $id = null): AppointmentRequests
+    public function appointments(int|string|null $id = null): AppointmentsRequest
     {
-        return new AppointmentRequests($id);
+        return new AppointmentsRequest($id);
     }
 
-    public function departments(int|string|null $id = null): DepartmentRequests
+    public function departments(int|string|null $id = null): DepartmentsRequest
     {
-        return new DepartmentRequests($id);
+        return new DepartmentsRequest($id);
     }
 
-    public function healthHistoryForms(int|string|null $id = null): HealthHistoryFormRequests
+    public function healthHistoryForms(int|string|null $id = null): HealthHistoryFormsRequest
     {
-        return new HealthHistoryFormRequests($id);
+        return new HealthHistoryFormsRequest($id);
     }
 
-    public function insurances(int|string|null $id = null): InsuranceRequests
+    public function insurances(int|string|null $id = null): InsurancesRequest
     {
-        return new InsuranceRequests($id);
+        return new InsurancesRequest($id);
     }
 
-    public function master(int|string|null $id = null): MasterRequests
+    public function master(int|string|null $id = null): MasterRequest
     {
-        return new MasterRequests($id);
+        return new MasterRequest($id);
     }
 
-    public function patients(int|string|null $id = null): PatientRequests
+    public function patients(int|string|null $id = null): PatientsRequest
     {
-        return new PatientRequests($id);
+        return new PatientsRequest($id);
     }
 
-    public function persons(int|string|null $id = null): PersonRequests
+    public function persons(int|string|null $id = null): PersonsRequest
     {
-        return new PersonRequests($id);
+        return new PersonsRequest($id);
     }
 }

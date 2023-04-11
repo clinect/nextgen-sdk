@@ -5,7 +5,7 @@ namespace Clinect\NextGen\Requests;
 use Clinect\NextGen\Requests\Persons\ChartRequest;
 use Clinect\NextGen\Requests\Request;
 
-class PersonRequests extends Request
+class PersonsRequest extends Request
 {
     public function __construct(
         public int|string|null $id = null

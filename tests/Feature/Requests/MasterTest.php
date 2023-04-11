@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
-use Clinect\NextGen\Requests\MasterRequests;
+use Clinect\NextGen\Requests\MasterRequest;
 use Orchestra\Testbench\TestCase;
 use Clinect\NextGen\Tests\Stubs\Master as MasterStub;
 
@@ -20,7 +20,7 @@ class MasterTest extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /master
-        $request = (new MasterRequests)->get();
+        $request = (new MasterRequest)->get();
 
         $response = $connector->send($request);
 
@@ -41,7 +41,7 @@ class MasterTest extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /master/payers
-        $request = (new MasterRequests)->payers()->get();
+        $request = (new MasterRequest)->payers()->get();
 
         $response = $connector->send($request);
 
@@ -62,7 +62,7 @@ class MasterTest extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /master/payers/{$payersId}
-        $request = (new MasterRequests)->payers('id-2')->get();
+        $request = (new MasterRequest)->payers('id-2')->get();
 
         $response = $connector->send($request);
 

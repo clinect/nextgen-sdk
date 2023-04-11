@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Requests\DepartmentRequests;
+use Clinect\NextGen\Requests\DepartmentsRequest;
 use Clinect\NextGen\Tests\Stubs\Department as DepartmentStub;
 
 class DepartmentTests extends TestCase
@@ -20,7 +20,7 @@ class DepartmentTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /{$practiceId}/departments
-        $request = (new DepartmentRequests)->withPracticeId('practice-id')->get();
+        $request = (new DepartmentsRequest)->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
@@ -41,7 +41,7 @@ class DepartmentTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /{$practiceId}/departments/{$departmentId}
-        $request = (new DepartmentRequests('id-3'))->withPracticeId('practice-id')->get();
+        $request = (new DepartmentsRequest('id-3'))->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
@@ -59,7 +59,7 @@ class DepartmentTests extends TestCase
         $connector->withMockClient($this->client($baseUrl));
 
         // Endpoint: /{$practiceId}/departments/{$departmentId}
-        $request = (new DepartmentRequests('department-id'))->withPracticeId('practice-id')->get();
+        $request = (new DepartmentsRequest('department-id'))->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 

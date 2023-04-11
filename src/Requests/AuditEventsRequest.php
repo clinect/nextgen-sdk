@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
-class AuditEventRequest extends Request
+class AuditEventsRequest extends Request
 {
     public function __construct(
         public int|string|null $id = null
