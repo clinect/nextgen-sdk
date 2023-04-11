@@ -2,10 +2,10 @@
 
 namespace Clinect\NextGen;
 
-use Clinect\NextGen\Requests\RequestResources;
 use Saloon\Http\Request;
 use Saloon\Http\Connector;
 use Saloon\Http\Paginators\PagedPaginator;
+use Clinect\NextGen\Requests\RequestResources;
 
 class NextGen extends Connector
 {

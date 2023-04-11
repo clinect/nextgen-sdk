@@ -16,8 +16,8 @@ return [
     'practice_id' => env('NEXTGEN_PRACTICEID'),
 
 
-    'base_url' => env('NEXTGEN_URL', ''),
+    'base_url' => env('NEXTGEN_URL', 'https://nativeapi.nextgen.com/nge/prod'),
 
 
-    'route_uri' => env('NEXTGEN_ROUTEURI'),
+    'route_uri' => env('NEXTGEN_ROUTEURI', '/nge-api/api'),
 ];
