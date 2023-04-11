@@ -2,6 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
+use Clinect\NextGen\Requests\Persons\ChartRequest;
 use Clinect\NextGen\Requests\Request;
 
 class PersonRequests extends Request
@@ -15,26 +16,6 @@ class PersonRequests extends Request
     public function defaultEndpoint(): string
     {
         return '/persons';
-    }
-
-    public function balances(int|string|null $id = null): static
-    {
-        return $this->addEndpoint('/chart/balances')->withUriParamId($id);
-    }
-
-    public function charges(int|string|null $id = null): static
-    {
-        return $this->addEndpoint('/chart/charges')->withUriParamId($id);
-    }
-
-    public function charts(int|string|null $id = null): static
-    {
-        return $this->addEndpoint('/chart')->withUriParamId($id);
-    }
-
-    public function encounters(int|string|null $id = null): static
-    {
-        return $this->addEndpoint('/chart/encounters')->withUriParamId($id);
     }
 
     public function insurances(int|string|null $id = null): static
@@ -60,5 +41,11 @@ class PersonRequests extends Request
     public function search(array $queries): \Saloon\Http\Request
     {
         return $this->addEndpoint('/lookup')->withQuery($queries)->get();
+    }
+
+    public function chart(): ChartRequest
+    {
+        $this->cleanUpEndpoint();
+        return new ChartRequest($this->endpoint);
     }
 }

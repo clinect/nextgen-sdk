@@ -9,11 +9,6 @@ trait RequestResources
         return new AppointmentRequests($id);
     }
 
-    public function charts(int|string|null $id = null): ChartRequests
-    {
-        return new ChartRequests($id);
-    }
-
     public function departments(int|string|null $id = null): DepartmentRequests
     {
         return new DepartmentRequests($id);

@@ -25,4 +25,10 @@ class ChartRequest extends Request
     {
         return $this->addEndpoint('/charges')->withUriParamId($id);
     }
+
+    public function encounters(int|string|null $id = null): EncountersRequest
+    {
+        $this->cleanUpEndpoint();
+        return new EncountersRequest($this->endpoint, $id);
+    }
 }
