@@ -2,10 +2,10 @@
 
 namespace Clinect\NextGen;
 
-use Clinect\NextGen\Requests\RequestResources;
 use Saloon\Http\Request;
 use Saloon\Http\Connector;
 use Saloon\Http\Paginators\PagedPaginator;
+use Clinect\NextGen\Requests\RequestResources;
 
 class NextGen extends Connector
 {
@@ -19,8 +19,7 @@ class NextGen extends Connector
         public string $siteId = '',
         public string $enterpriseId = '',
         public string $practiceId = '',
-        public string $baseUrl = '',
-        public string $routeUri = ''
+        public string $baseUrl = ''
     ) { }
     
     public function resolveBaseUrl(): string

@@ -21,8 +21,7 @@ class NextGenServiceProvider extends ServiceProvider
                 siteId: config('clinect.nextgen.site_id'),
                 enterpriseId: config('clinect.nextgen.enterprise_id'),
                 practiceId: config('clinect.nextgen.practice_id'),
-                baseUrl: config('clinect.nextgen.base_url'),
-                routeUri: config('clinect.nextgen.route_uri')
+                baseUrl: config('clinect.nextgen.base_url')
             );
         });
     }
