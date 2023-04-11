@@ -2,6 +2,7 @@
 
 namespace Clinect\NextGen\Laravel;
 
+use Clinect\NextGen\NextGen;
 use Illuminate\Support\ServiceProvider;
 
 class NextGenServiceProvider extends ServiceProvider
