@@ -19,7 +19,8 @@ class NextGen extends Connector
         public string $siteId = '',
         public string $enterpriseId = '',
         public string $practiceId = '',
-        public string $baseUrl = ''
+        public string $baseUrl = '',
+        public string $routeUri = ''
     ) { }
     
     public function resolveBaseUrl(): string
