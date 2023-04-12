@@ -21,6 +21,7 @@ class NextGen extends Connector
         public string $practiceId = '',
         public string $baseUrl = 'https://nativeapi.nextgen.com/nge/prod',
         public string $routeUri = '/nge-api/api',
+        public string $authUri = '/nge-oauth/token'
     ) {
         $this->authorize();
     }
@@ -30,29 +31,19 @@ class NextGen extends Connector
         return "{$this->baseUrl}{$this->routeUri}";
     }
 
-    protected function defaultHeaders(): array
-    {
-        return [];
-    }
-
     protected function authorize(): void
     {
-        $routeUri = $this->routeUri;
-
-        $this->routeUri = '';
-
-        $request = (new AuthRequest)
+        $request = (new AuthRequest("{$this->baseUrl}{$this->authUri}"))
             ->fill([
                 'grant_type' => 'client_credentials',
                 'client_id' => $this->clientId,
                 'client_secret' => $this->secret,
                 'site_id' => $this->siteId,
             ])
+            ->usingFormBody()
             ->post();
 
         $response = $this->send($request);
-
-        $this->routeUri = $routeUri;
 
         if ($response->failed()) {
             $response->throw();

@@ -76,6 +76,11 @@ abstract class Request
 
     protected function cleanUpEndpoint(): void
     {
+        if (!empty(filter_var($this->defaultEndpoint(), FILTER_VALIDATE_URL))) {
+            $this->endpoint = $this->defaultEndpoint();
+            return;
+        }
+
         $endpoint = rtrim($this->defaultEndpoint(), '/') . rtrim($this->endpoint, '/');
 
         if (!is_null($this->practiceId) || (is_string($this->practiceId) && strlen($this->practiceId) > 0)) {
