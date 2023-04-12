@@ -11,6 +11,7 @@ class GetRequest extends Request
 
     public function __construct(
         public string $endpoint,
+        // public array $_headers = [],
         public array $queries = [],
         public array $configs = []
     ) {
@@ -19,6 +20,13 @@ class GetRequest extends Request
     public function resolveEndpoint(): string
     {
         return $this->endpoint;
+    }
+
+    protected function defaultHeaders(): array
+    {
+        return [
+            'Content-Type' => 'application/json',
+        ];
     }
 
     protected function defaultQuery(): array
