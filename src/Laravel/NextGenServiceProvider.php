@@ -20,7 +20,6 @@ class NextGenServiceProvider extends ServiceProvider
                 secret: config('clinect.nextgen.secret'),
                 siteId: config('clinect.nextgen.site_id'),
                 enterpriseId: config('clinect.nextgen.enterprise_id'),
-                practiceId: config('clinect.nextgen.practice_id'),
                 baseUrl: config('clinect.nextgen.base_url'),
                 routeUri: config('clinect.nextgen.route_uri')
             );
