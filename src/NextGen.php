@@ -6,41 +6,39 @@ use Saloon\Http\Request;
 use Saloon\Http\Connector;
 use Clinect\NextGen\Requests\AuthRequest;
 use Saloon\Http\Paginators\PagedPaginator;
+use Saloon\CachePlugin\Contracts\Cacheable;
 use Clinect\NextGen\Requests\NgSessionRequest;
 use Clinect\NextGen\Requests\RequestResources;
 
-class NextGen extends Connector
+class NextGen extends Connector implements Cacheable
 {
     use RequestResources;
+    use Traits\Caching;
 
     public function __construct(
-        public string $clientId = '',
-        public string $secret = '',
-        public string $siteId = '',
-        public string $enterpriseId = '',
-        public string $practiceId = '',
-        public string $baseUrl = 'https://nativeapi.nextgen.com/nge/prod',
-        public string $routeUri = '/nge-api/api',
-        public string $authUri = '/nge-oauth/token'
+        public NextGenConfig $configs
     ) {
         $this->authorize();
+
+        $this->disableCaching();
     }
 
     public function resolveBaseUrl(): string
     {
-        return "{$this->baseUrl}{$this->routeUri}";
+        return "{$this->configs->getBaseUrl()}{$this->configs->getRouteUri()}";
     }
 
     protected function authorize(): void
     {
-        $request = (new AuthRequest("{$this->baseUrl}{$this->authUri}"))
+        $this->enableCaching();
+
+        $request = (new AuthRequest("{$this->configs->getBaseUrl()}{$this->configs->getAuthUri()}"))
             ->fill([
                 'grant_type' => 'client_credentials',
-                'client_id' => $this->clientId,
-                'client_secret' => $this->secret,
-                'site_id' => $this->siteId,
+                'client_id' => $this->configs->getClientId(),
+                'client_secret' => $this->configs->getSecret(),
+                'site_id' => $this->configs->getSiteId(),
             ])
-            ->usingFormBody()
             ->post();
 
         $response = $this->send($request);
@@ -54,8 +52,8 @@ class NextGen extends Connector
         $request = (new NgSessionRequest)
             ->withConfig([
                 'json' => [
-                    'enterpriseid' => $this->enterpriseId,
-                    'practiceId' => $this->practiceId,
+                    'enterpriseid' => $this->configs->getEnterpriseId(),
+                    'practiceId' => $this->configs->getPracticeId(),
                 ],
             ])
             ->put();
@@ -69,8 +67,8 @@ class NextGen extends Connector
         $this->headers()->add('X-NG-SessionID', $response->headers()->get('x-ng-sessionid'));
     }
 
-    public function paginate(Request $request, int $perPage = 20): PagedPaginator
+    public function paginate(Request $request, int $perPage = 20, int $page = 1): PagedPaginator
     {
-        return new PagedPaginator($this, $request, $perPage);
+        return new PagedPaginator($this, $request, $perPage, $page);
     }
 }

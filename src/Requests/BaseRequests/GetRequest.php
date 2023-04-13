@@ -11,7 +11,6 @@ class GetRequest extends Request
 
     public function __construct(
         public string $endpoint,
-        // public array $_headers = [],
         public array $queries = [],
         public array $configs = []
     ) {

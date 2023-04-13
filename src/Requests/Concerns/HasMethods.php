@@ -15,7 +15,6 @@ trait HasMethods
 
         return new GetRequest(
             endpoint: $this->endpoint,
-            // _headers: $this->headers,
             queries: $this->queries,
             configs: $this->configs
         );
@@ -50,7 +49,8 @@ trait HasMethods
             _headers: $this->headers,
             queries: $this->queries,
             configs: $this->configs,
-            data: $this->data
+            data: $this->data,
+            typeBody: $this->typeBody
         );
     }
 }
