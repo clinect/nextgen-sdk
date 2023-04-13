@@ -2,6 +2,8 @@
 
 namespace Clinect\NextGen\Requests;
 
+use Clinect\NextGen\Requests\Financial\GuarantorsRequest;
+
 class FinancialRequest extends Request
 {
     public function defaultEndpoint(): string

@@ -2,6 +2,8 @@
 
 namespace Clinect\NextGen\Requests;
 
+use Clinect\NextGen\Requests\Favorites\MedicationsRequest;
+
 class FavoritesRequest extends Request
 {
     public function defaultEndpoint(): string

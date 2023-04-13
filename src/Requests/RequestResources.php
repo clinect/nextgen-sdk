@@ -9,6 +9,16 @@ trait RequestResources
         return new AppointmentsRequest($id);
     }
 
+    public function auditEvents(int|string|null $id = null): AuditEventsRequest
+    {
+        return new AuditEventsRequest($id);
+    }
+
+    public function authenticationServices(): AuthenticationServicesRequest
+    {
+        return new AuthenticationServicesRequest();
+    }
+
     public function departments(int|string|null $id = null): DepartmentsRequest
     {
         return new DepartmentsRequest($id);
