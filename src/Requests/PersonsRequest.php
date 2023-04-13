@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
-use Clinect\NextGen\Requests\Persons\ChartRequest;
+use Clinect\NextGen\Requests\PersonsChart\ChartRequest;
 use Clinect\NextGen\Requests\Request;
 
 class PersonsRequest extends Request
