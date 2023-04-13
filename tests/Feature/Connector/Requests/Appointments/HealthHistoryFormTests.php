@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Connector\Requests\Appointments;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Appointment as AppointmentStub;
 
 class HealthHistoryFormTests extends TestCase
@@ -12,11 +12,9 @@ class HealthHistoryFormTests extends TestCase
 
     public function testCanSeeAllAppointmentHealthHistoryForms()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
         // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms
         $request = $connector->appointments('appointment-id')->withPracticeId('practice-id')->healthHistoryForms()->get();
 
@@ -32,11 +30,9 @@ class HealthHistoryFormTests extends TestCase
 
     public function testCanSeeAppointmentHealthHistoryForm()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms/{$healthHistoryFormId}
         $request = $connector->appointments('appointment-id')->withPracticeId('practice-id')->healthHistoryForms('id-3')->get();
@@ -50,11 +46,9 @@ class HealthHistoryFormTests extends TestCase
 
     public function testAppointmentHealthHistoryFormNotFound()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms/{$healthHistoryFormId}
         $request = $connector->appointments('appointment-id')->withPracticeId('practice-id')->healthHistoryForms('id-4')->get();

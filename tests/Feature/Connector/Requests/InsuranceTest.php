@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Connector\Requests;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Insurance as InsuranceStub;
 
 class InsuranceTests extends TestCase
@@ -12,17 +12,14 @@ class InsuranceTests extends TestCase
 
     public function testCanSeeAllInsurances()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /insurances
         $request = $connector->insurances()->get();
 
         $response = $connector->send($request);
-
         $this->assertSame($response->status(), 200);
 
         foreach ($response->json() as $key => $result) {
@@ -33,11 +30,9 @@ class InsuranceTests extends TestCase
 
     public function testCanSeeInsurance()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /insurances/{$insuranceId}
         $request = $connector->insurances('id-2')->get();
@@ -51,12 +46,9 @@ class InsuranceTests extends TestCase
 
     public function testCanSeeInsuranceDetails()
     {
+        $connector = new NextGen($this->config());
 
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /insurances/{$insuranceId}/{$href}
         $request = $connector->insurances('id-3')->details('href_insurance')->get();
@@ -70,11 +62,9 @@ class InsuranceTests extends TestCase
 
     public function testInsuranceNotFound()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /insurances/{$insuranceId}
         $request = $connector->insurances('insurance-id')->get();

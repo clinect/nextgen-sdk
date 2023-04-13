@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Requests\DepartmentRequests;
 use Clinect\NextGen\Tests\Stubs\Department as DepartmentStub;
 
@@ -13,11 +13,9 @@ class DepartmentTests extends TestCase
 
     public function testCanSeeAllDepartments()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /{$practiceId}/departments
         $request = (new DepartmentRequests)->withPracticeId('practice-id')->get();
@@ -34,11 +32,9 @@ class DepartmentTests extends TestCase
 
     public function testCanSeeDepartment()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /{$practiceId}/departments/{$departmentId}
         $request = (new DepartmentRequests('id-3'))->withPracticeId('practice-id')->get();
@@ -52,11 +48,9 @@ class DepartmentTests extends TestCase
 
     public function testDepartmentNotFound()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /{$practiceId}/departments/{$departmentId}
         $request = (new DepartmentRequests('department-id'))->withPracticeId('practice-id')->get();

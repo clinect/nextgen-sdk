@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Requests\PatientRequests;
 use Clinect\NextGen\Tests\Stubs\Patient as PatientStub;
 
@@ -13,11 +13,8 @@ class PatientTests extends TestCase
 
     public function testCanSeeAllPatients()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config());
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /{$practiceId}/patients/{$patientId}
         $request = (new PatientRequests)->withPracticeId('practice-id')->get();
@@ -32,11 +29,9 @@ class PatientTests extends TestCase
 
     public function testCanSeePatient()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /{$practiceId}/patients/{$patientId}
         $request = (new PatientRequests('id-3'))->withPracticeId('practice-id')->get();
@@ -50,11 +45,9 @@ class PatientTests extends TestCase
 
     public function testPatientNotFound()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /{$practiceId}/patients/{$patientId}
         $request = (new PatientRequests('id-4'))->withPracticeId('practice-id')->get();
@@ -67,11 +60,9 @@ class PatientTests extends TestCase
 
     public function testCanSearch()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         $queryParams = ['filter'  => "",  'skip' => 300, 'orderby' => 'modifyTimestamp'];
 

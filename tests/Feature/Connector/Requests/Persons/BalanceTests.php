@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Connector\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class BalanceTests extends TestCase
@@ -12,11 +12,9 @@ class BalanceTests extends TestCase
 
     public function testCanSeePersonAllBalances()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /persons/{$personId}/chart/balances
         $request = $connector->persons('person-id')->balances()->get();
@@ -33,11 +31,9 @@ class BalanceTests extends TestCase
 
     public function testCanSeePersonBalance()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /persons/{$personId}/chart/balances/{$balanceId}
         $request = $connector->persons('person-id')->balances('id-3')->get();
@@ -51,11 +47,9 @@ class BalanceTests extends TestCase
 
     public function testPersonBalanceNotFound()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector->withMockClient($this->client($this->testBaseUrl));
 
         // Endpoint: /persons/{$personId}/chart/balances/{$balanceId}
         $request = $connector->persons('person-id')->balances('id-4')->get();
