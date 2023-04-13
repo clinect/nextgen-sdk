@@ -20,4 +20,7 @@ return [
 
 
     'route_uri' => env('NEXTGEN_ROUTEURI', '/nge-api/api'),
+
+
+    'auth_uri' => env('NEXTGEN_AUTHURI', '/nge-oauth/token'),
 ];
