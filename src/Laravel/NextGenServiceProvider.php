@@ -4,7 +4,6 @@ namespace Clinect\NextGen\Laravel;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\NextGenConfig;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 
 class NextGenServiceProvider extends ServiceProvider
@@ -26,11 +25,7 @@ class NextGenServiceProvider extends ServiceProvider
                 'base_url' => config('clinect.nextgen.base_url'),
                 'route_uri' => config('clinect.nextgen.route_uri'),
                 'auth_uri' => config('clinect.nextgen.auth_uri'),
-                'cache_adapter' => [
-                    'type' => 'laravel-cache',
-                    'driver' => Cache::store('file'),
-                    'expiry_time' => 3600,
-                ],
+                'cache_adapter' => config('clinect.nextgen.cache_adapter'),
             ]);
 
             return new NextGen($config);

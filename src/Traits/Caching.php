@@ -15,12 +15,19 @@ trait Caching
 
     public function resolveCacheDriver(): Driver
     {
-        return match ($this->configs->getCacheAdapter('type')) {
-            'psr-cache' => new PsrCacheDriver($this->configs->getCacheAdapter('driver')),
-            'filesystem' => new FlysystemDriver($this->configs->getCacheAdapter('driver')),
-            'laravel-cache' => new LaravelCacheDriver($this->configs->getCacheAdapter('driver')),
-            default => new LaravelCacheDriver($this->configs->getCacheAdapter('driver'))
-        };
+        switch ($this->configs->getCacheAdapter('type')) {
+            case 'psr-cache':
+                return new PsrCacheDriver($this->configs->getCacheAdapter('driver'));
+                break;
+            case 'filesystem':
+                return new FlysystemDriver($this->configs->getCacheAdapter('driver'));
+                break;
+            case 'laravel-cache':
+            default:
+                $class = $this->configs->getCacheAdapter('driver');
+                return new LaravelCacheDriver($class::store($this->configs->getCacheAdapter('cache_type')));
+                break;
+        }
     }
 
     public function cacheExpiryInSeconds(): int

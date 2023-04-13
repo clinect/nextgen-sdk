@@ -23,4 +23,15 @@ return [
 
 
     'auth_uri' => env('NEXTGEN_AUTHURI', '/nge-oauth/token'),
+
+
+    'cache_adapter' => [
+        'type' => 'laravel-cache',
+
+        'driver' => Illuminate\Support\Facades\Cache::class,
+
+        'cache_type' => 'file',
+
+        'expiry_time' => 3600,
+    ],
 ];
