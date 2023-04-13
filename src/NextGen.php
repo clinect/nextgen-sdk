@@ -18,8 +18,6 @@ class NextGen extends Connector implements Cacheable
     public function __construct(
         public NextGenConfig $configs
     ) {
-        $this->authorize();
-
         $this->disableCaching();
     }
 
@@ -28,7 +26,7 @@ class NextGen extends Connector implements Cacheable
         return "{$this->configs->getBaseUrl()}{$this->configs->getRouteUri()}";
     }
 
-    protected function authorize(): void
+    public function authorize(): void
     {
         $this->enableCaching();
 
