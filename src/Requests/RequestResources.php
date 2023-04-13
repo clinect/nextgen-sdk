@@ -24,9 +24,9 @@ trait RequestResources
         return new InsurancesRequest($id);
     }
 
-    public function master(int|string|null $id = null): MasterRequest
+    public function master(): MasterRequest
     {
-        return new MasterRequest($id);
+        return new MasterRequest();
     }
 
     public function patients(int|string|null $id = null): PatientsRequest
@@ -37,5 +37,25 @@ trait RequestResources
     public function persons(int|string|null $id = null): PersonsRequest
     {
         return new PersonsRequest($id);
+    }
+
+    public function core(): CoreRequest
+    {
+        return new CoreRequest();
+    }
+
+    public function favorites(): FavoritesRequest
+    {
+        return new FavoritesRequest();
+    }
+
+    public function financial(): FinancialRequest
+    {
+        return new FinancialRequest();
+    }
+
+    public function documentsBatches(int|string|null $id = null): DocumentBatchesRequest
+    {
+        return new DocumentBatchesRequest($id);
     }
 }
