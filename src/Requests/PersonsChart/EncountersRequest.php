@@ -122,4 +122,9 @@ class EncountersRequest extends Request
     {
         return $this->addEndpoint('/vitals')->withUriParamId($id);
     }
+
+    public function gestationalAge(): static
+    {
+        return $this->addEndpoint('/gestational-age');
+    }
 }

@@ -169,4 +169,79 @@ class ChartRequest extends Request
     {
         return $this->addEndpoint('/pharmacies');
     }
+
+    public function postpartumCheck(): static
+    {
+        return $this->addEndpoint('/postpartum-check');
+    }
+
+    public function postpartumVisits(): static
+    {
+        return $this->addEndpoint('/postpartum-visits');
+    }
+
+    public function pregnancies(): PregnanciesRequest
+    {
+        $this->cleanUpEndpoint();
+        return new PregnanciesRequest($this->endpoint);
+    }
+
+    public function problems(int|string|null $id = null): ProblemsRequest
+    {
+        $this->cleanUpEndpoint();
+        return new ProblemsRequest($this->endpoint, $id);
+    }
+
+    public function procedures(): static
+    {
+        return $this->addEndpoint('/procedures');
+    }
+
+    public function recallPlans(int|string|null $recallPlanId = null, int|string|null $occurenceId = null): static
+    {
+        if($occurenceId && $recallPlanId) 
+        {
+            return $this->addEndpoint('/recall-plans'.'/'. $recallPlanId)->withUriParamId($recallPlanId);
+        }
+        else
+        {
+            return $this->addEndpoint('/recall-plans')->withUriParamId($recallPlanId);
+        }
+    }
+
+    public function reviewOfSystems(): static
+    {
+        return $this->addEndpoint('/review-of-systems');
+    }
+
+    public function socialHistory(): SocialHistoryRequest
+    {
+        $this->cleanUpEndpoint();
+        return new SocialHistoryRequest($this->endpoint);
+    }
+
+    public function supportRoles(): static
+    {
+        return $this->addEndpoint('/support-roles');
+    }
+
+    public function telephoneCalls(): static
+    {
+        return $this->addEndpoint('/telephone-calls');
+    }
+
+    public function tobaccoUsage(): static
+    {
+        return $this->addEndpoint('/tobacco-usage');
+    }
+
+    public function todayEncounter(): static
+    {
+        return $this->addEndpoint('/today-encounter');
+    }
+
+    public function vitals(): static
+    {
+        return $this->addEndpoint('/vitals');
+    }
 }
