@@ -4,6 +4,7 @@ namespace Clinect\NextGen;
 
 use Saloon\Http\Request;
 use Saloon\Http\Connector;
+use Saloon\Http\Faking\MockClient;
 use Clinect\NextGen\Requests\AuthRequest;
 use Saloon\Http\Paginators\PagedPaginator;
 use Saloon\CachePlugin\Contracts\Cacheable;
@@ -16,8 +17,15 @@ class NextGen extends Connector implements Cacheable
     use Traits\Caching;
 
     public function __construct(
-        public NextGenConfig $configs
+        public NextGenConfig $configs,
+        protected ?MockClient $mockclient = null
     ) {
+        if ($mockclient) {
+            $this->withMockClient($mockclient);
+        }
+
+        $this->authorize();
+
         $this->disableCaching();
     }
 
@@ -26,7 +34,7 @@ class NextGen extends Connector implements Cacheable
         return "{$this->configs->getBaseUrl()}{$this->configs->getRouteUri()}";
     }
 
-    public function authorize(): void
+    protected function authorize(): void
     {
         $this->enableCaching();
 
