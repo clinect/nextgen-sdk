@@ -12,9 +12,7 @@ class BalanceTests extends TestCase
 
     public function testCanSeePersonAllBalances()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/balances
         $request = $connector->persons('person-id')->balances()->get();
@@ -31,9 +29,7 @@ class BalanceTests extends TestCase
 
     public function testCanSeePersonBalance()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/balances/{$balanceId}
         $request = $connector->persons('person-id')->balances('id-3')->get();
@@ -47,9 +43,7 @@ class BalanceTests extends TestCase
 
     public function testPersonBalanceNotFound()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/balances/{$balanceId}
         $request = $connector->persons('person-id')->balances('id-4')->get();

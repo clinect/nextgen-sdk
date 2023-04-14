@@ -13,9 +13,7 @@ class HealthHistoryFormTests extends TestCase
 
     public function testCanSeeAllAppointmentHealthHistoryForms()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms
         $request = (new AppointmentRequests('appointment-id'))->withPracticeId('practice-id')->healthHistoryForms()->get();
@@ -32,9 +30,7 @@ class HealthHistoryFormTests extends TestCase
 
     public function testCanSeeAppointmentHealthHistoryForm()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms/{$healthHistoryFormId}
         $request = (new AppointmentRequests('appointment-id'))->withPracticeId('practice-id')->healthHistoryForms('id-3')->get();
@@ -48,9 +44,7 @@ class HealthHistoryFormTests extends TestCase
 
     public function testAppointmentHealthHistoryFormNotFound()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms/{$healthHistoryFormId}
         $request = (new AppointmentRequests('appointment-id'))->withPracticeId('practice-id')->healthHistoryForms('id-4')->get();

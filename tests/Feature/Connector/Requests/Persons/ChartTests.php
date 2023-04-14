@@ -12,9 +12,7 @@ class ChartTests extends TestCase
 
     public function testCanSeePersonAllCharts()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart
         $request = $connector->persons('person-id')->charts()->get();
@@ -31,9 +29,7 @@ class ChartTests extends TestCase
 
     public function testCanSeePersonChart()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/{$chartId}
         $request = $connector->persons('person-id')->charts('id-3')->get();
@@ -47,9 +43,7 @@ class ChartTests extends TestCase
 
     public function testPersonChartNotFound()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/{$chartId}
         $request = $connector->persons('person-id')->charts('id-4')->get();

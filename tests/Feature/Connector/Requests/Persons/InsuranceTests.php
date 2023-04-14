@@ -12,9 +12,7 @@ class InsuranceTests extends TestCase
 
     public function testCanSeePersonAllInsurances()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances
         $request = $connector->persons('person-id')
@@ -33,9 +31,7 @@ class InsuranceTests extends TestCase
 
     public function testCanSeePersonInsurance()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}
         $request = $connector->persons('person-id')
@@ -51,9 +47,7 @@ class InsuranceTests extends TestCase
 
     public function testPersonInsuranceNotFound()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}
         $request = $connector->persons('person-id')

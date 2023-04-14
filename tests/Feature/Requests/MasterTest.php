@@ -13,9 +13,7 @@ class MasterTest extends TestCase
 
     public function testCanSeeAllMaster()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /master
         $request = (new MasterRequests)->get();
@@ -32,9 +30,7 @@ class MasterTest extends TestCase
 
     public function testCanSeeAllMasterPayer()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /master/payers
         $request = (new MasterRequests)->payers()->get();
@@ -51,9 +47,7 @@ class MasterTest extends TestCase
 
     public function testCanSeeMasterPayer()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /master/payers/{$payersId}
         $request = (new MasterRequests)->payers('id-2')->get();

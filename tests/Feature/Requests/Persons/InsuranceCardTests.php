@@ -13,9 +13,7 @@ class InsuranceCardTests extends TestCase
 
     public function testCanSeePersonAllInsuranceCards()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}/cards
         $request = (new PersonRequests('person-id'))
@@ -35,9 +33,7 @@ class InsuranceCardTests extends TestCase
 
     public function testCanSeePersonInsuranceCard()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}/cards/{$cardId}
         $request = (new PersonRequests('person-id'))
@@ -54,9 +50,7 @@ class InsuranceCardTests extends TestCase
 
     public function testCanSeePersonInsuranceCardBack()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}/cards/{$cardId}/back
         $request = (new PersonRequests('person-id'))
@@ -74,9 +68,7 @@ class InsuranceCardTests extends TestCase
 
     public function testCanSeePersonInsuranceCardFront()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}/cards/{$cardId}/front
         $request = (new PersonRequests('person-id'))
@@ -94,9 +86,7 @@ class InsuranceCardTests extends TestCase
 
     public function testPersonInsuranceCardNotFound()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}/cards/{$cardId}
         $request = (new PersonRequests('person-id'))

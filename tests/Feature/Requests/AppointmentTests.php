@@ -13,11 +13,8 @@ class AppointmentTests extends TestCase
 
     public function testCanSeeAllAppointments()
     {
-        $connector = new NextGen($this->config());
+        $connector = new NextGen($this->config(), $this->mockClient());
 
-        $connector->withMockClient($this->client($this->testBaseUrl));
-
-        // Endpoint: /appointments
         $request = (new AppointmentRequests)->get();
 
         $response = $connector->send($request);
@@ -32,9 +29,7 @@ class AppointmentTests extends TestCase
 
     public function testCanSeeAppointment()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /appointments/{$appointmentId}
         $request = (new AppointmentRequests('id-3'))->get();
@@ -48,9 +43,7 @@ class AppointmentTests extends TestCase
 
     public function testAppointmentNotFound()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /appointments/{$appointmentId}
         $request = (new AppointmentRequests('id-4'))->get();

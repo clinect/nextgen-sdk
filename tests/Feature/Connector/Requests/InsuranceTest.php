@@ -12,9 +12,7 @@ class InsuranceTests extends TestCase
 
     public function testCanSeeAllInsurances()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /insurances
         $request = $connector->insurances()->get();
@@ -30,9 +28,7 @@ class InsuranceTests extends TestCase
 
     public function testCanSeeInsurance()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /insurances/{$insuranceId}
         $request = $connector->insurances('id-2')->get();
@@ -46,9 +42,7 @@ class InsuranceTests extends TestCase
 
     public function testCanSeeInsuranceDetails()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /insurances/{$insuranceId}/{$href}
         $request = $connector->insurances('id-3')->details('href_insurance')->get();
@@ -62,9 +56,7 @@ class InsuranceTests extends TestCase
 
     public function testInsuranceNotFound()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /insurances/{$insuranceId}
         $request = $connector->insurances('insurance-id')->get();

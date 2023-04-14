@@ -13,9 +13,7 @@ class PersonTests extends TestCase
 
     public function testCanSeeAllPersons()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons
         $request = (new PersonRequests)->get();
@@ -32,9 +30,7 @@ class PersonTests extends TestCase
 
     public function testCanSeePerson()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}
         $request = (new PersonRequests('id-3'))->get();
@@ -48,9 +44,7 @@ class PersonTests extends TestCase
 
     public function testPersonNotFound()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}
         $request = (new PersonRequests('id-4'))->get();
@@ -63,9 +57,7 @@ class PersonTests extends TestCase
 
     public function testCanSearch()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         $queryParams = ['filter'  => "",  'skip' => 300, 'orderby' => 'modifyTimestamp'];
 

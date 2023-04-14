@@ -13,8 +13,7 @@ class PatientTests extends TestCase
 
     public function testCanSeeAllPatients()
     {
-        $connector = new NextGen($this->config());
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/patients/{$patientId}
         $request = (new PatientRequests)->withPracticeId('practice-id')->get();
@@ -29,9 +28,7 @@ class PatientTests extends TestCase
 
     public function testCanSeePatient()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/patients/{$patientId}
         $request = (new PatientRequests('id-3'))->withPracticeId('practice-id')->get();
@@ -45,9 +42,7 @@ class PatientTests extends TestCase
 
     public function testPatientNotFound()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/patients/{$patientId}
         $request = (new PatientRequests('id-4'))->withPracticeId('practice-id')->get();
@@ -60,9 +55,7 @@ class PatientTests extends TestCase
 
     public function testCanSearch()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         $queryParams = ['filter'  => "",  'skip' => 300, 'orderby' => 'modifyTimestamp'];
 

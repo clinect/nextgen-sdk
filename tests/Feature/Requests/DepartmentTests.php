@@ -13,9 +13,7 @@ class DepartmentTests extends TestCase
 
     public function testCanSeeAllDepartments()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/departments
         $request = (new DepartmentRequests)->withPracticeId('practice-id')->get();
@@ -32,9 +30,7 @@ class DepartmentTests extends TestCase
 
     public function testCanSeeDepartment()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/departments/{$departmentId}
         $request = (new DepartmentRequests('id-3'))->withPracticeId('practice-id')->get();
@@ -48,9 +44,7 @@ class DepartmentTests extends TestCase
 
     public function testDepartmentNotFound()
     {
-        $connector = new NextGen($this->config());
-
-        $connector->withMockClient($this->client($this->testBaseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/departments/{$departmentId}
         $request = (new DepartmentRequests('department-id'))->withPracticeId('practice-id')->get();
