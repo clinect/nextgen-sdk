@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Tests\Feature\TestCase;
-use Clinect\NextGen\Requests\PersonRequests;
+use Clinect\NextGen\Requests\PersonsRequest;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class InsuranceTests extends TestCase

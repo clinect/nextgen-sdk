@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
-use Clinect\NextGen\Requests\InsuranceRequests;
+use Clinect\NextGen\Requests\InsurancesRequest;
 use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Insurance as InsuranceStub;
 

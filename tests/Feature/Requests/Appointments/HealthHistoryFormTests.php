@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests\Appointments;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Tests\Feature\TestCase;
-use Clinect\NextGen\Requests\AppointmentRequests;
+use Clinect\NextGen\Requests\AppointmentsRequest;
 use Clinect\NextGen\Tests\Stubs\Appointment as AppointmentStub;
 
 class HealthHistoryFormTests extends TestCase

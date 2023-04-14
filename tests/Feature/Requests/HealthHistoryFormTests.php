@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Tests\Feature\TestCase;
-use Clinect\NextGen\Requests\HealthHistoryFormRequests;
+use Clinect\NextGen\Requests\HealthHistoryFormsRequest;
 use Clinect\NextGen\Tests\Stubs\HealthHistoryForm as HealthHistoryFormStub;
 
 class HealthHistoryFormTests extends TestCase

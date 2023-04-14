@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
-use Clinect\NextGen\Requests\MasterRequests;
+use Clinect\NextGen\Requests\MasterRequest;
 use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Master as MasterStub;
 

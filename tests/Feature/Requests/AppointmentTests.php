@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
-use Clinect\NextGen\Requests\AppointmentRequests;
+use Clinect\NextGen\Requests\AppointmentsRequest;
 use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Appointment as AppointmentStub;
 
@@ -15,7 +15,7 @@ class AppointmentTests extends TestCase
     {
         $connector = new NextGen($this->config(), $this->mockClient());
 
-        $request = (new AppointmentRequests)->get();
+        $request = (new AppointmentsRequest)->get();
 
         $response = $connector->send($request);
 

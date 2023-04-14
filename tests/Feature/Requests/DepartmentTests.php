@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Tests\Feature\TestCase;
-use Clinect\NextGen\Requests\DepartmentRequests;
+use Clinect\NextGen\Requests\DepartmentsRequest;
 use Clinect\NextGen\Tests\Stubs\Department as DepartmentStub;
 
 class DepartmentTests extends TestCase
