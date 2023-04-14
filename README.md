@@ -1,18 +1,205 @@
-# NextGen SDK
+# NextGen PHP SDK
+A extendable sdk powered by [Saloon](https://github.com/sammyjo20/saloon).
 
-## • Installation
+## Installation
 
-Use Composer to install this SDK.
+To get started with NextGen SDK, you will need to install it through Composer.
 
 ```
-composer require clinect/nextgen-sdk
+$ composer require clinect/nextgen-sdk
 ```
 
-## • Connector
+> NextGen SDK supports PHP 8.1+
+
+### Dependencies
+
+NextGen SDK has two dependencies.
+
+* [Saloon](https://github.com/Sammyjo20/saloon-docs) (Core php library for API integration framework)
+* [Saloon Cache Plugin](https://github.com/Sammyjo20/saloon-cache-plugin) (Official cache plugin for Saloon v2)
+
+### Using Laravel?
+
+After the installation. Next, publish the configuration file with the following Artisan command
+
+```
+php artisan vendor:publish --tag=nextgen-config
+```
+
+## Configuration
+
+### List of NextGen config keys:
+
+* `client_id`
+* `secret`
+* `site_id`
+* `enterprise_id`
+* `practice_id`
+* `base_url`
+* `route_uri`
+* `auth_uri`
+* `cache_adapter` ([see more about cache adapter](https://www.google.com))
+
+> Note: All config keys and values are required.
+
+### Usage
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+use Clinect\NextGen\NextGenConfig;
+
+$config = NextGenConfig::create([
+    'client_id' => 'nextgen-client-id',
+    'secret' => 'nextgen-secre',
+    'site_id' => 'nextgen-site-id',
+    'enterprise_id' => 'nextgen-enterprise-id',
+    'practice_id' => 'nextgen-practice-id',
+    'base_url' => 'nextgen-api-base-url',
+    'route_uri' => 'nextgen-route-uri-endpoint',
+    'auth_uri' => 'nextgen-auth-uri-endpoint',
+    'cache_adapter' => [
+        'type' => 'laravel-cache',
+
+        'driver' => Illuminate\Support\Facades\Cache::class,
+
+        'cache_type' => 'file',
+
+        'expiry_time' => 3600,
+    ],
+]);
+
+$connector = new NextGen($config);
+```
+
+## Requests
+
+NextGen SDK request stores the information of a single API request. Within a request, you can set the HTTP Method by appending at the end of each endpoint request.
+
+### Methods
+* `get()`
+* `post()`
+* `put()`
+* `patch()`
+* `delete()`
+
+## Usage
+
+### GET
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$connector = new NextGen(...);
+
+// Endpoint: "/persons"
+$request = $connector->persons()->get();
+
+// Endpoint: "/persons/{id}"
+$request = $connector->persons({id})->get();
+```
+
+### POST|PUT|PATCH|DELETE
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$connector = new NextGen(...);
+
+// Post
+$request = $connector->persons()
+    ->fill([
+        'name' => 'Name',
+        'provider' => 'Provider name',
+    ])
+    ->post();
+
+// Put
+$request = $connector->persons()
+    ->fill([
+        'name' => 'Name',
+        'provider' => 'Provider name',
+    ])
+    ->put();
+
+// Patch
+$request = $connector->persons()
+    ->fill([
+        'name' => 'Name',
+        'provider' => 'Provider name',
+    ])
+    ->patch();
+
+// Delete
+$request = $connector->persons({id})->delete();
+```
+
+There are three types of handling request body data.
+
+### Using form body
+
+```php
+<?php
+
+$request = $connector->persons()
+    ->fill([
+        'name' => 'Name',
+        'provider' => 'Provider name',
+    ])
+    ->usingFormBody()
+    ->post();
+```
+
+### Using json body
+
+```php
+<?php
+
+$request = $connector->persons()
+    ->fill([
+        'name' => 'Name',
+        'provider' => 'Provider name',
+    ])
+    ->usingJsonBody()
+    ->post();
+```
+
+### Using multipart body
+
+```php
+<?php
+
+$request = $connector->persons()
+    ->fill([
+        'name' => 'logo',
+        'contents' => 'your-file-contents-or-stream',
+        'filename' => 'logo.png',
+    ])
+    ->usingMultipartBody()
+    ->post();
+```
+
+> Note: The id's are all **OPTIONAL**.
+
+[See all available endpoints](http://www.google.com)
+
+
+## Docs
+
+* Configuration
+* Requests
+
+## Docs
 
 Instantiate the connector by passing the required parameters, with that you can now retrieve and send the requests.
 
 ```php
+<?php
 
 use Clinect\NextGen\NextGen;
 
