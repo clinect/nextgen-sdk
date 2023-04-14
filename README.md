@@ -122,7 +122,7 @@ NextGen SDK request stores the information of a single API request. Within a req
 
 > Note: The id's are all **OPTIONAL**.
 
-[See all available endpoints](http://www.google.com)
+[See all available endpoints](list-endpoints.md)
 
 ### Usage
 
