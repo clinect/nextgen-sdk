@@ -21,6 +21,13 @@ class GetRequest extends Request
         return $this->endpoint;
     }
 
+    protected function defaultHeaders(): array
+    {
+        return [
+            'Content-Type' => 'application/json',
+        ];
+    }
+
     protected function defaultQuery(): array
     {
         return $this->queries;

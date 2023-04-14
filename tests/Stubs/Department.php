@@ -7,20 +7,25 @@ use Saloon\Http\Faking\MockResponse;
 
 trait Department
 {
-    protected function client(string $baseUrl): MockClient
+    protected function mockClient(): MockClient
     {
-        return new MockClient([
-            "{$baseUrl}/*/departments" => MockResponse::make($this->all(), 200),
+        $response = [
+            ...$this->mockAuthorize(), 
+            ...[
+                "{$this->url()}/*/departments" => MockResponse::make($this->all(), 200),
+    
+                "{$this->url()}/*/departments/id-3" => MockResponse::make([
+                    'name' => 'Department 3',
+                    'category' => 'department-3',
+                ], 200),
+    
+                "*" => MockResponse::make([
+                    'error' => 'No data available'
+                ], 404),
+            ],
+        ];
 
-            "{$baseUrl}/*/departments/id-3" => MockResponse::make([
-                'name' => 'Department 3',
-                'category' => 'department-3',
-            ], 200),
-
-            "*" => MockResponse::make([
-                'error' => 'No data available'
-            ], 404),
-        ]);
+        return new MockClient($response);
     }
 
     protected function all(): array

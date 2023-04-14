@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Connector\Requests;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class PersonTests extends TestCase
@@ -12,11 +12,7 @@ class PersonTests extends TestCase
 
     public function testCanSeeAllPersons()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons
         $request = $connector->persons()->get();
@@ -33,11 +29,7 @@ class PersonTests extends TestCase
 
     public function testCanSeePerson()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}
         $request = $connector->persons('id-3')->get();
@@ -51,11 +43,7 @@ class PersonTests extends TestCase
 
     public function testPersonNotFound()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}
         $request = $connector->persons('id-4')->get();
@@ -68,12 +56,7 @@ class PersonTests extends TestCase
 
     public function testCanSearch()
     {
-
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         $queryParams = ['filter'  => "",  'skip' => 300, 'orderby' => 'modifyTimestamp'];
 
