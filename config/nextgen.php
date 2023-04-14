@@ -16,8 +16,22 @@ return [
     'practice_id' => env('NEXTGEN_PRACTICEID'),
 
 
-    'base_url' => env('NEXTGEN_URL', ''),
+    'base_url' => env('NEXTGEN_URL', 'https://nativeapi.nextgen.com/nge/prod'),
 
 
-    'route_uri' => env('NEXTGEN_ROUTEURI'),
+    'route_uri' => env('NEXTGEN_ROUTEURI', '/nge-api/api'),
+
+
+    'auth_uri' => env('NEXTGEN_AUTHURI', '/nge-oauth/token'),
+
+
+    'cache_adapter' => [
+        'type' => 'laravel-cache',
+
+        'driver' => Illuminate\Support\Facades\Cache::class,
+
+        'cache_type' => 'file',
+
+        'expiry_time' => 3600,
+    ],
 ];

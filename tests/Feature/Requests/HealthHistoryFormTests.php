@@ -3,8 +3,8 @@
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Requests\HealthHistoryFormsRequest;
+use Clinect\NextGen\Tests\Feature\TestCase;
+use Clinect\NextGen\Requests\HealthHistoryFormRequests;
 use Clinect\NextGen\Tests\Stubs\HealthHistoryForm as HealthHistoryFormStub;
 
 class HealthHistoryFormTests extends TestCase
@@ -13,11 +13,7 @@ class HealthHistoryFormTests extends TestCase
 
     public function testCanSeeAllHealthHistoryForms()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/healthhistoryforms
         $request = (new HealthHistoryFormsRequest)->withPracticeId('practice-id')->get();
@@ -34,11 +30,7 @@ class HealthHistoryFormTests extends TestCase
 
     public function testCanSeeHealthHistoryForm()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/healthhistoryforms/{$healthHistoryFormId}
         $request = (new HealthHistoryFormsRequest('id-3'))->withPracticeId('practice-id')->get();
@@ -52,11 +44,7 @@ class HealthHistoryFormTests extends TestCase
 
     public function testHealthHistoryFormNotFound()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/healthhistoryforms/{$healthHistoryFormId}
         $request = (new HealthHistoryFormsRequest('id-4'))->withPracticeId('practice-id')->get();

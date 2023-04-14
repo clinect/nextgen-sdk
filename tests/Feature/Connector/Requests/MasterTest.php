@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Connector\Requests;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Master as MasterStub;
 
 class MasterTest extends TestCase
@@ -12,11 +12,7 @@ class MasterTest extends TestCase
 
     public function testCanSeeAllMaster()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /master
         $request = $connector->master()->get();
@@ -33,11 +29,7 @@ class MasterTest extends TestCase
 
     public function testCanSeeAllMasterPayer()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /master/payers
         $request = $connector->master()->payers()->get();
@@ -54,11 +46,7 @@ class MasterTest extends TestCase
 
     public function testCanSeeMasterPayer()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /master/payers/{$payersId}
         $request = $connector->master()->payers('id-2')->get();

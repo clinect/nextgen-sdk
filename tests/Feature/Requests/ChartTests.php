@@ -1,21 +1,22 @@
 <?php
 
-namespace Clinect\NextGen\Tests\Feature\Connector\Requests\Persons;
+namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Tests\Feature\TestCase;
-use Clinect\NextGen\Tests\Stubs\Department as DepartmentStub;
+use Clinect\NextGen\Requests\ChartRequests;
+use Clinect\NextGen\Tests\Stubs\Chart as ChartStub;
 
-class DepartmentTests extends TestCase
+class ChartTests extends TestCase
 {
-    use DepartmentStub;
+    use ChartStub;
 
-    public function testCanSeeAllDepartments()
+    public function testCanSeeAllCharts()
     {
         $connector = new NextGen($this->config(), $this->mockClient());
 
-        // Endpoint: /{$practiceId}/departments
-        $request = $connector->departments()->withPracticeId('practice-id')->get();
+        // Endpoint: /charts
+        $request = (new ChartRequests)->get();
 
         $response = $connector->send($request);
 
@@ -27,26 +28,26 @@ class DepartmentTests extends TestCase
         }
     }
 
-    public function testCanSeeDepartment()
+    public function testCanSeeChart()
     {
         $connector = new NextGen($this->config(), $this->mockClient());
 
-        // Endpoint: /{$practiceId}/departments/{$departmentId}
-        $request = $connector->departments('id-3')->withPracticeId('practice-id')->get();
+        // Endpoint: /charts/{$chartId}
+        $request = (new ChartRequests('id-3'))->get();
 
         $response = $connector->send($request);
 
         $this->assertSame($response->status(), 200);
-        $this->assertSame($response->json('name'), 'Department 3');
-        $this->assertSame($response->json('category'), 'department-3');
+        $this->assertSame($response->json('name'), 'Chart 3');
+        $this->assertSame($response->json('category'), 'chart-3');
     }
 
-    public function testDepartmentNotFound()
+    public function testChartNotFound()
     {
         $connector = new NextGen($this->config(), $this->mockClient());
 
-        // Endpoint: /{$practiceId}/departments/{$departmentId}
-        $request = $connector->departments('department-id')->withPracticeId('practice-id')->get();
+        // Endpoint: /charts/{$chartId}
+        $request = (new ChartRequests('id-4'))->get();
 
         $response = $connector->send($request);
 

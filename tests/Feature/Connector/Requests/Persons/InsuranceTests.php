@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Connector\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class InsuranceTests extends TestCase
@@ -12,11 +12,7 @@ class InsuranceTests extends TestCase
 
     public function testCanSeePersonAllInsurances()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances
         $request = $connector->persons('person-id')
@@ -35,11 +31,7 @@ class InsuranceTests extends TestCase
 
     public function testCanSeePersonInsurance()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}
         $request = $connector->persons('person-id')
@@ -55,11 +47,7 @@ class InsuranceTests extends TestCase
 
     public function testPersonInsuranceNotFound()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/insurances/{$insuranceId}
         $request = $connector->persons('person-id')

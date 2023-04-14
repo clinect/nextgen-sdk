@@ -3,8 +3,8 @@
 namespace Clinect\NextGen\Tests\Feature\Requests\Appointments;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
-use Clinect\NextGen\Requests\AppointmentsRequest;
+use Clinect\NextGen\Tests\Feature\TestCase;
+use Clinect\NextGen\Requests\AppointmentRequests;
 use Clinect\NextGen\Tests\Stubs\Appointment as AppointmentStub;
 
 class HealthHistoryFormTests extends TestCase
@@ -13,11 +13,7 @@ class HealthHistoryFormTests extends TestCase
 
     public function testCanSeeAllAppointmentHealthHistoryForms()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms
         $request = (new AppointmentsRequest('appointment-id'))->withPracticeId('practice-id')->healthHistoryForms()->get();
@@ -34,11 +30,7 @@ class HealthHistoryFormTests extends TestCase
 
     public function testCanSeeAppointmentHealthHistoryForm()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms/{$healthHistoryFormId}
         $request = (new AppointmentsRequest('appointment-id'))->withPracticeId('practice-id')->healthHistoryForms('id-3')->get();
@@ -52,11 +44,7 @@ class HealthHistoryFormTests extends TestCase
 
     public function testAppointmentHealthHistoryFormNotFound()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/appointments/{$appointmentId}/healthhistoryforms/{$healthHistoryFormId}
         $request = (new AppointmentsRequest('appointment-id'))->withPracticeId('practice-id')->healthHistoryForms('id-4')->get();

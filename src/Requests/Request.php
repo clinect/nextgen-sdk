@@ -2,16 +2,24 @@
 
 namespace Clinect\NextGen\Requests;
 
-use Saloon\Http\Request as BaseRequest;
-use Clinect\NextGen\Requests\BaseRequests\GetRequest;
-
 abstract class Request
 {
+    use Concerns\HasUsing;
+    use Concerns\HasMethods;
+
     public string $endpoint = '';
+
+    public array $headers = [];
 
     public array $queries = [];
 
     public array $configs = [];
+
+    public array $data = [];
+
+    public bool $isCache = false;
+
+    public string $typeBody = 'form';
 
     public int|string|null $practiceId = null;
 
@@ -31,16 +39,35 @@ abstract class Request
         return $this;
     }
 
+    public function withHeaders(array $headers): static
+    {
+        $this->headers = [...$this->headers, ...$headers];
+
+        return $this;
+    }
+
     public function withQuery(array $queries): static
     {
-        $this->queries = $queries;
+        $this->queries = [...$this->queries, ...$queries];
 
         return $this;
     }
 
     public function withConfig(array $configs): static
     {
-        $this->configs = $configs;
+        $this->configs = [...$this->configs, ...$configs];
+
+        return $this;
+    }
+
+    public function withTokenAuth(string $token, string $prefix = 'Bearer'): static
+    {
+        return $this->withHeaders(['Authorization' => "{$prefix} {$token}"]);
+    }
+
+    public function fill(array $data = []): static
+    {
+        $this->data = $data;
 
         return $this;
     }
@@ -49,6 +76,11 @@ abstract class Request
 
     protected function cleanUpEndpoint(): void
     {
+        if (!empty(filter_var($this->defaultEndpoint(), FILTER_VALIDATE_URL))) {
+            $this->endpoint = $this->defaultEndpoint();
+            return;
+        }
+
         $endpoint = rtrim($this->defaultEndpoint(), '/') . rtrim($this->endpoint, '/');
 
         if (!is_null($this->practiceId) || (is_string($this->practiceId) && strlen($this->practiceId) > 0)) {
@@ -56,23 +88,6 @@ abstract class Request
         }
 
         $this->endpoint = str_replace('//', '/', $endpoint);
-    }
-
-    public function get(): BaseRequest
-    {
-        $this->cleanUpEndpoint();
-
-        return new GetRequest($this->endpoint, $this->queries, $this->configs);
-    }
-
-    public function post()
-    {
-        //
-    }
-
-    public function put()
-    {
-        //
     }
 
     protected function setPracticeId(int|string $id): static

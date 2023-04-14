@@ -7,21 +7,26 @@ use Saloon\Http\Faking\MockResponse;
 
 trait master
 {
-    protected function client(string $baseUrl): MockClient
+    protected function mockClient(): MockClient
     {
-        return new MockClient([
-            "{$baseUrl}/master" => MockResponse::make($this->all(), 200),
+        $response = [
+            ...$this->mockAuthorize(), 
+            ...[
+                "{$this->url()}/master" => MockResponse::make($this->all(), 200),
+    
+                "{$this->url()}/master/payers" => MockResponse::make($this->all('payer'), 200),
+    
+                "{$this->url()}/master/payers/id-2" => MockResponse::make([
+                    'name' => 'Master Payer 2',
+                    'category' => 'master-payer-2',
+                ], 200),
+            ],
+        ];
 
-            "{$baseUrl}/master/payers" => MockResponse::make($this->all('payer'), 200),
-
-            "{$baseUrl}/master/payers/id-2" => MockResponse::make([
-                'name' => 'Master Payer 2',
-                'category' => 'master-payer-2',
-            ], 200),
-        ]);
+        return new MockClient($response);
     }
 
-    protected function all($type = 'master'): array
+    protected function all(string $type = 'master'): array
     {
         return $type == 'master' ? [
             [

@@ -7,27 +7,32 @@ use Saloon\Http\Faking\MockResponse;
 
 trait Appointment
 {
-    protected function client(string $baseUrl): MockClient
+    protected function mockClient(): MockClient
     {
-        return new MockClient([
-            "{$baseUrl}/appointments" => MockResponse::make($this->all(), 200),
+        $response = [
+            ...$this->mockAuthorize(), 
+            ...[
+                "{$this->url()}/appointments" => MockResponse::make($this->all(), 200),
 
-            "{$baseUrl}/appointments/id-3" => MockResponse::make([
-                'name' => 'Appointment 3',
-                'category' => 'appointment-3',
-            ], 200),
+                "{$this->url()}/appointments/id-3" => MockResponse::make([
+                    'name' => 'Appointment 3',
+                    'category' => 'appointment-3',
+                ], 200),
 
-            "{$baseUrl}/*/appointments/*/healthhistoryforms" => MockResponse::make($this->healthHistoryForms(), 200),
+                "{$this->url()}/*/appointments/*/healthhistoryforms" => MockResponse::make($this->healthHistoryForms(), 200),
 
-            "{$baseUrl}/*/appointments/*/healthhistoryforms/id-3" => MockResponse::make([
-                'name' => 'Appointment health history 3',
-                'category' => 'appointment-health-history-3',
-            ], 200),
+                "{$this->url()}/*/appointments/*/healthhistoryforms/id-3" => MockResponse::make([
+                    'name' => 'Appointment health history 3',
+                    'category' => 'appointment-health-history-3',
+                ], 200),
 
-            "*" => MockResponse::make([
-                'error' => 'No data available'
-            ], 404),
-        ]);
+                "*" => MockResponse::make([
+                    'error' => 'No data available'
+                ], 404),
+            ],
+        ];
+
+        return new MockClient($response);
     }
 
     protected function all(): array

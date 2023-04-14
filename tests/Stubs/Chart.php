@@ -7,20 +7,25 @@ use Saloon\Http\Faking\MockResponse;
 
 trait Chart
 {
-    protected function client(string $baseUrl): MockClient
+    protected function mockClient(): MockClient
     {
-        return new MockClient([
-            "{$baseUrl}/chart" => MockResponse::make($this->all(), 200),
+        $response = [
+            ...$this->mockAuthorize(), 
+            ...[
+                "{$this->url()}/chart" => MockResponse::make($this->all(), 200),
+    
+                "{$this->url()}/chart/id-3" => MockResponse::make([
+                    'name' => 'Chart 3',
+                    'category' => 'chart-3',
+                ], 200),
+    
+                "{$this->url()}/chart/*" => MockResponse::make([
+                    'error' => 'No data available'
+                ], 404),
+            ],
+        ];
 
-            "{$baseUrl}/chart" => MockResponse::make([
-                'name' => 'Person chart 3',
-                'category' => 'person-chart-3',
-            ], 200),
-
-            "{$baseUrl}/chart" => MockResponse::make([
-                'error' => 'No data available'
-            ], 404),
-        ]);
+        return new MockClient($response);
     }
 
     protected function all(): array
