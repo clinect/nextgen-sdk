@@ -6,6 +6,10 @@ use Clinect\NextGen\Requests\Master\AppointmentsRequest;
 use Clinect\NextGen\Requests\Master\BulkOrderTestsRequest;
 use Clinect\NextGen\Requests\Master\CodesRequest;
 use Clinect\NextGen\Requests\Master\DiagnosesRequest;
+use Clinect\NextGen\Requests\Master\DocumentFieldsRequest;
+use Clinect\NextGen\Requests\Master\DocumentTypesRequest;
+use Clinect\NextGen\Requests\Master\EnterprisesRequest;
+use Clinect\NextGen\Requests\Master\EventsRequest;
 
 class MasterRequest extends Request
 {
@@ -111,5 +115,39 @@ class MasterRequest extends Request
     public function diagnosticTests(): static
     {
         return $this->addEndpoint('/Diagnostic-tests');
+    }
+
+    public function documentFields(int|string|null $id = null): DocumentFieldsRequest
+    {
+        $this->cleanUpEndpoint();
+        return new DocumentFieldsRequest($this->endpoint, $id);
+    }
+
+    public function documentTypes(int|string|null $id = null): DocumentTypesRequest
+    {
+        $this->cleanUpEndpoint();
+        return new DocumentTypesRequest($this->endpoint, $id);
+    }
+
+    public function enterprises(int|string|null $id = null): EnterprisesRequest
+    {
+        $this->cleanUpEndpoint();
+        return new EnterprisesRequest($this->endpoint, $id);
+    }
+
+    public function events(int|string|null $id = null): EventsRequest
+    {
+        $this->cleanUpEndpoint();
+        return new EventsRequest($this->endpoint, $id);
+    }
+
+    public function externalOrganizations(): static
+    {
+        return $this->addEndpoint('/external-organizations');
+    }
+
+    public function externalSystems(): static
+    {
+        return $this->addEndpoint('/external-systems');
     }
 }
