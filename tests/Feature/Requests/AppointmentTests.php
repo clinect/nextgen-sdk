@@ -3,8 +3,8 @@
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
 use Clinect\NextGen\Requests\AppointmentRequests;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Appointment as AppointmentStub;
 
 class AppointmentTests extends TestCase
@@ -13,13 +13,8 @@ class AppointmentTests extends TestCase
 
     public function testCanSeeAllAppointments()
     {
-        $baseUrl = 'test.clinect.com';
+        $connector = new NextGen($this->config(), $this->mockClient());
 
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
-
-        // Endpoint: /appointments
         $request = (new AppointmentRequests)->get();
 
         $response = $connector->send($request);
@@ -34,11 +29,7 @@ class AppointmentTests extends TestCase
 
     public function testCanSeeAppointment()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /appointments/{$appointmentId}
         $request = (new AppointmentRequests('id-3'))->get();
@@ -52,11 +43,7 @@ class AppointmentTests extends TestCase
 
     public function testAppointmentNotFound()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /appointments/{$appointmentId}
         $request = (new AppointmentRequests('id-4'))->get();

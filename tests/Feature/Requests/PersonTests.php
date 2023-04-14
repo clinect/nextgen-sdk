@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
-use Orchestra\Testbench\TestCase;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Requests\PersonRequests;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
@@ -13,11 +13,7 @@ class PersonTests extends TestCase
 
     public function testCanSeeAllPersons()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons
         $request = (new PersonRequests)->get();
@@ -34,11 +30,7 @@ class PersonTests extends TestCase
 
     public function testCanSeePerson()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}
         $request = (new PersonRequests('id-3'))->get();
@@ -52,11 +44,7 @@ class PersonTests extends TestCase
 
     public function testPersonNotFound()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}
         $request = (new PersonRequests('id-4'))->get();
@@ -69,15 +57,10 @@ class PersonTests extends TestCase
 
     public function testCanSearch()
     {
-
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         $queryParams = ['filter'  => "",  'skip' => 300, 'orderby' => 'modifyTimestamp'];
-        
+
         // Endpoint: /persons/lookup
         $request = (new PersonRequests)->search($queryParams);
 

@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Requests\InsuranceRequests;
-use Orchestra\Testbench\TestCase;
+use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Insurance as InsuranceStub;
 
 class InsuranceTests extends TestCase
@@ -13,11 +13,7 @@ class InsuranceTests extends TestCase
 
     public function testCanSeeAllInsurances()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /insurances
         $request = (new InsuranceRequests)->get();
@@ -34,11 +30,7 @@ class InsuranceTests extends TestCase
 
     public function testCanSeeInsurance()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /insurances/{$insuranceId}
         $request = (new InsuranceRequests('id-2'))->get();
@@ -52,12 +44,7 @@ class InsuranceTests extends TestCase
 
     public function testCanSeeInsuranceDetails()
     {
-
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /insurances/{$insuranceId}/{$href}
         $request = (new InsuranceRequests('id-3'))->details('href_insurance')->get();
@@ -71,11 +58,7 @@ class InsuranceTests extends TestCase
 
     public function testInsuranceNotFound()
     {
-        $baseUrl = 'test.clinect.com';
-
-        $connector = new NextGen(baseUrl: $baseUrl);
-
-        $connector->withMockClient($this->client($baseUrl));
+        $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /insurances/{$insuranceId}
         $request = (new InsuranceRequests('insurance-id'))->get();
