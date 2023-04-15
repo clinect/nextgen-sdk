@@ -88,13 +88,13 @@ use Clinect\NextGen\NextGenConfig;
 
 $config = NextGenConfig::create([
     'client_id' => 'nextgen-client-id',
-    'secret' => 'nextgen-secre',
+    'secret' => 'nextgen-secret',
     'site_id' => 'nextgen-site-id',
     'enterprise_id' => 'nextgen-enterprise-id',
     'practice_id' => 'nextgen-practice-id',
-    'base_url' => 'nextgen-api-base-url',
-    'route_uri' => 'nextgen-route-uri-endpoint',
-    'auth_uri' => 'nextgen-auth-uri-endpoint',
+    'base_url' => 'https://nativeapi.nextgen.com/nge/prod',
+    'route_uri' => '/nge-api/api',
+    'auth_uri' => '/nge-oauth/token',
     'cache_adapter' => [
         'type' => 'laravel-cache',
 
@@ -107,6 +107,23 @@ $config = NextGenConfig::create([
 ]);
 
 $connector = new NextGen($config);
+```
+
+#### Using Laravel?
+
+Publish the config using the artisan command ([see above example](README.md#using-laravel)). And add this to your `.env` config file.
+
+```env
+# config for .env file
+
+NEXTGEN_CLIENTID=nextgen-client-id
+NEXTGEN_SECRET=nextgen-secret
+NEXTGEN_SITEID=nextgen-site-id
+NEXTGEN_ENTERPRISEID=nextgen-enterprise-id
+NEXTGEN_PRACTICEID=nextgen-practice-id
+NEXTGEN_URL=https://nativeapi.nextgen.com/nge/prod
+NEXTGEN_ROUTEURI=/nge-api/api
+NEXTGEN_AUTHURI=/nge-oauth/token
 ```
 
 ## Requests
