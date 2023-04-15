@@ -30,7 +30,7 @@ php artisan vendor:publish --tag=nextgen-config
 
 There are two ways in using NextGen SDK class.
 
-## By Instantiating The Class
+### By Instantiating The Class
 
 ```php
 <?php
@@ -42,7 +42,7 @@ $connector = new NextGen(...);
 $request = $connector->persons()->get();
 ```
 
-## By Using Laravel Dependency Injection
+### By Using Laravel Dependency Injection
 
 ```php
 <?php
