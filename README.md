@@ -1,4 +1,4 @@
-# NextGen PHP SDK
+# NextGen SDK
 A extendable sdk powered by [Saloon](https://github.com/sammyjo20/saloon).
 
 ## Installation
@@ -227,7 +227,7 @@ $request = $connector->persons()
     ->get();
 ```
 
-### Paginate
+### Pagination
 
 ```php
 <?php
@@ -236,8 +236,7 @@ use Clinect\NextGen\NextGen;
 
 $connector = new NextGen(...);
 
-$request = $connector->persons()
-    ->paginate(perPage: $perPage, page: $page);
+$request = $connector->persons()->paginate(perPage: $perPage, page: $page);
 ```
 
 ### Request Body/Data
