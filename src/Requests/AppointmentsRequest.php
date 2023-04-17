@@ -34,4 +34,9 @@ class AppointmentsRequest extends Request
     {
         return $this->addEndpoint('/waitlist-items')->withUriParamId($id);
     }
+
+    public function statusHistories(): static
+    {
+        return $this->addEndpoint('/status-histories');
+    }
 }
