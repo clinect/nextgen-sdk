@@ -16,7 +16,7 @@ trait master
     
                 "{$this->url()}/master/payers" => MockResponse::make($this->all('payer'), 200),
     
-                "{$this->url()}/master/payers/id-2" => MockResponse::make([
+                "{$this->url()}/master/payers/id-2/copays" => MockResponse::make([
                     'name' => 'Master Payer 2',
                     'category' => 'master-payer-2',
                 ], 200),

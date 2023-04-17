@@ -20,6 +20,7 @@ class PayersRequest extends Request
     public function copays(int|string|null $id = null): CopaysRequest
     {
         $this->withUriParamId($this->id);
+        $this->cleanUpEndpoint();
         return new CopaysRequest($this->endpoint, $id);
     }
 }

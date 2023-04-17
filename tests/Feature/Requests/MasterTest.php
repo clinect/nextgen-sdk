@@ -50,7 +50,7 @@ class MasterTest extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /master/payers/{$payersId}
-        $request = (new MasterRequest)->payers('id-2')->get();
+        $request = (new MasterRequest)->payers('id-2')->copays()->get();
 
         $response = $connector->send($request);
 
