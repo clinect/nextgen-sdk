@@ -1,237 +1,351 @@
 # NextGen SDK
+A extendable sdk powered by [Saloon](https://github.com/sammyjo20/saloon).
 
-## • Installation
+## Installation
 
-Use Composer to install this SDK.
+To get started with NextGen SDK, you will need to install it through Composer.
 
 ```
-composer require clinect/nextgen-sdk
+$ composer require clinect/nextgen-sdk
 ```
 
-## • Connector
+> Note: NextGen SDK supports PHP 8.1+
 
-Instantiate the connector by passing the required parameters, with that you can now retrieve and send the requests.
+### Dependencies
+
+NextGen SDK has two dependencies.
+
+* [Saloon](https://github.com/Sammyjo20/saloon-docs) (Core php library for API integration framework)
+* [Saloon Cache Plugin](https://github.com/Sammyjo20/saloon-cache-plugin) (Official cache plugin for Saloon v2)
+
+### Using Laravel?
+
+After the installation. Next, publish the configuration file with the following Artisan command
+
+```
+php artisan vendor:publish --tag=nextgen-config
+```
+
+## NextGen Sdk Class
+
+There are two ways in using NextGen SDK class.
+
+### By Instantiating The Class
 
 ```php
+<?php
 
 use Clinect\NextGen\NextGen;
 
-$nextGenConnector = new NextGen(
-    clientId: 'client-id-123',
-    secret: 'secret-123',
-    siteId: 'site-id-123',
-    enterpriseId: 'enterprise-id-123',
-    practiceId: 'practice-id-123',
-);
+$connector = new NextGen(...);
+
+$request = $connector->persons()->get();
 ```
 
-## • Configuration
-
-## • Requests
-
-Currently, there are 8 request classes, you have two options to use them:
+### By Using Laravel Dependency Injection
 
 ```php
-Request         | Via Request                       | Via Connector
-Appointment     - (new AppointmentsRequest)         - $nextGenConnector->appointments()
-Chart           - (new ChartRequests)               - $nextGenConnector->charts()
-Health History  - (new HealthHistoryFormsRequest)   - $nextGenConnector->healthHistoryForms()
-Insurance       - (new InsurancesRequest)           - $nextGenConnector->insurances()
-Patient         - (new PatientsRequest)             - $nextGenConnector->patients()
-Person          - (new PersonsRequest)              - $nextGenConnector->persons()
-Master          - (new MasterRequest)              - $nextGenConnector->master()
+<?php
+
+use Clinect\NextGen\NextGen;
+
+class ExampleController extends Controller
+{
+    public function show(NextGen $connector)
+    {
+        $request = $connector->persons()->get();
+    }
+}
 ```
 
-### Requests methods
+## Authorization/Session
 
-#### • GET Method
+The authorization and session is executed automatically when the nextgen sdk class is instantiated.
 
-<details>
-  <summary>Usage</summary>
-    
-In order to use a get request you just have to append ``->get()`` to the request
+## Configuration
+
+#### List of NextGen config keys:
+
+* `client_id`
+* `secret`
+* `site_id`
+* `enterprise_id`
+* `practice_id`
+* `base_url`
+* `route_uri`
+* `auth_uri`
+* `cache_adapter` ([see more about caching responses below](README.md#caching-responses))
+
+> Note: All config keys and values are required.
+
+#### Usage
+
 ```php
-// This retrieves all of the persons data. Endpoint:  '/persons/{$personId}
-    
-// Via Request
-    $request = (new PersonsRequest)->get();
-    // With Id
-    $request = (new PersonsRequest($personId))->get();
-    
-// Via Connector
-    $request = $nextGenConnector->persons()->get();
-    // With Id
-    $request = $nextGenConnector->persons($personId)->get();
+<?php
+
+use Clinect\NextGen\NextGen;
+use Clinect\NextGen\NextGenConfig;
+
+$config = NextGenConfig::create([
+    'client_id' => 'nextgen-client-id',
+    'secret' => 'nextgen-secret',
+    'site_id' => 'nextgen-site-id',
+    'enterprise_id' => 'nextgen-enterprise-id',
+    'practice_id' => 'nextgen-practice-id',
+    'base_url' => 'https://nativeapi.nextgen.com/nge/prod',
+    'route_uri' => '/nge-api/api',
+    'auth_uri' => '/nge-oauth/token',
+    'cache_adapter' => [
+        'type' => 'laravel-cache',
+
+        'driver' => Illuminate\Support\Facades\Cache::class,
+
+        'cache_type' => 'file',
+
+        'expiry_time' => 3600,
+    ],
+]);
+
+$connector = new NextGen($config);
 ```
 
-<details>
-  <summary>Nested get() requests:</summary>
-    
-Requests can also be connected dependent on their api endpoints.
- 
-```php
-// Endpoint: '/persons/{$personId}/chart/balances/{$balanceId - this is optional}'
-// This request retrieves person's/patient's balances
+#### Using Laravel?
 
-// Via Request:
-$request = (new PersonsRequest($personId))->balances($balanceId)->get();
+Publish the config using the artisan command ([see above example](README.md#using-laravel)). And add this to your `.env` config file.
 
-// Via Connector:
-$request = $connector->persons($personId)->balances($balanceId)->get();
+```env
+# config for .env file
 
-````
-
- ```php
-
-// Endpoint: '/persons/{$personId}/insurances/{insuranceId}/cards/{cardId}/front'
-// This request retrieves the front part of the person's insurance card
-
-// Via Request:
-$request = (new PersonsRequest($personId))
-            ->insurances($insuranceId)
-            ->cards($cardId)
-            ->front()
-            ->get();
-
-// Via Connector:
-$request = $connector->persons($personId)
-            ->insurances($insuranceId)
-            ->cards($cardId)
-            ->front()
-            ->get();
-````
-
-You can also check our tests to see more examples:
-
-`Via Request: /tests/Feature/Requests/`
-
-`Via Connector: /tests/Feature/Connector/Requests/`
-
-All tests corresponds to a specific api endpoint, the id's are all **optional**. If you want to retrieve all of the data; skip the id's, and if you want to retrieve a specific data of the request; pass the id to the request.
-
-</details>
-    
-<details>
-  <summary>All GET Requests</summary>
-</details>
-    
-</details>
-
-#### • POST Method
-
-<details>
-  <summary>Usage</summary>
-</details>
-
-#### • PUT Method
-
-<details>
-  <summary>Usage</summary>
-</details>
-
-#### • PATCH Method
-
-<details>
-  <summary>Usage</summary>
-</details>
-
-#### • DELETE Method
-
-<details>
-  <summary>Usage</summary>
-</details>
-
-### Sending the Request
-
-Once you have the request class and the connector class, you can now start sending the request using the `send()` or `sendAsync()` methods from your `$nextGenConnector`.
-
-When using the `send()` method, you will receive a response class.
-
-<details>
-  <summary>Via Request:</summary>
- 
-```php
-use Clinect\NextGen\NextGen;
-use Clinect\NextGen\Requests\PersonsRequest;
-
-$request = (new PersonsRequest)->get();
-$response = $nextGenConnector->send($request);
-
-// With ID's - To get only the specific data, simply pass the id to the request.
-$request = (new PersonsRequest($personId))->get();
-$response = $nextGenConnector->send($request);
-
-````
-
-</details>
-
-<details>
-  <summary>Via Connector:</summary>
-
-```php
-use Clinect\NextGen\NextGen;
-
-$request = $nextGenConnector->persons()->get();
-$response = $nextGenConnector->send($request);
-
-// With ID's - To get only the specific data, simply pass the id to the request.
-$request = $nextGenConnector->persons($personId)->get();
-$response = $nextGenConnector->send($request);
-````
-
-</details>
-
-Saloon supports asynchronous requests, to send those you will have to use the `sendAsync()` method, and you will receive an instance of PromiseInterface. _Please see Response chapter to see how the promise should be handled_.
-
-<details>
-  <summary>Via Request:</summary>
-  
-```php
-use Clinect\NextGen\NextGen;
-use Clinect\NextGen\Requests\PersonsRequest;
-
-$request = (new PersonsRequest($personId))->get();
-$promise = $nextGenConnector->sendAsync($request);
-
-````
-
-</details>
-
-<details>
-  <summary>Via Connector:</summary>
-
-```php
-use Clinect\NextGen\NextGen;
-
-$request = $nextGenConnector->persons($personId)->get();
-$promise = $nextGenConnector->sendAsync($request);
-````
-
-</details>
-
-## • Response
-
-You can handle the response of your request depending on what method you've used in sending the request
-
-<details>
-  <summary>send(): Response</summary>
-
-```php
-$response = $nextGenConnector->send($request);
-
-$body = $response->body();
-$decodedBody = $response->json();
+NEXTGEN_CLIENTID=nextgen-client-id
+NEXTGEN_SECRET=nextgen-secret
+NEXTGEN_SITEID=nextgen-site-id
+NEXTGEN_ENTERPRISEID=nextgen-enterprise-id
+NEXTGEN_PRACTICEID=nextgen-practice-id
+NEXTGEN_URL=https://nativeapi.nextgen.com/nge/prod
+NEXTGEN_ROUTEURI=/nge-api/api
+NEXTGEN_AUTHURI=/nge-oauth/token
 ```
 
-</details>
+## Requests
 
-<details>
-  <summary>sendAsync(): PromiseInterface</summary>
+NextGen SDK request stores the information of a single API request. Within a request, you can set the HTTP Method by appending at the end of each endpoint request.
+
+#### Methods
+* `get()`
+* `post()`
+* `put()`
+* `patch()`
+* `delete()`
+
+> Note: The id's are all **OPTIONAL**.
+
+[See all available endpoints](list-endpoints.md)
+
+### Usage
+
+#### GET
 
 ```php
-$promise = $nextGenConnector->sendAsync($request);
-$promise
-    ->then(function (Response $response) {
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$connector = new NextGen(...);
+
+// Endpoint: "/persons"
+$request = $connector->persons()->get();
+
+// Endpoint: "/persons/{id}"
+$request = $connector->persons({id})->get();
+```
+
+#### POST|PUT|PATCH|DELETE
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$connector = new NextGen(...);
+
+// Post
+$request = $connector->persons()
+    ->fill([
+        'name' => 'Name',
+        'provider' => 'Provider name',
+    ])
+    ->post();
+
+// Put
+$request = $connector->persons()
+    ->fill([
+        'name' => 'Name',
+        'provider' => 'Provider name',
+    ])
+    ->put();
+
+// Patch
+$request = $connector->persons()
+    ->fill([
+        'name' => 'Name',
+        'provider' => 'Provider name',
+    ])
+    ->patch();
+
+// Delete
+$request = $connector->persons({id})->delete();
+```
+
+### Headers
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$connector = new NextGen(...);
+
+$request = $connector->persons()
+    ->withHeaders([
+        ...
+    ])
+    ->get();
+```
+
+### Query Parameters
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$connector = new NextGen(...);
+
+$request = $connector->persons()
+    ->withQuery([
+        ...
+    ])
+    ->get();
+```
+
+### Client Config
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$connector = new NextGen(...);
+
+$request = $connector->persons()
+    ->withConfig([
+        ...
+    ])
+    ->get();
+```
+
+### Pagination
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$connector = new NextGen(...);
+
+$request = $connector->persons()->paginate(perPage: $perPage, page: $page);
+```
+
+### Request Body/Data
+
+#### Using form body
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$request = $connector->persons()
+    ->fill([
+        'name' => 'Name',
+        'provider' => 'Provider name',
+    ])
+    ->usingFormBody()
+    ->post();
+```
+
+#### Using json body
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$request = $connector->persons()
+    ->fill([
+        'name' => 'Name',
+        'provider' => 'Provider name',
+    ])
+    ->usingJsonBody()
+    ->post();
+```
+
+#### Using multipart body
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$request = $connector->persons()
+    ->fill([
+        'name' => 'logo',
+        'contents' => 'your-file-contents-or-stream',
+        'filename' => 'logo.png',
+    ])
+    ->usingMultipartBody()
+    ->post();
+```
+
+## Responses
+
+Depending on how you sent your request (synchronous/asynchronous) you will either receive an instance of `Response` or a `PromiseInterface`.
+
+### Synchronous Responses
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+
+$connector = new NextGen(...);
+
+$request = $connector->persons()->get();
+
+$response = $connector->send($request);
+
+// Returns the HTTP body as a string
+$response->body();
+
+// Retrieves a JSON response body and json_decodes it into an array.
+$response->json();
+```
+
+### Asynchronous Responses
+
+```php
+<?php
+
+use Clinect\NextGen\NextGen;
+use Saloon\Contracts\Response;
+
+$connector = new NextGen(...);
+
+$request = $connector->persons()->get();
+
+$response = $connector->sendAsync($request);
+
+$promise->then(function (Response $response) {
         // Handle successful response
     })
     ->otherwise(function (Exception $exception) {
@@ -239,4 +353,60 @@ $promise
     });
 ```
 
-</details>
+## Caching Responses
+
+There are scenarios where you may want to cache a response from an API, like retrieving a static list or retrieving data that you know won't change for a specified amount of time. Caching can be incredibly powerful and can speed up an application by relying less on a third-party integration. There are three types of caching integration.
+
+> Note: Caching can be added/changed based on user taste in the `NextGenConfig::create([...])` or if using **Laravel** in `./config/clinect/nextgen.php` file.
+
+#### PsrCacheDriver (Supports PSR-16 Cache Implementations)
+
+`Not available.`
+
+#### FlysystemDriver (Requires league/flysystem version 3)
+
+`Not available.`
+
+#### LaravelCacheDriver (Supports any of Laravel's cache disks, requires Laravel)
+
+```php
+<?php
+
+use Clinect\NextGen\NextGenConfig;
+
+NextGenConfig::create([
+    ...
+    'cache_adapter' => [
+        // Cache type.
+        'type' => 'laravel-cache',
+
+        // Driver to be used.
+        'driver' => Illuminate\Support\Facades\Cache::class,
+
+        // Where to store the cache: "file", "redis", etc...
+        // For reference: Check your laravel './config/cache.php'file
+        'cache_type' => 'file',
+
+        // Set cache expiry time in seconds.
+        'expiry_time' => 3600,
+    ],
+]);
+```
+
+#### Usage
+
+```php
+<?php
+
+$connector = new NextGen(...);
+
+// Using cache
+$request = $connector->enableCaching()->persons()->get();
+
+// Not using cache
+$request = $connector->persons()->get();
+```
+
+## License
+
+The MIT License (MIT).
