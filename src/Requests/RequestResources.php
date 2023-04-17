@@ -19,19 +19,9 @@ trait RequestResources
         return new AuthenticationServicesRequest();
     }
 
-    public function departments(int|string|null $id = null): DepartmentsRequest
-    {
-        return new DepartmentsRequest($id);
-    }
-
     public function healthHistoryForms(int|string|null $id = null): HealthHistoryFormsRequest
     {
         return new HealthHistoryFormsRequest($id);
-    }
-
-    public function insurances(int|string|null $id = null): InsurancesRequest
-    {
-        return new InsurancesRequest($id);
     }
 
     public function master(): MasterRequest
@@ -47,6 +37,21 @@ trait RequestResources
     public function persons(int|string|null $id = null): PersonsRequest
     {
         return new PersonsRequest($id);
+    }
+
+    public function providers(int|string|null $id = null): ProvidersRequest
+    {
+        return new ProvidersRequest($id);
+    }
+
+    public function resources(int|string|null $id = null): ResourcesRequest
+    {
+        return new ResourcesRequest($id);
+    }
+
+    public function users(int|string|null $id = null): UsersRequest
+    {
+        return new UsersRequest($id);
     }
 
     public function core(): CoreRequest
