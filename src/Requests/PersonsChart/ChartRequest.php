@@ -244,4 +244,10 @@ class ChartRequest extends Request
     {
         return $this->addEndpoint('/vitals');
     }
+
+    public function patientDocuments(int|string|null $id = null): PatientDocumentsRequest
+    {
+        $this->cleanUpEndpoint();
+        return new PatientDocumentsRequest($this->endpoint, $id);
+    }
 }
