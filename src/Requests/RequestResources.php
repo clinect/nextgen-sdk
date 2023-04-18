@@ -4,43 +4,73 @@ namespace Clinect\NextGen\Requests;
 
 trait RequestResources
 {
-    public function appointments(int|string|null $id = null): AppointmentRequests
+    public function appointments(int|string|null $id = null): AppointmentsRequest
     {
-        return new AppointmentRequests($id);
+        return new AppointmentsRequest($id);
     }
 
-    public function charts(int|string|null $id = null): ChartRequests
+    public function auditEvents(int|string|null $id = null): AuditEventsRequest
     {
-        return new ChartRequests($id);
+        return new AuditEventsRequest($id);
     }
 
-    public function departments(int|string|null $id = null): DepartmentRequests
+    public function authenticationServices(): AuthenticationServicesRequest
     {
-        return new DepartmentRequests($id);
+        return new AuthenticationServicesRequest();
     }
 
-    public function healthHistoryForms(int|string|null $id = null): HealthHistoryFormRequests
+    public function healthHistoryForms(int|string|null $id = null): HealthHistoryFormsRequest
     {
-        return new HealthHistoryFormRequests($id);
+        return new HealthHistoryFormsRequest($id);
     }
 
-    public function insurances(int|string|null $id = null): InsuranceRequests
+    public function master(): MasterRequest
     {
-        return new InsuranceRequests($id);
+        return new MasterRequest();
     }
 
-    public function master(int|string|null $id = null): MasterRequests
+    public function patients(int|string|null $id = null): PatientsRequest
     {
-        return new MasterRequests($id);
+        return new PatientsRequest($id);
     }
 
-    public function patients(int|string|null $id = null): PatientRequests
+    public function persons(int|string|null $id = null): PersonsRequest
     {
-        return new PatientRequests($id);
+        return new PersonsRequest($id);
     }
 
-    public function persons(int|string|null $id = null): PersonRequests
+    public function providers(int|string|null $id = null): ProvidersRequest
     {
-        return new PersonRequests($id);
+        return new ProvidersRequest($id);
+    }
+
+    public function resources(int|string|null $id = null): ResourcesRequest
+    {
+        return new ResourcesRequest($id);
+    }
+
+    public function users(int|string|null $id = null): UsersRequest
+    {
+        return new UsersRequest($id);
+    }
+
+    public function core(): CoreRequest
+    {
+        return new CoreRequest();
+    }
+
+    public function favorites(): FavoritesRequest
+    {
+        return new FavoritesRequest();
+    }
+
+    public function financial(): FinancialRequest
+    {
+        return new FinancialRequest();
+    }
+
+    public function documentsBatches(int|string|null $id = null): DocumentBatchesRequest
+    {
+        return new DocumentBatchesRequest($id);
     }
 }

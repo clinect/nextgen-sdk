@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
-use Clinect\NextGen\Requests\MasterRequests;
+use Clinect\NextGen\Requests\MasterRequest;
 use Clinect\NextGen\Tests\Feature\TestCase;
 use Clinect\NextGen\Tests\Stubs\Master as MasterStub;
 
@@ -16,7 +16,7 @@ class MasterTest extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /master
-        $request = (new MasterRequests)->get();
+        $request = (new MasterRequest)->get();
 
         $response = $connector->send($request);
 
@@ -33,7 +33,7 @@ class MasterTest extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /master/payers
-        $request = (new MasterRequests)->payers()->get();
+        $request = (new MasterRequest)->payers()->get();
 
         $response = $connector->send($request);
 
@@ -50,7 +50,7 @@ class MasterTest extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /master/payers/{$payersId}
-        $request = (new MasterRequests)->payers('id-2')->get();
+        $request = (new MasterRequest)->payers('id-2')->copays()->get();
 
         $response = $connector->send($request);
 

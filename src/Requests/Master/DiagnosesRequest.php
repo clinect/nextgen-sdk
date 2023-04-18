@@ -1,22 +1,24 @@
 <?php
 
-namespace Clinect\NextGen\Requests;
+namespace Clinect\NextGen\Requests\Master;
 
-class PatientRequests extends Request
+use Clinect\NextGen\Requests\Request;
+
+class DiagnosesRequest extends Request
 {
     public function __construct(
-        public int|string|null $id = null,
+        public string $endPoint,
     ) {
-        $this->withUriParamId($id);
     }
 
     public function defaultEndpoint(): string
     {
-        return '/patients';
+        return $this->endPoint . '/diagnoses';
     }
 
     public function search(array $queries): \Saloon\Http\Request
     {
         return $this->addEndpoint('/search')->withQuery($queries)->get();
     }
+
 }

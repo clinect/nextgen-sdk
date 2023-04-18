@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Tests\Feature\TestCase;
-use Clinect\NextGen\Requests\PatientRequests;
+use Clinect\NextGen\Requests\PatientsRequest;
 use Clinect\NextGen\Tests\Stubs\Patient as PatientStub;
 
 class PatientTests extends TestCase
@@ -16,7 +16,7 @@ class PatientTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/patients/{$patientId}
-        $request = (new PatientRequests)->withPracticeId('practice-id')->get();
+        $request = (new PatientsRequest)->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
@@ -31,7 +31,7 @@ class PatientTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/patients/{$patientId}
-        $request = (new PatientRequests('id-3'))->withPracticeId('practice-id')->get();
+        $request = (new PatientsRequest('id-3'))->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
@@ -45,7 +45,7 @@ class PatientTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/patients/{$patientId}
-        $request = (new PatientRequests('id-4'))->withPracticeId('practice-id')->get();
+        $request = (new PatientsRequest('id-4'))->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
@@ -60,7 +60,7 @@ class PatientTests extends TestCase
         $queryParams = ['filter'  => "",  'skip' => 300, 'orderby' => 'modifyTimestamp'];
 
         // Endpoint: /{$practiceId}/patients/search
-        $request = (new PatientRequests)->search($queryParams);
+        $request = (new PatientsRequest)->search($queryParams);
 
         $response = $connector->send($request);
         $this->assertSame($response->status(), 200);

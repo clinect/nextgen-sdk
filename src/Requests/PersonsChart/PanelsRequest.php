@@ -1,12 +1,13 @@
 <?php
 
-namespace Clinect\NextGen\Requests;
+namespace Clinect\NextGen\Requests\PersonsChart;
 
 use Clinect\NextGen\Requests\Request;
 
-class InsuranceRequests extends Request
+class PanelsRequest extends Request
 {
     public function __construct(
+        public string $endPoint,
         public int|string|null $id = null
     ) {
         $this->withUriParamId($id);
@@ -14,11 +15,11 @@ class InsuranceRequests extends Request
 
     public function defaultEndpoint(): string
     {
-        return '/insurances';
+        return $this->endPoint . '/panels';
     }
 
-    public function details(string $href)
+    public function results(): static
     {
-        return $this->addEndpoint($href);
+        return $this->addEndpoint('/results');
     }
 }

@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests\Persons;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Tests\Feature\TestCase;
-use Clinect\NextGen\Requests\PersonRequests;
+use Clinect\NextGen\Requests\PersonsRequest;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class BalanceTests extends TestCase
@@ -16,7 +16,7 @@ class BalanceTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/balances
-        $request = (new PersonRequests('person-id'))->balances()->get();
+        $request = (new PersonsRequest('person-id'))->chart()->balances()->get();
 
         $response = $connector->send($request);
 
@@ -33,7 +33,7 @@ class BalanceTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/balances/{$balanceId}
-        $request = (new PersonRequests('person-id'))->balances('id-3')->get();
+        $request = (new PersonsRequest('person-id'))->chart()->balances('id-3')->get();
 
         $response = $connector->send($request);
 
@@ -47,7 +47,7 @@ class BalanceTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/balances/{$balanceId}
-        $request = (new PersonRequests('person-id'))->balances('id-4')->get();
+        $request = (new PersonsRequest('person-id'))->chart()->balances('id-4')->get();
 
         $response = $connector->send($request);
 

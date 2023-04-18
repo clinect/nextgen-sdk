@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
-class AppointmentRequests extends Request
+class DocumentBatchesRequest extends Request
 {
     public function __construct(
         public int|string|null $id = null
@@ -12,11 +12,11 @@ class AppointmentRequests extends Request
 
     public function defaultEndpoint(): string
     {
-        return '/appointments';
+        return '/document-batches';
     }
 
-    public function healthHistoryForms(int|string|null $id = null): static
+    public function documents(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/healthhistoryforms')->withUriParamId($id);
+        return $this->addEndpoint('/documents')->withUriParamId($id);
     }
 }

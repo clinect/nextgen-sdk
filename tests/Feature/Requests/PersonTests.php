@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Tests\Feature\TestCase;
-use Clinect\NextGen\Requests\PersonRequests;
+use Clinect\NextGen\Requests\PersonsRequest;
 use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class PersonTests extends TestCase
@@ -16,7 +16,7 @@ class PersonTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons
-        $request = (new PersonRequests)->get();
+        $request = (new PersonsRequest)->get();
 
         $response = $connector->send($request);
 
@@ -33,7 +33,7 @@ class PersonTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}
-        $request = (new PersonRequests('id-3'))->get();
+        $request = (new PersonsRequest('id-3'))->get();
 
         $response = $connector->send($request);
 
@@ -47,7 +47,7 @@ class PersonTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}
-        $request = (new PersonRequests('id-4'))->get();
+        $request = (new PersonsRequest('id-4'))->get();
 
         $response = $connector->send($request);
 
@@ -59,10 +59,8 @@ class PersonTests extends TestCase
     {
         $connector = new NextGen($this->config(), $this->mockClient());
 
-        $queryParams = ['filter'  => "",  'skip' => 300, 'orderby' => 'modifyTimestamp'];
-
         // Endpoint: /persons/lookup
-        $request = (new PersonRequests)->search($queryParams);
+        $request = (new PersonsRequest)->lookup()->get();
 
         $response = $connector->send($request);
         $this->assertSame($response->status(), 200);

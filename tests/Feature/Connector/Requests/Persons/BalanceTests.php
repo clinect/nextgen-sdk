@@ -15,7 +15,7 @@ class BalanceTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/balances
-        $request = $connector->persons('person-id')->balances()->get();
+        $request = $connector->persons('person-id')->chart()->balances()->get();
 
         $response = $connector->send($request);
 
@@ -32,7 +32,7 @@ class BalanceTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/balances/{$balanceId}
-        $request = $connector->persons('person-id')->balances('id-3')->get();
+        $request = $connector->persons('person-id')->chart()->balances('id-3')->get();
 
         $response = $connector->send($request);
 
@@ -46,7 +46,7 @@ class BalanceTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /persons/{$personId}/chart/balances/{$balanceId}
-        $request = $connector->persons('person-id')->balances('id-4')->get();
+        $request = $connector->persons('person-id')->chart()->balances('id-4')->get();
 
         $response = $connector->send($request);
 

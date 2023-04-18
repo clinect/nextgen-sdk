@@ -58,10 +58,8 @@ class PersonTests extends TestCase
     {
         $connector = new NextGen($this->config(), $this->mockClient());
 
-        $queryParams = ['filter'  => "",  'skip' => 300, 'orderby' => 'modifyTimestamp'];
-
         // Endpoint: /persons/lookup
-        $request = $connector->persons()->search($queryParams);
+        $request = $connector->persons()->lookup()->get();
 
         $response = $connector->send($request);
         $this->assertSame($response->status(), 200);

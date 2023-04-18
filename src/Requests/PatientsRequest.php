@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Requests;
 
-class DepartmentRequests extends Request
+class PatientsRequest extends Request
 {
     public function __construct(
         public int|string|null $id = null,
@@ -12,6 +12,11 @@ class DepartmentRequests extends Request
 
     public function defaultEndpoint(): string
     {
-        return '/departments';
+        return '/patients';
+    }
+
+    public function search(array $queries): \Saloon\Http\Request
+    {
+        return $this->addEndpoint('/search')->withQuery($queries)->get();
     }
 }

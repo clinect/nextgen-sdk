@@ -23,9 +23,9 @@ abstract class Request
 
     public int|string|null $practiceId = null;
 
-    public function addEndpoint(string $endpoint): static
+    public function addEndpoint(string $endpoint, string $separator = '/'): static
     {
-        $this->endpoint = rtrim($this->endpoint, '/')."/".ltrim($endpoint, '/');
+        $this->endpoint = rtrim($this->endpoint, '/')."{$separator}".ltrim($endpoint, '/');
 
         return $this;
     }

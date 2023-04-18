@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Tests\Feature\Requests;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\Tests\Feature\TestCase;
-use Clinect\NextGen\Requests\HealthHistoryFormRequests;
+use Clinect\NextGen\Requests\HealthHistoryFormsRequest;
 use Clinect\NextGen\Tests\Stubs\HealthHistoryForm as HealthHistoryFormStub;
 
 class HealthHistoryFormTests extends TestCase
@@ -16,7 +16,7 @@ class HealthHistoryFormTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/healthhistoryforms
-        $request = (new HealthHistoryFormRequests)->withPracticeId('practice-id')->get();
+        $request = (new HealthHistoryFormsRequest)->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
@@ -33,7 +33,7 @@ class HealthHistoryFormTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/healthhistoryforms/{$healthHistoryFormId}
-        $request = (new HealthHistoryFormRequests('id-3'))->withPracticeId('practice-id')->get();
+        $request = (new HealthHistoryFormsRequest('id-3'))->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
@@ -47,7 +47,7 @@ class HealthHistoryFormTests extends TestCase
         $connector = new NextGen($this->config(), $this->mockClient());
 
         // Endpoint: /{$practiceId}/healthhistoryforms/{$healthHistoryFormId}
-        $request = (new HealthHistoryFormRequests('id-4'))->withPracticeId('practice-id')->get();
+        $request = (new HealthHistoryFormsRequest('id-4'))->withPracticeId('practice-id')->get();
 
         $response = $connector->send($request);
 
