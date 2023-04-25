@@ -19,6 +19,12 @@ trait Config
         return "{$this->testBaseUrl}{$this->testRouteUri}";
     }
 
+    public function apiUrl(): string
+    {
+        return "https://nativeapi.nextgen.com/nge/prod/nge-api/api";
+        
+    }
+
     public function mockAuthorize(): array
     {
         return [
@@ -34,7 +40,7 @@ trait Config
         ];
     }
 
-    public function config(): NextGenConfig
+    public function mockConfig(): NextGenConfig
     {
         return NextGenConfig::create([
             'client_id' => 'Test-client-id',
@@ -45,6 +51,37 @@ trait Config
             'base_url' => $this->testBaseUrl,
             'route_uri' => $this->testRouteUri,
             'auth_uri' => $this->testAuthUri,
+            'cache_adapter' => [
+                'type' => 'laravel-cache',
+
+                'driver' => Cache::class,
+
+                'cache_type' => 'file',
+
+                'expiry_time' => 3600,
+            ],
+        ]);
+    }
+
+    public function apiAuthorize(): array
+    {
+        return [
+             MockResponse::fixture('Config/authorization'),
+             MockResponse::fixture('Config/ng-session'),
+        ];
+    }
+
+    public function apiConfig(): NextGenConfig
+    {
+        return NextGenConfig::create([
+            'client_id' => 'l723c8df26aec14a81b33c513dd857746b',
+            'secret' => '5e084d602dff49dc9679a0cfe1a31b98',
+            'site_id' => 'c8e052ba-2d8b-e70a-ef88-fcd1a3022d73',
+            'enterprise_id' => '00002',
+            'practice_id' => '0006',
+            'base_url' => 'https://nativeapi.nextgen.com/nge/prod',
+            'route_uri' => '/nge-api/api',
+            'auth_uri' => '/nge-oauth/token',
             'cache_adapter' => [
                 'type' => 'laravel-cache',
 

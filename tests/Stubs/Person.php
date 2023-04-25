@@ -2,6 +2,8 @@
 
 namespace Clinect\NextGen\Tests\Stubs;
 
+use Clinect\NextGen\Requests\BaseRequests\GetRequest;
+use Saloon\Helpers\MockConfig;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
@@ -89,6 +91,45 @@ trait Person
 
         return new MockClient($response);
     }
+
+    protected function fixtureClient(): MockClient
+    {
+        $response = [
+            ...$this->apiAuthorize(),
+            ...[
+                "{$this->apiUrl()}/persons" => MockResponse::fixture('Person/persons'),
+                "{$this->apiUrl()}/persons/1" => MockResponse::fixture('Person/person'),
+                "{$this->apiUrl()}/persons/1/address-histories" => MockResponse::fixture('Person/addressHistories'),
+                "{$this->apiUrl()}/persons/1/appointments" => MockResponse::fixture('Person/appointments'),
+                "{$this->apiUrl()}/persons/1/eligibilities" => MockResponse::fixture('Person/eligibilities'),
+                "{$this->apiUrl()}/persons/1/employers" => MockResponse::fixture('Person/employers'),
+                "{$this->apiUrl()}/persons/1/employers/1" => MockResponse::fixture('Person/employer'),
+                "{$this->apiUrl()}/persons/1/ethnicities" => MockResponse::fixture('Person/ethnicities'),
+                "{$this->apiUrl()}/persons/1/formularies" => MockResponse::fixture('Person/Formularies/formularies'),
+                "{$this->apiUrl()}/persons/1/formularies/medications/1/alternatives" => MockResponse::fixture('Person/Formularies/alternatives'),
+                "{$this->apiUrl()}/persons/1/formularies/medications/1/copays/1" => MockResponse::fixture('Person/Formularies/copays'),
+                "{$this->apiUrl()}/persons/1/formularies/medications/1/coverages/1" => MockResponse::fixture('Person/Formularies/coverages'),
+                "{$this->apiUrl()}/persons/1/gender-identities" => MockResponse::fixture('Person/genderIdentities'),
+                "{$this->apiUrl()}/persons/1/insurances" => MockResponse::fixture('Person/Insurances/insurances'),
+                "{$this->apiUrl()}/persons/1/insurances/1" => MockResponse::fixture('Person/Insurances/insurance'),
+                "{$this->apiUrl()}/persons/1/insurances/1/cards" => MockResponse::fixture('Person/Insurances/cards'),
+                "{$this->apiUrl()}/persons/1/insurances/1/cards/1" => MockResponse::fixture('Person/Insurances/card'),
+                "{$this->apiUrl()}/persons/1/insurances/1/cards/1/back" => MockResponse::fixture('Person/Insurances/backCard'),
+                "{$this->apiUrl()}/persons/1/insurances/1/cards/1/front" => MockResponse::fixture('Person/Insurances/frontCard'),
+                "{$this->apiUrl()}/persons/1/medication-history" => MockResponse::fixture('Person/medicationHistory'),
+                "{$this->apiUrl()}/persons/1/photo" => MockResponse::fixture('Person/photo'),
+                "{$this->apiUrl()}/persons/1/races" => MockResponse::fixture('Person/races'),
+                "{$this->apiUrl()}/persons/1/relations" => MockResponse::fixture('Person/relations'),
+                "{$this->apiUrl()}/persons/1/support-roles" => MockResponse::fixture('Person/supportRoles'),
+                "{$this->apiUrl()}/persons/lookup" => MockResponse::fixture('Person/lookup'),
+                "{$this->apiUrl()}/persons/merged" => MockResponse::fixture('Person/merged'),
+                "{$this->apiUrl()}/persons/payers" => MockResponse::fixture('Person/payers'),
+            ],
+        ];
+
+        return new MockClient($response);
+    }
+
 
     protected function persons(): array
     {
