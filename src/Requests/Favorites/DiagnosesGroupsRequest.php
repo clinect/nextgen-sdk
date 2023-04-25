@@ -1,6 +1,6 @@
 <?php
 
-namespace Clinect\NextGen\Requests\Users;
+namespace Clinect\NextGen\Requests\Favorites;
 
 use Clinect\NextGen\Requests\Request;
 

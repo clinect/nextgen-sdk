@@ -2,8 +2,6 @@
 
 namespace Clinect\NextGen\Requests;
 
-use Clinect\NextGen\Requests\Request;
-
 class AuthRequest extends Request
 {
     public function __construct(

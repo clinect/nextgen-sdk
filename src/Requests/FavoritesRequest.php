@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Requests;
 
 use Clinect\NextGen\Requests\Favorites\MedicationsRequest;
-use Clinect\NextGen\Requests\Users\DiagnosesGroupsRequest;
+use Clinect\NextGen\Requests\Favorites\DiagnosesGroupsRequest;
 
 class FavoritesRequest extends Request
 {

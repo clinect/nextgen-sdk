@@ -102,6 +102,6 @@ class AuditEventsRequest extends Request
 
     public function performance(): static
     {
-        return $this->endpoint('/performance');
+        return $this->addEndpoint('/performance');
     }
 }

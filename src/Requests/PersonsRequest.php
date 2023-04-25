@@ -5,7 +5,6 @@ namespace Clinect\NextGen\Requests;
 use Clinect\NextGen\Requests\Persons\FormulariesRequest;
 use Clinect\NextGen\Requests\Persons\InsurancesRequest;
 use Clinect\NextGen\Requests\PersonsChart\ChartRequest;
-use Clinect\NextGen\Requests\Request;
 
 class PersonsRequest extends Request
 {
