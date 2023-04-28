@@ -33,9 +33,9 @@ class DocumentsRequest extends Request
         return $this->addEndpoint('/plain-text');
     }
 
-    public function thumbnail(): static
+    public function thumbnail(int|string|null $page): static
     {
-        return $this->addEndpoint('/thumbnail');
+        return $this->addEndpoint('/thumbnail')->withUriParamId($page);
     }
 
     public function xml(): static

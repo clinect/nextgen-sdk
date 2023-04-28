@@ -36,7 +36,11 @@ class NextGen extends Connector implements Cacheable
 
     protected function authorize(): void
     {
-        $this->enableCaching();
+        if ($this->hasMockClient()) {
+            $this->disableCaching();
+        } else {
+            $this->enableCaching();
+        }
 
         $request = (new AuthRequest("{$this->configs->getBaseUrl()}{$this->configs->getAuthUri()}"))
             ->fill([

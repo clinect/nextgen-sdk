@@ -15,8 +15,13 @@ class CarePlanRequest extends Request
     {
         return $this->endPoint . '/care-plan';
     }
+
+    public function goals(): static
+    {
+        return $this->addEndpoint('/goals');
+    }
     
-    public function healthConcerns(int|string|null $id): HealthConcernsRequest
+    public function healthConcerns(int|string|null $id = null): HealthConcernsRequest
     {
         $this->cleanUpEndpoint();
         return new HealthConcernsRequest($this->endpoint, $id);
