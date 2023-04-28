@@ -9,8 +9,6 @@ use Clinect\NextGen\Tests\Stubs\AuditEvent as AuditEventStub;
 class AuditEventsTests extends TestCase
 {
     use AuditEventStub;
-    private $apiConnector;
-    private $mockConnector;
 
     protected function setup(): void
     {
@@ -19,7 +17,7 @@ class AuditEventsTests extends TestCase
         $this->mockConnector = new NextGen($this->mockConfig(), $this->mockClient());
     }
 
-    public function testCanSeeAuditEvent()
+    public function testCanGetAuditEvent()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->get();
@@ -30,7 +28,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventAccount()
+    public function testCanGetAuditEventAccount()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->account()->get();
@@ -41,7 +39,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventAllergy()
+    public function testCanGetAuditEventAllergy()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->allergy()->get();
@@ -52,7 +50,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventApplicationAccess()
+    public function testCanGetAuditEventApplicationAccess()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->applicationAccess()->get();
@@ -63,7 +61,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventDataTrailItems()
+    public function testCanGetAuditEventDataTrailItems()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->dataTrailItems()->get();
@@ -74,7 +72,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventDiagnosis()
+    public function testCanGetAuditEventDiagnosis()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->diagnosis()->get();
@@ -85,7 +83,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventEncounter()
+    public function testCanGetAuditEventEncounter()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->encounter()->get();
@@ -96,7 +94,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventIcs()
+    public function testCanGetAuditEventIcs()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->ics()->get();
@@ -107,7 +105,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventInterfaceHoldingTank()
+    public function testCanGetAuditEventInterfaceHoldingTank()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->interfaceHoldingTank()->get();
@@ -118,7 +116,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventInteroperability()
+    public function testCanGetAuditEventInteroperability()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->interoperability()->get();
@@ -129,7 +127,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventMedication()
+    public function testCanGetAuditEventMedication()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->medication()->get();
@@ -140,7 +138,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventOrder()
+    public function testCanGetAuditEventOrder()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->order()->get();
@@ -151,7 +149,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventPaq()
+    public function testCanGetAuditEventPaq()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->paq()->get();
@@ -162,7 +160,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventPatientEducation()
+    public function testCanGetAuditEventPatientEducation()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->patientEducation()->get();
@@ -173,7 +171,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventProcedure()
+    public function testCanGetAuditEventProcedure()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->procedure()->get();
@@ -184,7 +182,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventRosetta()
+    public function testCanGetAuditEventRosetta()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->rosetta()->get();
@@ -195,7 +193,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventSecurity()
+    public function testCanGetAuditEventSecurity()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->security()->get();
@@ -206,7 +204,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventTemplate()
+    public function testCanGetAuditEventTemplate()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents(1)->template()->get();
@@ -217,7 +215,7 @@ class AuditEventsTests extends TestCase
         // add assertions
     }
 
-    public function testCanSeeAuditEventPerformance()
+    public function testCanGetAuditEventPerformance()
     {
         $request = $this->mockConnector->disableCaching()
             ->auditEvents()->performance()->get();
