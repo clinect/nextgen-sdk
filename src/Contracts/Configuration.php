@@ -82,4 +82,12 @@ interface Configuration
      * @return array
      */
     public function getCacheAdapter(string $key): mixed;
+
+    /**
+     * set cache expiry time.
+     * 
+     * @param string $key
+     * @return void
+     */
+    public function setCacheExpiryTime(string $key): void;
 }

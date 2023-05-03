@@ -72,4 +72,9 @@ class NextGenConfig implements Configuration
     {
         return $this->configs['cache_adapter'][$key];
     }
+
+    public function setCacheExpiryTime(string $key): void
+    {
+        $this->configs['cache_adapter']['expiry_time'] = $key;
+    }
 }

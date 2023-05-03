@@ -10,6 +10,7 @@ use Saloon\Http\Paginators\PagedPaginator;
 use Saloon\CachePlugin\Contracts\Cacheable;
 use Clinect\NextGen\Requests\NgSessionRequest;
 use Clinect\NextGen\Requests\RequestResources;
+use Saloon\Contracts\PendingRequest;
 
 class NextGen extends Connector implements Cacheable
 {
@@ -27,6 +28,17 @@ class NextGen extends Connector implements Cacheable
         $this->authorize();
 
         $this->disableCaching();
+    }
+
+    public function boot(PendingRequest $pendingRequest): void
+    {
+        if(!strpos($pendingRequest->getUrl(), $this->configs->getAuthUri()) &&
+            !strpos($pendingRequest->getUrl(), NgSessionRequest::getEndpoint())) {
+            if ($this->mockclient) {
+                $this->withMockClient($this->mockclient);
+            }
+
+        }
     }
 
     public function resolveBaseUrl(): string
@@ -50,13 +62,13 @@ class NextGen extends Connector implements Cacheable
                 'site_id' => $this->configs->getSiteId(),
             ])
             ->post();
-
         $response = $this->send($request);
 
         if ($response->failed()) {
             $response->throw();
         }
-
+        $this->configs->setCacheExpiryTime((string)$response->json('expires_in'));
+        
         $this->withTokenAuth((string) $response->json('access_token'), (string) $response->json('token_type'));
 
         $request = (new NgSessionRequest)
@@ -76,6 +88,7 @@ class NextGen extends Connector implements Cacheable
 
         $this->headers()->add('X-NG-SessionID', $response->headers()->get('x-ng-sessionid'));
     }
+
 
     public function paginate(Request $request, int $perPage = 20, int $page = 1): PagedPaginator
     {

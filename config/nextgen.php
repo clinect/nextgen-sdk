@@ -32,6 +32,6 @@ return [
 
         'cache_type' => 'file',
 
-        'expiry_time' => 3600,
+        'expiry_time' => 1000,
     ],
 ];
