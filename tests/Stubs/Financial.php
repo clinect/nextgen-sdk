@@ -7,6 +7,9 @@ use Saloon\Http\Faking\MockResponse;
 
 trait Financial
 {
+    private $apiConnector;
+    private $mockConnector;
+
     protected function mockClient(): MockClient
     {
         $response = [

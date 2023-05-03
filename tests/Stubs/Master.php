@@ -5,17 +5,20 @@ namespace Clinect\NextGen\Tests\Stubs;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
-trait master
+trait Master
 {
+    private $apiConnector;
+    private $mockConnector;
+
     protected function mockClient(): MockClient
     {
         $response = [
-            ...$this->mockAuthorize(), 
+            ...$this->mockAuthorize(),
             ...[
                 "{$this->url()}/master" => MockResponse::make($this->all(), 200),
-    
+
                 "{$this->url()}/master/payers" => MockResponse::make($this->all('payer'), 200),
-    
+
                 "{$this->url()}/master/payers/id-2/copays" => MockResponse::make([
                     'name' => 'Master Payer 2',
                     'category' => 'master-payer-2',
@@ -159,6 +162,6 @@ trait master
                 'name' => 'Master Payer 2',
                 'category' => 'master-payer-2',
             ]
-            ];
+        ];
     }
 }

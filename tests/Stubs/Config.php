@@ -29,7 +29,7 @@ trait Config
     {
         return [
             "{$this->testBaseUrl}{$this->testAuthUri}" => MockResponse::make([
-                'access_token' => 'example-token', 'token_type' => 'Bearer', 'time' => 3600
+                'access_token' => 'example-token', 'token_type' => 'Bearer', 'time' => 1000
             ], 200),
 
             "{$this->url()}/users/me/login-defaults" =>  MockResponse::make([
@@ -58,7 +58,7 @@ trait Config
 
                 'cache_type' => 'file',
 
-                'expiry_time' => 3600,
+                'expiry_time' => 1000,
             ],
         ]);
     }
@@ -89,7 +89,7 @@ trait Config
 
                 'cache_type' => 'file',
 
-                'expiry_time' => 3600,
+                'expiry_time' => 1000,
             ],
         ]);
     }

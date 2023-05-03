@@ -7,18 +7,21 @@ use Saloon\Http\Faking\MockResponse;
 
 trait HealthHistoryForm
 {
+    private $apiConnector;
+    private $mockConnector;
+
     protected function mockClient(): MockClient
     {
         $response = [
-            ...$this->mockAuthorize(), 
+            ...$this->mockAuthorize(),
             ...[
                 "{$this->url()}/*/healthhistoryforms" => MockResponse::make($this->all(), 200),
-    
-                "{$this->url()}/*/healthhistoryforms/id-3" => MockResponse::make([
-                    'name' => 'Health history 3',
-                    'category' => 'health-history-3',
+
+                "{$this->url()}/*/healthhistoryforms/1" => MockResponse::make([
+                    'name' => 'Health history 1',
+                    'category' => 'health-history-1',
                 ], 200),
-    
+
                 "*" => MockResponse::make([
                     'error' => 'No data available'
                 ], 404),

@@ -2,86 +2,87 @@
 
 namespace Clinect\NextGen\Tests\Stubs;
 
-use Clinect\NextGen\Requests\BaseRequests\GetRequest;
-use Saloon\Helpers\MockConfig;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
 trait Person
 {
+    private $apiConnector;
+    private $mockConnector;
+
     protected function mockClient(): MockClient
     {
         $response = [
-            ...$this->mockAuthorize(), 
+            ...$this->mockAuthorize(),
             ...[
                 // Person
                 "{$this->url()}/persons" => MockResponse::make($this->persons(), 200),
-    
+
                 "{$this->url()}/persons/lookup" => MockResponse::make($this->search(), 200),
-    
+
                 "{$this->url()}/persons/id-3" => MockResponse::make([
                     'name' => 'Person 3',
                     'category' => 'person-3',
                 ], 200),
-    
+
                 // Person balances
                 "{$this->url()}/persons/*/chart/balances" => MockResponse::make($this->balances(), 200),
-    
+
                 "{$this->url()}/persons/*/chart/balances/id-3" => MockResponse::make([
                     'name' => 'Person balance 3',
                     'category' => 'person-balance-3',
                 ], 200),
-    
+
                 // Person charges
                 "{$this->url()}/persons/*/chart/charges" => MockResponse::make($this->charges(), 200),
-    
+
                 "{$this->url()}/persons/*/chart/charges/id-3" => MockResponse::make([
                     'name' => 'Person charge 3',
                     'category' => 'person-charge-3',
                 ], 200),
-    
+
                 // Person charts
                 "{$this->url()}/persons/*/chart" => MockResponse::make($this->charts(), 200),
-    
+
                 "{$this->url()}/persons/*/chart/id-3" => MockResponse::make([
                     'name' => 'Person chart 3',
                     'category' => 'person-chart-3',
                 ], 200),
-    
+
                 // Person encounters
                 "{$this->url()}/persons/*/chart/encounters" => MockResponse::make($this->encounters(), 200),
-    
+
                 "{$this->url()}/persons/*/chart/encounters/id-3" => MockResponse::make([
                     'name' => 'Person encounter 3',
                     'category' => 'person-encounter-3',
                 ], 200),
-    
+
                 // Person insurances
                 "{$this->url()}/persons/*/insurances" => MockResponse::make($this->insurances(), 200),
-    
+
                 "{$this->url()}/persons/*/insurances/id-3" => MockResponse::make([
                     'name' => 'Person insurance 3',
                     'category' => 'person-insurance-3',
                 ], 200),
-    
+
                 // Person insurance cards
                 "{$this->url()}/persons/*/insurances/*/cards" => MockResponse::make($this->insuranceCards(), 200),
-    
+
                 "{$this->url()}/persons/*/insurances/*/cards/id-3" => MockResponse::make([
                     'name' => 'Person insurance card 3',
                     'category' => 'person-insurance-card-3',
                 ], 200),
-    
+
                 "{$this->url()}/persons/*/insurances/*/cards/*/back" => MockResponse::make([
                     'name' => 'Person insurance card back 3',
                     'category' => 'person-insurance-card-back-3',
                 ], 200),
-    
+
                 "{$this->url()}/persons/*/insurances/*/cards/*/front" => MockResponse::make([
                     'name' => 'Person insurance card front 3',
                     'category' => 'person-insurance-card-front-3',
                 ], 200),
-    
+
                 // Error 404: Not found
                 "*" => MockResponse::make([
                     'error' => 'No data available'
@@ -221,7 +222,7 @@ trait Person
             ]
         ];
     }
-    
+
     protected function search(): array
     {
         return [
