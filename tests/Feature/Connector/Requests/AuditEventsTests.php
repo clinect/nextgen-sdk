@@ -25,7 +25,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventAccount()
@@ -36,7 +35,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event account 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventAllergy()
@@ -47,7 +45,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event allergy 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventApplicationAccess()
@@ -58,7 +55,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event application access 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventDataTrailItems()
@@ -69,7 +65,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event data trail items 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventDiagnosis()
@@ -80,7 +75,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event diagnosis 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventEncounter()
@@ -91,7 +85,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event encounter 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventIcs()
@@ -102,7 +95,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event ics 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventInterfaceHoldingTank()
@@ -113,7 +105,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event interface holding tank 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventInteroperability()
@@ -124,7 +115,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event interoperability 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventMedication()
@@ -135,7 +125,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event medication 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventOrder()
@@ -146,7 +135,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event order 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventPaq()
@@ -157,7 +145,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event paq 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventPatientEducation()
@@ -168,7 +155,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event patient education 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventProcedure()
@@ -179,7 +165,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event procedure 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventRosetta()
@@ -190,7 +175,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event rosetta 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventSecurity()
@@ -201,7 +185,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event security 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventTemplate()
@@ -212,7 +195,6 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event template 1');
-        // add assertions
     }
 
     public function testCanGetAuditEventPerformance()
@@ -223,6 +205,5 @@ class AuditEventsTests extends TestCase
         $response = $this->mockConnector->send($request);
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json('name'), 'Audit Event performance 1');
-        // add assertions
     }
 }
