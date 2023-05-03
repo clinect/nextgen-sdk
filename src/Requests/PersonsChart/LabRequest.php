@@ -27,4 +27,9 @@ class LabRequest extends Request
         $this->cleanUpEndpoint();
         return new PanelsRequest($this->endpoint, $id);
     }
+
+    public function results(): static
+    {
+        return $this->addEndpoint('/results');
+    }
 }

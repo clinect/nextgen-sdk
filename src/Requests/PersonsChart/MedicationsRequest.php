@@ -48,8 +48,8 @@ class MedicationsRequest extends Request
         return $this->addEndpoint('/patient-education');
     }
 
-    public function pmdpReport(): static
+    public function pdmpReport(): static
     {
-        return $this->addEndpoint('/pmdp-report');
+        return $this->addEndpoint('/pdmp-report');
     }
 }

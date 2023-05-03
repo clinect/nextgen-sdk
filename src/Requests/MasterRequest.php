@@ -195,6 +195,16 @@ class MasterRequest extends Request
         return $this->addEndpoint('/my-lists')->withUriParamId($id);
     }
 
+    public function orderableVaccines(): static
+    {
+        return $this->addEndpoint('/orderable-vaccines');
+    }
+
+    public function patientStatuses(): static
+    {
+        return $this->addEndpoint('/patient-statuses');
+    }
+
     public function payers(int|string|null $id = null): PayersRequest
     {
         $this->cleanUpEndpoint();
@@ -222,7 +232,7 @@ class MasterRequest extends Request
         return $this->addEndpoint('/practitioners');
     }
     
-    public function problemsSearch(array $queries): \Saloon\Http\Request
+    public function problemsSearch(array $queries = null): \Saloon\Http\Request
     {
         return $this->addEndpoint('/problems/search')->withQuery($queries)->get();
     }

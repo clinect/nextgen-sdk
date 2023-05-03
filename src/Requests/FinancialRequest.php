@@ -16,7 +16,7 @@ class FinancialRequest extends Request
         return $this->addEndpoint('/cards')->withUriParamId($id);
     }
 
-    public function medications(int|string|null $id): GuarantorsRequest
+    public function guarantors(int|string|null $id): GuarantorsRequest
     {
         $this->cleanUpEndpoint();
         return new GuarantorsRequest($this->endpoint, $id);

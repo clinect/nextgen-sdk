@@ -110,4 +110,9 @@ abstract class Request
             return call_user_func([new static, 'setPracticeId'], $arguments[0]);
         }
     }
+
+    public static function getEndpoint(): string
+    {
+        return call_user_func([new static, 'defaultEndpoint']);
+    }
 }
