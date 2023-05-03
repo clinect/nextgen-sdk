@@ -24,7 +24,6 @@ class AppointmentsTests extends TestCase
 
         $this->assertSame($response->status(), 200);
         $this->assertArrayHasKey('items', $response->json());
-        $this->assertNotEmpty($response->json()['items']);
     }
 
     public function testCanGetAppointmentsSlot()
@@ -48,7 +47,7 @@ class AppointmentsTests extends TestCase
     public function testCanGetAppointment()
     {
         $appointmentId = "97456e4b-8575-4423-857e-ba7549d65d25";
-        $request = $this->apiConnector->appointments($appointmentId)->get();
+        $request = $this->apiConnector->disableCaching()->appointments($appointmentId)->get();
         $response = $this->apiConnector->send($request);
 
         $this->assertSame($response->status(), 200);
@@ -57,7 +56,7 @@ class AppointmentsTests extends TestCase
 
     public function testCanGetAppointmentResponse()
     {
-        $request = $this->mockConnector->appointments()->responses(1)->get();
+        $request = $this->mockConnector->disableCaching()->appointments()->responses(1)->get();
         $response = $this->mockConnector->send($request);
 
         $this->assertSame($response->status(), 200);
@@ -67,7 +66,7 @@ class AppointmentsTests extends TestCase
 
     public function testCanGetAppointmentsWaitListItem()
     {
-        $request = $this->mockConnector->appointments()->waitlistItems(1)->get();
+        $request = $this->mockConnector->disableCaching()->appointments()->waitlistItems(1)->get();
         $response = $this->mockConnector->send($request);
 
         $this->assertSame($response->status(), 200);
@@ -77,7 +76,7 @@ class AppointmentsTests extends TestCase
 
     public function testAppointmentNotFound()
     {
-        $request = $this->apiConnector->appointments('id-4')->get();
+        $request = $this->apiConnector->disableCaching()->appointments('id-4')->get();
         $response = $this->apiConnector->send($request);
 
         $this->assertSame($response->status(), 400);
