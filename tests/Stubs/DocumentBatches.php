@@ -9,25 +9,17 @@ trait DocumentBatches
 {
     private $apiConnector;
     private $mockConnector;
+    private $batchId = "24a13686-dd84-48d4-843e-03bc2eaee6bf";
 
     protected function mockClient(): MockClient
     {
         $response = [
             ...$this->mockAuthorize(),
             ...[
-                "{$this->url()}/document-batches" => MockResponse::make($this->all(), 200),
-                "{$this->url()}/document-batches/1" => MockResponse::make(
-                    [
-                        'name' => 'Batch 1',
-                        'category' => 'batch-1',
-                    ],
-                    200
-                ),
-                "{$this->url()}/document-batches/1/documents" => MockResponse::make($this->documents(), 200),
-                "{$this->url()}/document-batches/1/documents/1" => MockResponse::make(
+                "{$this->url()}/document-batches/{$this->batchId}/documents" => MockResponse::make($this->documents(), 200),
+                "{$this->url()}/document-batches/{$this->batchId}/documents/1" => MockResponse::make(
                     [
                         'name' => 'Document 1',
-                        'category' => 'document-1',
                     ],
                     200
                 ),
@@ -44,9 +36,9 @@ trait DocumentBatches
             ...$this->apiAuthorize(),
             ...[
                 "{$this->apiUrl()}/document-batches" => MockResponse::fixture('DocumentBatches/batches'),
-                "{$this->apiUrl()}/document-batches/1" => MockResponse::fixture('DocumentBatches/batch'),
-                "{$this->apiUrl()}/document-batches/1/documents" => MockResponse::fixture('DocumentBatches/documents'),
-                "{$this->apiUrl()}/document-batches/1/documents/1" => MockResponse::fixture('DocumentBatches/document'),
+                "{$this->apiUrl()}/document-batches/{$this->batchId}" => MockResponse::fixture('DocumentBatches/batch'),
+                "{$this->apiUrl()}/document-batches/{$this->batchId}/documents" => MockResponse::fixture('DocumentBatches/documents'),
+                "{$this->apiUrl()}/document-batches/{$this->batchId}/documents/1" => MockResponse::fixture('DocumentBatches/document'),
             ],
         ];
 
@@ -71,10 +63,8 @@ trait DocumentBatches
         return [
             [
                 'name' => 'Document 1',
-                'category' => 'document-1',
             ], [
                 'name' => 'Document 2',
-                'category' => 'document-2',
             ]
         ];
     }
