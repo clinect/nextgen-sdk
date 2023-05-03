@@ -7,6 +7,7 @@ use Clinect\NextGen\Requests\Request;
 class GuarantorsRequest extends Request
 {
     public function __construct(
+        public string $endPoint,
         public int|string|null $id
     ) {
         $this->withUriParamId($id);
@@ -14,7 +15,7 @@ class GuarantorsRequest extends Request
 
     public function defaultEndpoint(): string
     {
-        return '/guarantors';
+        return $this->endPoint . '/guarantors';
     }
 
     public function account(): static
