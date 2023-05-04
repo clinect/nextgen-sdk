@@ -8,7 +8,7 @@ use Clinect\NextGen\Requests\Favorites\DiagnosesGroupsRequest;
 class FavoritesRequest extends Request
 {
     public function __construct(
-        public string $endPoint,
+        public string $endPoint = '',
     ) {
     }
 

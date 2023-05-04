@@ -44,8 +44,8 @@ trait HasMethods
     public function form(Method $method): Request
     {
         return new FormRequest(
-            method: $method,
             endpoint: $this->endpoint,
+            method: $method,
             _headers: $this->headers,
             queries: $this->queries,
             configs: $this->configs,

@@ -6,7 +6,7 @@ trait RequestResources
 {
     public function appointments(int|string|null $id = null): AppointmentsRequest
     {
-        return new AppointmentsRequest($id);
+        return new AppointmentsRequest('',$id);
     }
 
     public function auditEvents(int|string|null $id = null): AuditEventsRequest
@@ -23,7 +23,7 @@ trait RequestResources
     {
         return new MasterRequest();
     }
-    
+
     public function persons(int|string|null $id = null): PersonsRequest
     {
         return new PersonsRequest($id);
