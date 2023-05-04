@@ -9,6 +9,7 @@ trait Person
 {
     private $apiConnector;
     private $mockConnector;
+    private $personId = "1c5d22d3-cc33-4082-98ad-7a58c637f646";
 
     protected function mockClient(): MockClient
     {
@@ -18,75 +19,81 @@ trait Person
                 // Person
                 "{$this->url()}/persons" => MockResponse::make($this->persons(), 200),
 
-                "{$this->url()}/persons/lookup" => MockResponse::make($this->search(), 200),
-
-                "{$this->url()}/persons/id-3" => MockResponse::make([
-                    'name' => 'Person 3',
-                    'category' => 'person-3',
+                "{$this->url()}/persons/{$this->personId}/employers" => MockResponse::make([
+                    'name' => 'employers',
                 ], 200),
 
-                // Person balances
-                "{$this->url()}/persons/*/chart/balances" => MockResponse::make($this->balances(), 200),
-
-                "{$this->url()}/persons/*/chart/balances/id-3" => MockResponse::make([
-                    'name' => 'Person balance 3',
-                    'category' => 'person-balance-3',
+                "{$this->url()}/persons/{$this->personId}/employers/1" => MockResponse::make([
+                    'name' => 'employer 1',
                 ], 200),
 
-                // Person charges
-                "{$this->url()}/persons/*/chart/charges" => MockResponse::make($this->charges(), 200),
-
-                "{$this->url()}/persons/*/chart/charges/id-3" => MockResponse::make([
-                    'name' => 'Person charge 3',
-                    'category' => 'person-charge-3',
+                "{$this->url()}/persons/{$this->personId}/formularies" => MockResponse::make([
+                    'name' => 'formularies',
                 ], 200),
 
-                // Person charts
-                "{$this->url()}/persons/*/chart" => MockResponse::make($this->charts(), 200),
-
-                "{$this->url()}/persons/*/chart/id-3" => MockResponse::make([
-                    'name' => 'Person chart 3',
-                    'category' => 'person-chart-3',
+                "{$this->url()}/persons/{$this->personId}/formularies/medications/1/alternatives" => MockResponse::make([
+                    'name' => 'formularies alternatives',
                 ], 200),
 
-                // Person encounters
-                "{$this->url()}/persons/*/chart/encounters" => MockResponse::make($this->encounters(), 200),
-
-                "{$this->url()}/persons/*/chart/encounters/id-3" => MockResponse::make([
-                    'name' => 'Person encounter 3',
-                    'category' => 'person-encounter-3',
+                "{$this->url()}/persons/{$this->personId}/formularies/medications/1/copays/1" => MockResponse::make([
+                    'name' => 'formularies copays',
                 ], 200),
 
-                // Person insurances
-                "{$this->url()}/persons/*/insurances" => MockResponse::make($this->insurances(), 200),
-
-                "{$this->url()}/persons/*/insurances/id-3" => MockResponse::make([
-                    'name' => 'Person insurance 3',
-                    'category' => 'person-insurance-3',
+                "{$this->url()}/persons/{$this->personId}/formularies/medications/1/coverages/1" => MockResponse::make([
+                    'name' => 'formularies coverages',
                 ], 200),
 
-                // Person insurance cards
-                "{$this->url()}/persons/*/insurances/*/cards" => MockResponse::make($this->insuranceCards(), 200),
-
-                "{$this->url()}/persons/*/insurances/*/cards/id-3" => MockResponse::make([
-                    'name' => 'Person insurance card 3',
-                    'category' => 'person-insurance-card-3',
+                "{$this->url()}/persons/{$this->personId}/gender-identities" => MockResponse::make([
+                    'name' => 'gender-identities',
                 ], 200),
 
-                "{$this->url()}/persons/*/insurances/*/cards/*/back" => MockResponse::make([
-                    'name' => 'Person insurance card back 3',
-                    'category' => 'person-insurance-card-back-3',
+                "{$this->url()}/persons/{$this->personId}/insurances/1" => MockResponse::make([
+                    'name' => 'insurance',
                 ], 200),
 
-                "{$this->url()}/persons/*/insurances/*/cards/*/front" => MockResponse::make([
-                    'name' => 'Person insurance card front 3',
-                    'category' => 'person-insurance-card-front-3',
+                "{$this->url()}/persons/{$this->personId}/insurances/1/cards" => MockResponse::make([
+                    'name' => 'insurance cards',
                 ], 200),
 
-                // Error 404: Not found
-                "*" => MockResponse::make([
-                    'error' => 'No data available'
-                ], 404),
+                "{$this->url()}/persons/{$this->personId}/insurances/1/cards/1" => MockResponse::make([
+                    'name' => 'insurance card',
+                ], 200),
+
+                "{$this->url()}/persons/{$this->personId}/insurances/1/cards/1/back" => MockResponse::make([
+                    'name' => 'insurance card back',
+                ], 200),
+
+                "{$this->url()}/persons/{$this->personId}/insurances/1/cards/1/front" => MockResponse::make([
+                    'name' => 'insurance card front',
+                ], 200),
+
+                "{$this->url()}/persons/{$this->personId}/medication-history" => MockResponse::make([
+                    'name' => 'medication-history',
+                ], 200),
+
+                "{$this->url()}/persons/{$this->personId}/photo" => MockResponse::make([
+                    'name' => 'photo',
+                ], 200),
+
+                "{$this->url()}/persons/{$this->personId}/relations" => MockResponse::make([
+                    'name' => 'relations',
+                ], 200),
+
+                "{$this->url()}/persons/{$this->personId}/support-roles" => MockResponse::make([
+                    'name' => 'support-roles',
+                ], 200),
+
+                "{$this->url()}/persons/lookup" => MockResponse::make([
+                    'name' => 'lookup',
+                ], 200),
+
+                "{$this->url()}/persons/merged" => MockResponse::make([
+                    'name' => 'merged',
+                ], 200),
+
+                "{$this->url()}/persons/payers" => MockResponse::make([
+                    'name' => 'payers',
+                ], 200),
             ],
         ];
 
@@ -99,29 +106,29 @@ trait Person
             ...$this->apiAuthorize(),
             ...[
                 "{$this->apiUrl()}/persons" => MockResponse::fixture('Person/persons'),
-                "{$this->apiUrl()}/persons/1" => MockResponse::fixture('Person/person'),
-                "{$this->apiUrl()}/persons/1/address-histories" => MockResponse::fixture('Person/addressHistories'),
-                "{$this->apiUrl()}/persons/1/appointments" => MockResponse::fixture('Person/appointments'),
-                "{$this->apiUrl()}/persons/1/eligibilities" => MockResponse::fixture('Person/eligibilities'),
-                "{$this->apiUrl()}/persons/1/employers" => MockResponse::fixture('Person/employers'),
-                "{$this->apiUrl()}/persons/1/employers/1" => MockResponse::fixture('Person/employer'),
-                "{$this->apiUrl()}/persons/1/ethnicities" => MockResponse::fixture('Person/ethnicities'),
-                "{$this->apiUrl()}/persons/1/formularies" => MockResponse::fixture('Person/Formularies/formularies'),
-                "{$this->apiUrl()}/persons/1/formularies/medications/1/alternatives" => MockResponse::fixture('Person/Formularies/alternatives'),
-                "{$this->apiUrl()}/persons/1/formularies/medications/1/copays/1" => MockResponse::fixture('Person/Formularies/copays'),
-                "{$this->apiUrl()}/persons/1/formularies/medications/1/coverages/1" => MockResponse::fixture('Person/Formularies/coverages'),
-                "{$this->apiUrl()}/persons/1/gender-identities" => MockResponse::fixture('Person/genderIdentities'),
-                "{$this->apiUrl()}/persons/1/insurances" => MockResponse::fixture('Person/Insurances/insurances'),
-                "{$this->apiUrl()}/persons/1/insurances/1" => MockResponse::fixture('Person/Insurances/insurance'),
-                "{$this->apiUrl()}/persons/1/insurances/1/cards" => MockResponse::fixture('Person/Insurances/cards'),
-                "{$this->apiUrl()}/persons/1/insurances/1/cards/1" => MockResponse::fixture('Person/Insurances/card'),
-                "{$this->apiUrl()}/persons/1/insurances/1/cards/1/back" => MockResponse::fixture('Person/Insurances/backCard'),
-                "{$this->apiUrl()}/persons/1/insurances/1/cards/1/front" => MockResponse::fixture('Person/Insurances/frontCard'),
-                "{$this->apiUrl()}/persons/1/medication-history" => MockResponse::fixture('Person/medicationHistory'),
-                "{$this->apiUrl()}/persons/1/photo" => MockResponse::fixture('Person/photo'),
-                "{$this->apiUrl()}/persons/1/races" => MockResponse::fixture('Person/races'),
-                "{$this->apiUrl()}/persons/1/relations" => MockResponse::fixture('Person/relations'),
-                "{$this->apiUrl()}/persons/1/support-roles" => MockResponse::fixture('Person/supportRoles'),
+                "{$this->apiUrl()}/persons/{$this->personId}" => MockResponse::fixture('Person/person'),
+                "{$this->apiUrl()}/persons/{$this->personId}/address-histories" => MockResponse::fixture('Person/addressHistories'),
+                "{$this->apiUrl()}/persons/{$this->personId}/appointments" => MockResponse::fixture('Person/appointments'),
+                "{$this->apiUrl()}/persons/{$this->personId}/eligibilities" => MockResponse::fixture('Person/eligibilities'),
+                "{$this->apiUrl()}/persons/{$this->personId}/employers" => MockResponse::fixture('Person/employers'),
+                "{$this->apiUrl()}/persons/{$this->personId}/employers/1" => MockResponse::fixture('Person/employer'),
+                "{$this->apiUrl()}/persons/{$this->personId}/ethnicities" => MockResponse::fixture('Person/ethnicities'),
+                "{$this->apiUrl()}/persons/{$this->personId}/formularies" => MockResponse::fixture('Person/Formularies/formularies'),
+                "{$this->apiUrl()}/persons/{$this->personId}/formularies/medications/1/alternatives" => MockResponse::fixture('Person/Formularies/alternatives'),
+                "{$this->apiUrl()}/persons/{$this->personId}/formularies/medications/1/copays/1" => MockResponse::fixture('Person/Formularies/copays'),
+                "{$this->apiUrl()}/persons/{$this->personId}/formularies/medications/1/coverages/1" => MockResponse::fixture('Person/Formularies/coverages'),
+                "{$this->apiUrl()}/persons/{$this->personId}/gender-identities" => MockResponse::fixture('Person/genderIdentities'),
+                "{$this->apiUrl()}/persons/{$this->personId}/insurances" => MockResponse::fixture('Person/Insurances/insurances'),
+                "{$this->apiUrl()}/persons/{$this->personId}/insurances/1" => MockResponse::fixture('Person/Insurances/insurance'),
+                "{$this->apiUrl()}/persons/{$this->personId}/insurances/1/cards" => MockResponse::fixture('Person/Insurances/cards'),
+                "{$this->apiUrl()}/persons/{$this->personId}/insurances/1/cards/1" => MockResponse::fixture('Person/Insurances/card'),
+                "{$this->apiUrl()}/persons/{$this->personId}/insurances/1/cards/1/back" => MockResponse::fixture('Person/Insurances/backCard'),
+                "{$this->apiUrl()}/persons/{$this->personId}/insurances/1/cards/1/front" => MockResponse::fixture('Person/Insurances/frontCard'),
+                "{$this->apiUrl()}/persons/{$this->personId}/medication-history" => MockResponse::fixture('Person/medicationHistory'),
+                "{$this->apiUrl()}/persons/{$this->personId}/photo" => MockResponse::fixture('Person/photo'),
+                "{$this->apiUrl()}/persons/{$this->personId}/races" => MockResponse::fixture('Person/races'),
+                "{$this->apiUrl()}/persons/{$this->personId}/relations" => MockResponse::fixture('Person/relations'),
+                "{$this->apiUrl()}/persons/{$this->personId}/support-roles" => MockResponse::fixture('Person/supportRoles'),
                 "{$this->apiUrl()}/persons/lookup" => MockResponse::fixture('Person/lookup'),
                 "{$this->apiUrl()}/persons/merged" => MockResponse::fixture('Person/merged'),
                 "{$this->apiUrl()}/persons/payers" => MockResponse::fixture('Person/payers'),

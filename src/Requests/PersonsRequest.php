@@ -104,6 +104,6 @@ class PersonsRequest extends Request
 
     public function payers(): static
     {
-        return $this->addEndpoint('/merged');
+        return $this->addEndpoint('/payers');
     }
 }

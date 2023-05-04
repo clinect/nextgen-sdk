@@ -25,11 +25,13 @@ class MedicationsRequest extends Request
 
     public function copays(int|string|null $id = null): static
     {
+        $this->withUriParamId($this->id);
         return $this->addEndpoint('/copays')->withUriParamId($id);
     }
 
     public function coverages(int|string|null $id = null): static
     {
+        $this->withUriParamId($this->id);
         return $this->addEndpoint('/coverages')->withUriParamId($id);
     }
 }
