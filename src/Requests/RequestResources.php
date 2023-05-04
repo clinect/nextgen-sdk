@@ -19,21 +19,11 @@ trait RequestResources
         return new AuthenticationServicesRequest();
     }
 
-    public function healthHistoryForms(int|string|null $id = null): HealthHistoryFormsRequest
-    {
-        return new HealthHistoryFormsRequest($id);
-    }
-
     public function master(): MasterRequest
     {
         return new MasterRequest();
     }
-
-    public function patients(int|string|null $id = null): PatientsRequest
-    {
-        return new PatientsRequest($id);
-    }
-
+    
     public function persons(int|string|null $id = null): PersonsRequest
     {
         return new PersonsRequest($id);
