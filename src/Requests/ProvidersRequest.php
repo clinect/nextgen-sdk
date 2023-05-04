@@ -38,7 +38,7 @@ class ProvidersRequest extends Request
 
     public function durReasons()
     {
-        return $this->addEndpoint('/durReasons');
+        return $this->addEndpoint('/dur-reasons');
     }
 
     public function encounters()
