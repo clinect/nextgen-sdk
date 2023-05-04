@@ -66,8 +66,8 @@ trait Config
     public function apiAuthorize(): array
     {
         return [
-             MockResponse::fixture('Config/authorization'),
-             MockResponse::fixture('Config/ng-session'),
+            "https://nativeapi.nextgen.com/nge/prod/nge-oauth/token" => MockResponse::fixture('Config/authorization'),
+            "{$this->apiUrl()}/users/me/login-defaults" => MockResponse::fixture('Config/ng-session'),
         ];
     }
 
