@@ -97,7 +97,6 @@ class ProvidersTests extends TestCase
 
         $this->assertSame($response->status(), 200);
         $this->assertArrayHasKey('items', $response->json());
-        $this->assertNotEmpty($response->json());
         foreach ($response->json()['items'] as $data) {
             $this->assertSame($data['providerId'], $this->providerId);
         }

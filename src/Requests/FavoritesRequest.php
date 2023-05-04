@@ -7,9 +7,14 @@ use Clinect\NextGen\Requests\Favorites\DiagnosesGroupsRequest;
 
 class FavoritesRequest extends Request
 {
+    public function __construct(
+        public string $endPoint,
+    ) {
+    }
+
     public function defaultEndpoint(): string
     {
-        return '/favorites';
+        return $this->endPoint . '/favorites';
     }
 
     public function medications(int|string|null $id): MedicationsRequest
@@ -18,7 +23,7 @@ class FavoritesRequest extends Request
         return new MedicationsRequest($this->endpoint, $id);
     }
 
-    public function diagnosesGroups(int|string|null $id): DiagnosesGroupsRequest
+    public function diagnosesGroups(int|string|null $id = null): DiagnosesGroupsRequest
     {
         $this->cleanUpEndpoint();
         return new DiagnosesGroupsRequest($this->endpoint, $id);

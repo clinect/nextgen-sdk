@@ -59,10 +59,11 @@ class UsersRequest extends Request
         return $this->addEndpoint('/enterprises');
     }
 
-    public function favorites(int|string|null $id = null): FavoritesRequest
+    public function favorites(): FavoritesRequest
     {
-        $this->withUriParamId($id);
-        return new FavoritesRequest($this->endpoint, $id);
+        $this->withUriParamId($this->id);
+        $this->cleanUpEndpoint();
+        return new FavoritesRequest($this->endpoint);
     }
 
     public function groups(): static
@@ -126,13 +127,15 @@ class UsersRequest extends Request
 
     public function taskSets(int|string|null $id = null): TasksSetsRequest
     {
-        $this->withUriParamId($id);
+        $this->withUriParamId($this->id);
+        $this->cleanUpEndpoint();
         return new TasksSetsRequest($this->endpoint, $id);
     }
 
     public function tasks(int|string|null $id = null): TasksRequest
     {
-        $this->withUriParamId($id);
+        $this->withUriParamId($this->id);
+        $this->cleanUpEndpoint();
         return new TasksRequest($this->endpoint, $id);
     }
 }

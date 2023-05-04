@@ -9,7 +9,9 @@ class TasksSetsRequest extends Request
     public function __construct(
         public string $endPoint,
         public int|string|null $id = null
-    ) {
+    )
+    {
+        $this->withUriParamId($id);
     }
 
     public function defaultEndpoint(): string
@@ -17,9 +19,8 @@ class TasksSetsRequest extends Request
         return $this->endPoint . '/task-sets';
     }
 
-    public function tasks(int|string|null $id = null)
+    public function tasks()
     {
-        $this->withUriParamId($id);
         return $this->addEndpoint('/tasks');
     }
 }
