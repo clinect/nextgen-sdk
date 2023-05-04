@@ -90,7 +90,7 @@ class MasterRequest extends Request
 
     public function customPicklist(): static
     {
-        return $this->addEndpoint('/custom-picklist');
+        return $this->addEndpoint('/custom-picklists');
     }
 
     public function diagnoses(): DiagnosesRequest
