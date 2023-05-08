@@ -3,10 +3,10 @@
 namespace Clinect\NextGen\Tests\Feature\Connector;
 
 use Clinect\NextGen\NextGen;
-use Clinect\NextGen\Tests\Feature\TestCase;
-use Saloon\Exceptions\Request\RequestException;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
+use Clinect\NextGen\Tests\Feature\TestCase;
+use Saloon\Exceptions\Request\RequestException;
 
 class RetryRequestTests extends TestCase
 {
@@ -30,7 +30,7 @@ class RetryRequestTests extends TestCase
             $this->assertSame($exception->getResponse()->status(), 500);
             return true;
         }, throw: false);
-        
+
         $this->assertSame($response->status(), 200);
         $this->assertSame($response->json()['name'], 'NextGen');
     }

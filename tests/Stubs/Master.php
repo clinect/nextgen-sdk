@@ -23,7 +23,7 @@ trait Master
     private $specialtiesId = "0002";
     private $vaccineInventoryId = "33";
     private $viewCategoryId = "45af7c7b-abe7-4e2b-9bd0-01ea3eb460fb";
-    
+
     protected function mockClient(): MockClient
     {
         $response = [

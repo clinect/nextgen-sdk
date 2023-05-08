@@ -20,7 +20,7 @@ class CarePlanRequest extends Request
     {
         return $this->addEndpoint('/goals');
     }
-    
+
     public function healthConcerns(int|string|null $id = null): HealthConcernsRequest
     {
         $this->cleanUpEndpoint();

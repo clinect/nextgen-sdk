@@ -9,8 +9,7 @@ class DiagnosesGroupsRequest extends Request
     public function __construct(
         public string $endPoint,
         public int|string|null $id = null
-    )
-    {
+    ) {
         $this->withUriParamId($id);
     }
 
@@ -24,4 +23,3 @@ class DiagnosesGroupsRequest extends Request
         return $this->addEndpoint('/diagnoses');
     }
 }
- 

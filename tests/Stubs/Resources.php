@@ -19,7 +19,7 @@ trait Resources
                 "{$this->url()}/resources/{$this->resourceId}/appointments/1" => MockResponse::make([
                     'name' => 'appointment 1',
                 ], 200),
-                
+
                 "{$this->url()}/resources/{$this->resourceId}/appointments/1/status-histories" => MockResponse::make([
                     'name' => 'appointment status-histories',
                 ], 200),

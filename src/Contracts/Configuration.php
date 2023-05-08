@@ -6,7 +6,7 @@ interface Configuration
 {
     /**
      * Create configuration.
-     * 
+     *
      * @param array $config
      * @return static
      */
@@ -14,70 +14,70 @@ interface Configuration
 
     /**
      * Get the config keys.
-     * 
+     *
      * @return array
      */
     public function configKeys(): array;
 
     /**
      * Get client id.
-     * 
+     *
      * @return string
      */
     public function getClientId(): string;
 
     /**
      * Get secret.
-     * 
+     *
      * @return string
      */
     public function getSecret(): string;
 
     /**
      * Get site id.
-     * 
+     *
      * @return string
      */
     public function getSiteId(): string;
 
     /**
      * Get enterprise id.
-     * 
+     *
      * @return string
      */
     public function getEnterpriseId(): string;
 
     /**
      * Get practice id.
-     * 
+     *
      * @return string
      */
     public function getPracticeId(): string;
 
     /**
      * Get base url.
-     * 
+     *
      * @return string
      */
     public function getBaseUrl(): string;
 
     /**
      * Get route uri.
-     * 
+     *
      * @return string
      */
     public function getRouteUri(): string;
 
     /**
      * Get auth uri.
-     * 
+     *
      * @return string
      */
     public function getAuthUri(): string;
 
     /**
      * Get cache adapter.
-     * 
+     *
      * @param string $key
      * @return array
      */
@@ -85,7 +85,7 @@ interface Configuration
 
     /**
      * set cache expiry time.
-     * 
+     *
      * @param string $key
      * @return void
      */

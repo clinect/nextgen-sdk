@@ -9,8 +9,7 @@ class MedicationsRequest extends Request
     public function __construct(
         public string $endPoint,
         public int|string|null $id = null
-    )
-    {
+    ) {
         $this->withUriParamId($this->id);
     }
 
@@ -53,5 +52,4 @@ class MedicationsRequest extends Request
     {
         return $this->addEndpoint('/rxchange-denial-reasons');
     }
-
 }

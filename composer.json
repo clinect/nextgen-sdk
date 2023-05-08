@@ -11,11 +11,11 @@
   ],
   "require": {
     "php": ">=8.1",
+    "friendsofphp/php-cs-fixer": "^3.14",
     "sammyjo20/saloon": "^2.0",
     "sammyjo20/saloon-cache-plugin": "^2.1"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^3.13",
     "orchestra/testbench": "^6.27",
     "phpunit/phpunit": "^9.5.10"
   },
@@ -57,6 +57,7 @@
     ],
     "delete-config-fixtures": [
       "@php -r \"array_map('unlink', glob('./tests/Fixtures/Saloon/Config/*.json'));\""
-    ]
+    ],
+    "fix": "./vendor/bin/php-cs-fixer fix"
   }
 }

@@ -6,8 +6,8 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Repositories\Body\FormBodyRepository;
 use Saloon\Repositories\Body\JsonBodyRepository;
-use Saloon\Repositories\Body\MultipartBodyRepository;
 use Saloon\Contracts\Body\HasBody as HasBodyContract;
+use Saloon\Repositories\Body\MultipartBodyRepository;
 
 class FormRequest extends Request implements HasBodyContract
 {

@@ -9,7 +9,7 @@ trait AuditEvent
 {
     private $apiConnector;
     private $mockConnector;
-    
+
     protected function mockClient(): MockClient
     {
         $response = [

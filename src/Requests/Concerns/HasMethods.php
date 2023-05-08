@@ -2,8 +2,8 @@
 
 namespace Clinect\NextGen\Requests\Concerns;
 
-use Saloon\Http\Request;
 use Saloon\Enums\Method;
+use Saloon\Http\Request;
 use Clinect\NextGen\Requests\BaseRequests\GetRequest;
 use Clinect\NextGen\Requests\BaseRequests\FormRequest;
 

@@ -23,7 +23,7 @@ class UsersTests extends TestCase
             ->users()
             ->get();
         $response = $this->apiConnector->send($request);
-        
+
         $this->assertSame($response->status(), 200);
         $this->assertArrayHasKey('items', $response->json());
         $this->assertNotEmpty($response->json()['items']);

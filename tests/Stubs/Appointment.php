@@ -9,7 +9,7 @@ trait Appointment
 {
     private $apiConnector;
     private $mockConnector;
-    
+
     protected function mockClient(): MockClient
     {
         $response = [

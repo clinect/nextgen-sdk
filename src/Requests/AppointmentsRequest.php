@@ -10,7 +10,7 @@ class AppointmentsRequest extends Request
     ) {
         $this->withUriParamId($id);
     }
-    
+
     public function defaultEndpoint(): string
     {
         return $this->endPoint . '/appointments';

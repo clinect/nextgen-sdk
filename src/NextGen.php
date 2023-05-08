@@ -5,12 +5,12 @@ namespace Clinect\NextGen;
 use Saloon\Http\Request;
 use Saloon\Http\Connector;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Contracts\PendingRequest;
 use Clinect\NextGen\Requests\AuthRequest;
 use Saloon\Http\Paginators\PagedPaginator;
 use Saloon\CachePlugin\Contracts\Cacheable;
 use Clinect\NextGen\Requests\NgSessionRequest;
 use Clinect\NextGen\Requests\RequestResources;
-use Saloon\Contracts\PendingRequest;
 
 class NextGen extends Connector implements Cacheable
 {
@@ -71,7 +71,7 @@ class NextGen extends Connector implements Cacheable
 
         $this->withTokenAuth((string) $response->json('access_token'), (string) $response->json('token_type'));
 
-        $request = (new NgSessionRequest)
+        $request = (new NgSessionRequest())
             ->withConfig([
                 'json' => [
                     'enterpriseid' => $this->configs->getEnterpriseId(),
@@ -88,7 +88,6 @@ class NextGen extends Connector implements Cacheable
 
         $this->headers()->add('X-NG-SessionID', $response->headers()->get('x-ng-sessionid'));
     }
-
 
     public function paginate(Request $request, int $perPage = 20, int $page = 1): PagedPaginator
     {

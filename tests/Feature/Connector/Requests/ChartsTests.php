@@ -1200,8 +1200,7 @@ class ChartsTests extends TestCase
         $this->assertSame($response->status(), 200);
         $this->assertNotEmpty($response->json());
         foreach ($response->json() as $data) {
-            if($data['statusCalculationCode'] != "EVAL_OLD_LOGIC")
-            {
+            if ($data['statusCalculationCode'] != "EVAL_OLD_LOGIC") {
                 $this->assertSame($data['personId'], $this->personId);
             }
         }

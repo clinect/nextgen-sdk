@@ -2,9 +2,9 @@
 
 namespace Clinect\NextGen\Requests;
 
+use Clinect\NextGen\Requests\Providers\FavoritesRequest;
 use Clinect\NextGen\Requests\Providers\ApprovalQueueRequest;
 use Clinect\NextGen\Requests\Providers\DiagnosisCategoriesRequest;
-use Clinect\NextGen\Requests\Providers\FavoritesRequest;
 
 class ProvidersRequest extends Request
 {

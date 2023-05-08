@@ -7,7 +7,6 @@ use Saloon\CachePlugin\Contracts\Driver;
 use Saloon\CachePlugin\Traits\HasCaching;
 use Saloon\CachePlugin\Drivers\PsrCacheDriver;
 use Saloon\CachePlugin\Drivers\FlysystemDriver;
-use Saloon\CachePlugin\Contracts\Cacheable;
 use Saloon\CachePlugin\Drivers\LaravelCacheDriver;
 
 trait Caching
@@ -43,7 +42,8 @@ trait Caching
         return [Method::GET, Method::POST, Method::PUT, Method::PATCH];
     }
 
-    public function getCache($key){
+    public function getCache($key)
+    {
         return $this->cacheInstance->get($key);
     }
 }

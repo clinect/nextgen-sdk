@@ -20,7 +20,7 @@ class ApprovalQueueRequest extends Request
 
     public function history()
     {
-        return $this->addEndpoint('history','-');
+        return $this->addEndpoint('history', '-');
     }
 
     public function comments()

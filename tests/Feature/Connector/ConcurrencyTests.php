@@ -3,11 +3,11 @@
 namespace Clinect\NextGen\Tests\Feature\Connector;
 
 use Clinect\NextGen\NextGen;
+use Saloon\Contracts\Response;
 use Clinect\NextGen\Tests\Feature\TestCase;
 use Saloon\Exceptions\Request\RequestException;
-use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
-use Saloon\Contracts\Response;
 use Saloon\Exceptions\Request\FatalRequestException;
+use Clinect\NextGen\Tests\Stubs\Person as PersonStub;
 
 class ConcurrencyTests extends TestCase
 {
@@ -33,7 +33,7 @@ class ConcurrencyTests extends TestCase
             responseHandler: function (Response $response) {
                 $this->assertSame($response->status(), 200);
                 $this->assertNotEmpty($response->json());
-             },
+            },
             exceptionHandler: function (FatalRequestException|RequestException $exception) {
                 $this->fail('Exception: '. $exception->getMessage());
             },

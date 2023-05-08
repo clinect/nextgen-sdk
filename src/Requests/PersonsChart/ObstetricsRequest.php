@@ -56,7 +56,7 @@ class ObstetricsRequest extends Request
     {
         return $this->addEndpoint('/problems')->withUriParamId($id);
     }
-    
+
     public function stiScreening(): static
     {
         return $this->addEndpoint('/sti-screenings');

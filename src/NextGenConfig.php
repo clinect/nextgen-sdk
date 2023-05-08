@@ -10,7 +10,7 @@ class NextGenConfig implements Configuration
 
     public static function create(array $config): static
     {
-        $static = new static;
+        $static = new static();
 
         foreach ($static->configKeys() as $key) {
             if (!array_key_exists($key, $config)) {

@@ -22,7 +22,6 @@ trait Config
     public function apiUrl(): string
     {
         return "https://nativeapi.nextgen.com/nge/prod/nge-api/api";
-        
     }
 
     public function mockAuthorize(): array

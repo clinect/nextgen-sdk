@@ -20,5 +20,4 @@ class DiagnosesRequest extends Request
     {
         return $this->addEndpoint('/search')->withQuery($queries)->get();
     }
-
 }

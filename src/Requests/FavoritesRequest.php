@@ -34,4 +34,3 @@ class FavoritesRequest extends Request
         return $this->addEndpoint('/procedures');
     }
 }
- 

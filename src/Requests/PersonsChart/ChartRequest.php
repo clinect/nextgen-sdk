@@ -199,12 +199,9 @@ class ChartRequest extends Request
 
     public function recallPlans(int|string|null $recallPlanId = null, int|string|null $occurenceId = null): static
     {
-        if($occurenceId && $recallPlanId) 
-        {
+        if ($occurenceId && $recallPlanId) {
             return $this->addEndpoint('/recall-plans'.'/'. $recallPlanId)->withUriParamId($recallPlanId);
-        }
-        else
-        {
+        } else {
             return $this->addEndpoint('/recall-plans')->withUriParamId($recallPlanId);
         }
     }

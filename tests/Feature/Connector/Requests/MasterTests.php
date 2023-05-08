@@ -1280,7 +1280,7 @@ class MasterTests extends TestCase
         $request = $this->mockConnector->disableCaching()->master()
             ->vaccines(1)->vis()
             ->get();
-            
+
         $response = $this->mockConnector->send($request);
 
         $this->assertSame($response->status(), 200);
