@@ -2,9 +2,9 @@
 
 namespace Clinect\NextGen\Requests;
 
+use Clinect\NextGen\Requests\Providers\FavoritesRequest;
 use Clinect\NextGen\Requests\Providers\ApprovalQueueRequest;
 use Clinect\NextGen\Requests\Providers\DiagnosisCategoriesRequest;
-use Clinect\NextGen\Requests\Providers\FavoritesRequest;
 
 class ProvidersRequest extends Request
 {
@@ -38,7 +38,7 @@ class ProvidersRequest extends Request
 
     public function durReasons()
     {
-        return $this->addEndpoint('/durReasons');
+        return $this->addEndpoint('/dur-reasons');
     }
 
     public function encounters()

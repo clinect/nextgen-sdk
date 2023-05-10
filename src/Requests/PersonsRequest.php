@@ -2,10 +2,9 @@
 
 namespace Clinect\NextGen\Requests;
 
-use Clinect\NextGen\Requests\Persons\FormulariesRequest;
 use Clinect\NextGen\Requests\Persons\InsurancesRequest;
 use Clinect\NextGen\Requests\PersonsChart\ChartRequest;
-use Clinect\NextGen\Requests\Request;
+use Clinect\NextGen\Requests\Persons\FormulariesRequest;
 
 class PersonsRequest extends Request
 {
@@ -65,7 +64,7 @@ class PersonsRequest extends Request
     public function insurances(int|string|null $id = null): InsurancesRequest
     {
         $this->cleanUpEndpoint();
-        return new InsurancesRequest($this->endpoint,$id);
+        return new InsurancesRequest($this->endpoint, $id);
     }
 
     public function medicationHistory(): static
@@ -105,6 +104,6 @@ class PersonsRequest extends Request
 
     public function payers(): static
     {
-        return $this->addEndpoint('/merged');
+        return $this->addEndpoint('/payers');
     }
 }

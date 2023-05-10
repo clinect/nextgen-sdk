@@ -5,6 +5,7 @@ namespace Clinect\NextGen;
 use Saloon\Http\Request;
 use Saloon\Http\Connector;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Contracts\PendingRequest;
 use Clinect\NextGen\Requests\AuthRequest;
 use Saloon\Http\Paginators\PagedPaginator;
 use Saloon\CachePlugin\Contracts\Cacheable;
@@ -29,6 +30,16 @@ class NextGen extends Connector implements Cacheable
         $this->disableCaching();
     }
 
+    public function boot(PendingRequest $pendingRequest): void
+    {
+        if (
+            !strpos($pendingRequest->getUrl(), $this->configs->getAuthUri()) &&
+            !strpos($pendingRequest->getUrl(), NgSessionRequest::getEndpoint())
+        ) {
+            $this->authorize();
+        }
+    }
+
     public function resolveBaseUrl(): string
     {
         return "{$this->configs->getBaseUrl()}{$this->configs->getRouteUri()}";
@@ -36,7 +47,11 @@ class NextGen extends Connector implements Cacheable
 
     protected function authorize(): void
     {
-        $this->enableCaching();
+        if ($this->hasMockClient()) {
+            $this->disableCaching();
+        } else {
+            $this->enableCaching();
+        }
 
         $request = (new AuthRequest("{$this->configs->getBaseUrl()}{$this->configs->getAuthUri()}"))
             ->fill([
@@ -52,10 +67,11 @@ class NextGen extends Connector implements Cacheable
         if ($response->failed()) {
             $response->throw();
         }
+        $this->configs->setCacheExpiryTime((string)$response->json('expires_in'));
 
         $this->withTokenAuth((string) $response->json('access_token'), (string) $response->json('token_type'));
 
-        $request = (new NgSessionRequest)
+        $request = (new NgSessionRequest())
             ->withConfig([
                 'json' => [
                     'enterpriseid' => $this->configs->getEnterpriseId(),

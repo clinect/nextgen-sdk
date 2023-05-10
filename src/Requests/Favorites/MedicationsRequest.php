@@ -7,6 +7,7 @@ use Clinect\NextGen\Requests\Request;
 class MedicationsRequest extends Request
 {
     public function __construct(
+        public string $endPoint,
         public int|string|null $id,
     ) {
         $this->withUriParamId($id);
@@ -14,7 +15,7 @@ class MedicationsRequest extends Request
 
     public function defaultEndpoint(): string
     {
-        return '/medications';
+        return $this->endPoint . '/medications';
     }
 
     public function customDosageOrders(): static

@@ -37,4 +37,3 @@ class PregnanciesRequest extends Request
         return $this->addEndpoint('/outcomes')->withUriParamId($id);
     }
 }
-

@@ -3,6 +3,7 @@
 namespace Clinect\NextGen\Requests;
 
 use Clinect\NextGen\Requests\Users\TasksRequest;
+use Clinect\NextGen\Requests\Users\TasksSetsRequest;
 
 class UsersRequest extends Request
 {
@@ -31,7 +32,7 @@ class UsersRequest extends Request
     public function approvalQueueActions(int|string|null $actionId = null): static
     {
         $this->withUriParamId($this->id);
-        return $this->addEndpoint('/appointment-status-approval-queue-actions')->withUriParamId($actionId);
+        return $this->addEndpoint('/approval-queue-actions')->withUriParamId($actionId);
     }
 
     public function approvalQueueCustomRules(): static
@@ -58,10 +59,11 @@ class UsersRequest extends Request
         return $this->addEndpoint('/enterprises');
     }
 
-    public function favorites(int|string|null $id = null): FavoritesRequest
+    public function favorites(): FavoritesRequest
     {
-        $this->withUriParamId($id);
-        return new FavoritesRequest($this->endpoint, $id);
+        $this->withUriParamId($this->id);
+        $this->cleanUpEndpoint();
+        return new FavoritesRequest($this->endpoint);
     }
 
     public function groups(): static
@@ -123,15 +125,17 @@ class UsersRequest extends Request
         return $this->addEndpoint('/lookup');
     }
 
-    public function taskSets(int|string|null $setId = null): static
+    public function taskSets(int|string|null $id = null): TasksSetsRequest
     {
         $this->withUriParamId($this->id);
-        return $this->addEndpoint('/task-sets')->withUriParamId($setId);
+        $this->cleanUpEndpoint();
+        return new TasksSetsRequest($this->endpoint, $id);
     }
 
     public function tasks(int|string|null $id = null): TasksRequest
     {
-        $this->withUriParamId($id);
+        $this->withUriParamId($this->id);
+        $this->cleanUpEndpoint();
         return new TasksRequest($this->endpoint, $id);
     }
 }

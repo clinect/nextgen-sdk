@@ -6,7 +6,7 @@ trait RequestResources
 {
     public function appointments(int|string|null $id = null): AppointmentsRequest
     {
-        return new AppointmentsRequest($id);
+        return new AppointmentsRequest('', $id);
     }
 
     public function auditEvents(int|string|null $id = null): AuditEventsRequest
@@ -19,19 +19,9 @@ trait RequestResources
         return new AuthenticationServicesRequest();
     }
 
-    public function healthHistoryForms(int|string|null $id = null): HealthHistoryFormsRequest
-    {
-        return new HealthHistoryFormsRequest($id);
-    }
-
     public function master(): MasterRequest
     {
         return new MasterRequest();
-    }
-
-    public function patients(int|string|null $id = null): PatientsRequest
-    {
-        return new PatientsRequest($id);
     }
 
     public function persons(int|string|null $id = null): PersonsRequest

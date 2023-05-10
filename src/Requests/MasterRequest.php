@@ -2,21 +2,21 @@
 
 namespace Clinect\NextGen\Requests;
 
-use Clinect\NextGen\Requests\Master\AppointmentsRequest;
-use Clinect\NextGen\Requests\Master\BulkOrderTestsRequest;
 use Clinect\NextGen\Requests\Master\CodesRequest;
-use Clinect\NextGen\Requests\Master\DiagnosesRequest;
-use Clinect\NextGen\Requests\Master\DocumentFieldsRequest;
-use Clinect\NextGen\Requests\Master\DocumentTypesRequest;
-use Clinect\NextGen\Requests\Master\EnterprisesRequest;
-use Clinect\NextGen\Requests\Master\EventsRequest;
-use Clinect\NextGen\Requests\Master\LabTestsRequest;
-use Clinect\NextGen\Requests\Master\MedicationsRequest;
-use Clinect\NextGen\Requests\Master\PayersRequest;
-use Clinect\NextGen\Requests\Master\PracticesRequest;
-use Clinect\NextGen\Requests\Master\SpecialtiesRequest;
 use Clinect\NextGen\Requests\Master\TasksRequest;
+use Clinect\NextGen\Requests\Master\EventsRequest;
+use Clinect\NextGen\Requests\Master\PayersRequest;
+use Clinect\NextGen\Requests\Master\LabTestsRequest;
 use Clinect\NextGen\Requests\Master\VaccinesRequest;
+use Clinect\NextGen\Requests\Master\DiagnosesRequest;
+use Clinect\NextGen\Requests\Master\PracticesRequest;
+use Clinect\NextGen\Requests\Master\EnterprisesRequest;
+use Clinect\NextGen\Requests\Master\MedicationsRequest;
+use Clinect\NextGen\Requests\Master\SpecialtiesRequest;
+use Clinect\NextGen\Requests\Master\AppointmentsRequest;
+use Clinect\NextGen\Requests\Master\DocumentTypesRequest;
+use Clinect\NextGen\Requests\Master\BulkOrderTestsRequest;
+use Clinect\NextGen\Requests\Master\DocumentFieldsRequest;
 use Clinect\NextGen\Requests\Master\ViewCategoriesRequest;
 
 class MasterRequest extends Request
@@ -90,7 +90,7 @@ class MasterRequest extends Request
 
     public function customPicklist(): static
     {
-        return $this->addEndpoint('/custom-picklist');
+        return $this->addEndpoint('/custom-picklists');
     }
 
     public function diagnoses(): DiagnosesRequest
@@ -195,6 +195,16 @@ class MasterRequest extends Request
         return $this->addEndpoint('/my-lists')->withUriParamId($id);
     }
 
+    public function orderableVaccines(): static
+    {
+        return $this->addEndpoint('/orderable-vaccines');
+    }
+
+    public function patientStatuses(): static
+    {
+        return $this->addEndpoint('/patient-statuses');
+    }
+
     public function payers(int|string|null $id = null): PayersRequest
     {
         $this->cleanUpEndpoint();
@@ -221,8 +231,8 @@ class MasterRequest extends Request
     {
         return $this->addEndpoint('/practitioners');
     }
-    
-    public function problemsSearch(array $queries): \Saloon\Http\Request
+
+    public function problemsSearch(array $queries = null): \Saloon\Http\Request
     {
         return $this->addEndpoint('/problems/search')->withQuery($queries)->get();
     }

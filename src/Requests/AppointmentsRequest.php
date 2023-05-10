@@ -5,6 +5,7 @@ namespace Clinect\NextGen\Requests;
 class AppointmentsRequest extends Request
 {
     public function __construct(
+        public string $endPoint = '',
         public int|string|null $id = null
     ) {
         $this->withUriParamId($id);
@@ -12,7 +13,7 @@ class AppointmentsRequest extends Request
 
     public function defaultEndpoint(): string
     {
-        return '/appointments';
+        return $this->endPoint . '/appointments';
     }
 
     public function healthHistoryForms(int|string|null $id = null): static

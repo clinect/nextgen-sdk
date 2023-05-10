@@ -46,5 +46,4 @@ class ImmunizationsRequest extends Request
     {
         return $this->addEndpoint('/series-completions')->withUriParamId($id);
     }
-
 }

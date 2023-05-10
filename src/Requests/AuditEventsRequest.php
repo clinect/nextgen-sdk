@@ -24,7 +24,7 @@ class AuditEventsRequest extends Request
     {
         return $this->addEndpoint('/allergy');
     }
-    
+
     public function applicationAccess(): static
     {
         return $this->addEndpoint('/application-access');
@@ -102,6 +102,6 @@ class AuditEventsRequest extends Request
 
     public function performance(): static
     {
-        return $this->endpoint('/performance');
+        return $this->addEndpoint('/performance');
     }
 }

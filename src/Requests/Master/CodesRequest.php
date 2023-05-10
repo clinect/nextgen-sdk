@@ -9,8 +9,7 @@ class CodesRequest extends Request
     public function __construct(
         public string $endPoint,
         public int|string|null $id = null
-    )
-    {
+    ) {
         $this->withUriParamId($this->id);
     }
 
@@ -19,7 +18,7 @@ class CodesRequest extends Request
         return $this->endPoint . '/codes';
     }
 
-    public function icd9(int|string|null $id = null): static
+    public function icd10(int|string|null $id = null): static
     {
         return $this->addEndpoint('/icd9'.'/'.$id.'/icd10');
     }

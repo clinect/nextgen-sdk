@@ -105,9 +105,14 @@ abstract class Request
     }
 
     public static function __callStatic($method, $arguments)
-    { 
+    {
         if (in_array($method, ['withPracticeId'])) {
-            return call_user_func([new static, 'setPracticeId'], $arguments[0]);
+            return call_user_func([new static(), 'setPracticeId'], $arguments[0]);
         }
+    }
+
+    public static function getEndpoint(): string
+    {
+        return call_user_func([new static(), 'defaultEndpoint']);
     }
 }

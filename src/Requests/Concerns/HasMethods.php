@@ -2,8 +2,8 @@
 
 namespace Clinect\NextGen\Requests\Concerns;
 
-use Saloon\Http\Request;
 use Saloon\Enums\Method;
+use Saloon\Http\Request;
 use Clinect\NextGen\Requests\BaseRequests\GetRequest;
 use Clinect\NextGen\Requests\BaseRequests\FormRequest;
 
@@ -44,8 +44,8 @@ trait HasMethods
     public function form(Method $method): Request
     {
         return new FormRequest(
-            method: $method,
             endpoint: $this->endpoint,
+            method: $method,
             _headers: $this->headers,
             queries: $this->queries,
             configs: $this->configs,

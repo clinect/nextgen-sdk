@@ -13,10 +13,10 @@ class FinancialRequest extends Request
 
     public function batches(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/cards')->withUriParamId($id);
+        return $this->addEndpoint('/batches')->withUriParamId($id);
     }
 
-    public function medications(int|string|null $id): GuarantorsRequest
+    public function guarantors(int|string|null $id): GuarantorsRequest
     {
         $this->cleanUpEndpoint();
         return new GuarantorsRequest($this->endpoint, $id);

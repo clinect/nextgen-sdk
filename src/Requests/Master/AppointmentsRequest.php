@@ -25,7 +25,6 @@ class AppointmentsRequest extends Request
     public function classes(int|string|null $id = null): ClassesRequest
     {
         $this->cleanUpEndpoint();
-        return new ClassesRequest($this->endpoint,$id);
+        return new ClassesRequest($this->endpoint, $id);
     }
-
 }

@@ -6,16 +6,16 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Repositories\Body\FormBodyRepository;
 use Saloon\Repositories\Body\JsonBodyRepository;
-use Saloon\Repositories\Body\MultipartBodyRepository;
 use Saloon\Contracts\Body\HasBody as HasBodyContract;
+use Saloon\Repositories\Body\MultipartBodyRepository;
 
 class FormRequest extends Request implements HasBodyContract
 {
     protected FormBodyRepository|JsonBodyRepository|MultipartBodyRepository $body;
 
     public function __construct(
-        protected Method $method = Method::POST,
         public string $endpoint,
+        protected Method $method = Method::POST,
         public array $_headers = [],
         public array $queries = [],
         public array $configs = [],

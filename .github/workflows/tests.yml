@@ -18,5 +18,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      - name: Remove Authentication and NG Session Fixture
+        run: composer delete-config-fixtures
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: ./vendor/bin/phpunit --stop-on-failure
