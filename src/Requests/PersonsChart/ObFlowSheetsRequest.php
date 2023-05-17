@@ -4,7 +4,7 @@ namespace Clinect\NextGen\Requests\PersonsChart;
 
 use Clinect\NextGen\Requests\Request;
 
-class AllergiesRequest extends Request
+class ObFlowSheetsRequest extends Request
 {
     public function __construct(
         public string $endPoint,
@@ -15,16 +15,11 @@ class AllergiesRequest extends Request
 
     public function defaultEndpoint(): string
     {
-        return $this->endPoint . '/allergies';
+        return $this->endPoint . '/ob-flowsheets';
     }
 
-    public function durCheck(): static
+    public function obMultiGestation(): static
     {
-        return $this->addEndpoint('/dur-check');
-    }
-
-    public function reactions(int|string|null $id = null): static
-    {
-        return $this->addEndpoint('/reactions')->withUriParamId($id);
+        return $this->addEndpoint('/ob-multi-gestation');
     }
 }

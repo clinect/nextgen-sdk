@@ -18,13 +18,13 @@ class TestsRequest extends Request
         return $this->endPoint . '/tests';
     }
 
-    public function suspectedDiagnoses(): static
+    public function suspectedDiagnoses(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/suspected-diagnoses');
+        return $this->addEndpoint('/suspected-diagnoses')->withUriParamId($id);
     }
 
-    public function orderEntryAnswers(): static
+    public function orderEntryAnswers(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/order-entry-answers');
+        return $this->addEndpoint('/order-entry-answers')->withUriParamId($id);
     }
 }

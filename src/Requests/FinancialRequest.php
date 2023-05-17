@@ -26,4 +26,9 @@ class FinancialRequest extends Request
     {
         return $this->addEndpoint('/transactions')->withUriParamId($id);
     }
+
+    public function accountPayments(): static
+    {
+        return $this->addEndpoint('/account-payments');
+    }
 }

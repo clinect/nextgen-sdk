@@ -2,9 +2,12 @@
 
 namespace Clinect\NextGen\Requests;
 
+use Clinect\NextGen\Requests\Persons\ImhRequest;
+use Clinect\NextGen\Requests\Persons\OrdersRequest;
 use Clinect\NextGen\Requests\Persons\InsurancesRequest;
 use Clinect\NextGen\Requests\PersonsChart\ChartRequest;
 use Clinect\NextGen\Requests\Persons\FormulariesRequest;
+use Clinect\NextGen\Requests\Persons\MedicationHistoryRequest;
 
 class PersonsRequest extends Request
 {
@@ -29,6 +32,11 @@ class PersonsRequest extends Request
         return $this->addEndpoint('/appointments');
     }
 
+    public function audit(): static
+    {
+        return $this->addEndpoint('/audit');
+    }
+
     public function chart(): ChartRequest
     {
         $this->cleanUpEndpoint();
@@ -38,6 +46,11 @@ class PersonsRequest extends Request
     public function eligibilities(): static
     {
         return $this->addEndpoint('/eligibilities');
+    }
+
+    public function createEligibilities(): static
+    {
+        return $this->addEndpoint('/eligibilities/create-request');
     }
 
     public function employers(int|string|null $id = null): static
@@ -67,9 +80,22 @@ class PersonsRequest extends Request
         return new InsurancesRequest($this->endpoint, $id);
     }
 
-    public function medicationHistory(): static
+    public function imhForms(): ImhRequest
     {
-        return $this->addEndpoint('/medication-history');
+        $this->cleanUpEndpoint();
+        return new ImhRequest($this->endpoint);
+    }
+
+    public function medicationHistory(): MedicationHistoryRequest
+    {
+        $this->cleanUpEndpoint();
+        return new MedicationHistoryRequest($this->endpoint);
+    }
+
+    public function orders(): OrdersRequest
+    {
+        $this->cleanUpEndpoint();
+        return new OrdersRequest($this->endpoint);
     }
 
     public function photo(): static
@@ -82,14 +108,14 @@ class PersonsRequest extends Request
         return $this->addEndpoint('/races');
     }
 
-    public function relations(): static
+    public function relations(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/relations');
+        return $this->addEndpoint('/relations')->withUriParamId($id);
     }
 
-    public function supportRoles(): static
+    public function supportRoles(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/support-roles');
+        return $this->addEndpoint('/support-roles')->withUriParamId($id);
     }
 
     public function lookup(): static

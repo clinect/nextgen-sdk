@@ -107,9 +107,9 @@ class ChartRequest extends Request
         return $this->addEndpoint('/family-history');
     }
 
-    public function familyInfo(): static
+    public function familyInfo(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/family-info');
+        return $this->addEndpoint('/family-info')->withUriParamId($id);
     }
 
     public function forms(): FormsRequest

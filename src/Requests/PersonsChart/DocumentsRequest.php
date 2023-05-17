@@ -23,6 +23,11 @@ class DocumentsRequest extends Request
         return $this->addEndpoint('/'.$page);
     }
 
+    public function convertHed(): static
+    {
+        return $this->addEndpoint('/convert-hed');
+    }
+
     public function pdf(): static
     {
         return $this->addEndpoint('/pdf');

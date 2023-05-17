@@ -41,6 +41,13 @@ trait HasMethods
         return $this->form(Method::PATCH);
     }
 
+    public function delete(): Request
+    {
+        $this->cleanUpEndpoint();
+
+        return $this->form(Method::DELETE);
+    }
+
     public function form(Method $method): Request
     {
         return new FormRequest(

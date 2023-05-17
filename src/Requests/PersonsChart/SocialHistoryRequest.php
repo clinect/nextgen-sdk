@@ -31,14 +31,14 @@ class SocialHistoryRequest extends Request
         return $this->addEndpoint('/comments');
     }
 
-    public function diet(): static
+    public function diet(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/diet');
+        return $this->addEndpoint('/diet')->withUriParamId($id);
     }
 
-    public function employments(): static
+    public function employments(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/employments');
+        return $this->addEndpoint('/employments')->withUriParamId($id);
     }
 
     public function lifestyle(): static

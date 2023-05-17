@@ -40,4 +40,24 @@ class AppointmentsRequest extends Request
     {
         return $this->addEndpoint('/status-histories');
     }
+
+    public function cancel(): static
+    {
+        return $this->addEndpoint('/cancel');
+    }
+
+    public function keptWorkflow(): static
+    {
+        return $this->addEndpoint('/kept/workflow');
+    }
+
+    public function reschedule(): static
+    {
+        return $this->addEndpoint('/reschedule');
+    }
+
+    public function availability(): static
+    {
+        return $this->addEndpoint('/availability');
+    }
 }
