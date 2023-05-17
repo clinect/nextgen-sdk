@@ -4,6 +4,7 @@ namespace Clinect\NextGen\Requests;
 
 use Clinect\NextGen\Requests\Providers\FavoritesRequest;
 use Clinect\NextGen\Requests\Providers\ApprovalQueueRequest;
+use Clinect\NextGen\Requests\Providers\MedicationRefillRequest;
 use Clinect\NextGen\Requests\Providers\DiagnosisCategoriesRequest;
 
 class ProvidersRequest extends Request
@@ -62,8 +63,9 @@ class ProvidersRequest extends Request
         return $this->addEndpoint('/lab-tests');
     }
 
-    public function medicationRefillRequests(int|string|null $id = null)
+    public function medicationRefillRequests(int|string|null $id = null): MedicationRefillRequest
     {
-        return $this->addEndpoint('/medication-refill-requests')->withUriParamId($id);
+        $this->cleanUpEndpoint();
+        return new MedicationRefillRequest($this->endpoint, $id);
     }
 }

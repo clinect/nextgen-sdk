@@ -23,6 +23,11 @@ class OrdersRequest extends Request
         return $this->addEndpoint('/insurances');
     }
 
+    public function send(): static
+    {
+        return $this->addEndpoint('/send');
+    }
+
     public function schedule(): static
     {
         return $this->addEndpoint('/schedule');

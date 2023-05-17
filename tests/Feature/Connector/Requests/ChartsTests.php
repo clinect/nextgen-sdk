@@ -775,7 +775,7 @@ class ChartsTests extends TestCase
     {
         $request = $this->mockConnector->disableCaching()
             ->persons($this->personId)->chart()->encounters($this->encounterId)
-            ->resonsForVisit()
+            ->reasonsForVisit()
             ->get();
 
         $response = $this->mockConnector->send($request);

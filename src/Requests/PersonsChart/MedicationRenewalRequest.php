@@ -22,4 +22,9 @@ class MedicationRenewalRequest extends Request
     {
         return $this->addEndpoint('/medications');
     }
+
+    public function status(): static
+    {
+        return $this->addEndpoint('/status');
+    }
 }

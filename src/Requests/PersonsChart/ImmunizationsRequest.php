@@ -21,9 +21,9 @@ class ImmunizationsRequest extends Request
         return $this->addEndpoint('/dose-validation');
     }
 
-    public function exclusions(): static
+    public function exclusions(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/exclusions');
+        return $this->addEndpoint('/exclusions')->withUriParamId($id);
     }
 
     public function groupStatus(): static

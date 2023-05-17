@@ -30,6 +30,16 @@ class EncountersRequest extends Request
         return new CarePlanRequest($this->endpoint);
     }
 
+    public function checkIn(): static
+    {
+        return $this->addEndpoint('/checkin');
+    }
+
+    public function checkout(): static
+    {
+        return $this->addEndpoint('/checkout');
+    }
+
     public function clinicalNotes(): static
     {
         return $this->addEndpoint('/clinical-notes');
@@ -41,20 +51,57 @@ class EncountersRequest extends Request
         return new DiagnosesRequest($this->endpoint, $id);
     }
 
+    public function diagnosticOrders(): static
+    {
+        return $this->addEndpoint('/diagnostic/orders');
+    }
+
+    public function dmeOrders(): static
+    {
+        return $this->addEndpoint('/dme/orders');
+    }
+
+    public function documents(): static
+    {
+        return $this->addEndpoint('/documents');
+    }
+
+    public function followUpOrders(): static
+    {
+        return $this->addEndpoint('/follow-up-orders');
+    }
+
     public function forms(): FormsRequest
     {
         $this->cleanUpEndpoint();
         return new FormsRequest($this->endpoint);
     }
 
-    public function insurances(): static
+    public function immunizations(): ImmunizationsRequest
     {
-        return $this->addEndpoint('/insurances');
+        $this->cleanUpEndpoint();
+        return new ImmunizationsRequest($this->endpoint);
     }
 
-    public function medications(int|string|null $id = null): static
+    public function insurances(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/medications')->withUriParamId($id);
+        return $this->addEndpoint('/insurances')->withUriParamId($id);
+    }
+
+    public function labOrders(): static
+    {
+        return $this->addEndpoint('/lab/orders');
+    }
+
+    public function lock(): static
+    {
+        return $this->addEndpoint('/lock');
+    }
+
+    public function medications(int|string|null $id = null): MedicationsRequest
+    {
+        $this->cleanUpEndpoint();
+        return new MedicationsRequest($this->endpoint, $id);
     }
 
     public function obstetrics(): ObstetricsRequest
@@ -84,9 +131,14 @@ class EncountersRequest extends Request
         return $this->addEndpoint('/procedures')->withUriParamId($id);
     }
 
-    public function resonsForVisit(): static
+    public function reasonsForVisit(): static
     {
         return $this->addEndpoint('/reasons-for-visit');
+    }
+
+    public function genericReasonsForVisit(): static
+    {
+        return $this->addEndpoint('/reasons-for-visit/generic');
     }
 
     public function referralOrders(): static
@@ -109,6 +161,11 @@ class EncountersRequest extends Request
     public function telephoneCalls(): static
     {
         return $this->addEndpoint('/telephone-calls');
+    }
+
+    public function telephoneCall(): static
+    {
+        return $this->addEndpoint('/telephone-call');
     }
 
     public function telephoneCommunications(): static

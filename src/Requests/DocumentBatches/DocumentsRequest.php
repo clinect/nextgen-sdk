@@ -1,10 +1,10 @@
 <?php
 
-namespace Clinect\NextGen\Requests\PersonsChart;
+namespace Clinect\NextGen\Requests\DocumentBatches;
 
 use Clinect\NextGen\Requests\Request;
 
-class PanelsRequest extends Request
+class DocumentsRequest extends Request
 {
     public function __construct(
         public string $endPoint,
@@ -15,11 +15,11 @@ class PanelsRequest extends Request
 
     public function defaultEndpoint(): string
     {
-        return $this->endPoint . '/panels';
+        return $this->endPoint . '/documents';
     }
 
-    public function results(int|string|null $id = null): static
+    public function file(): static
     {
-        return $this->addEndpoint('/results')->withUriParamId($id);
+        return $this->addEndpoint('/file');
     }
 }

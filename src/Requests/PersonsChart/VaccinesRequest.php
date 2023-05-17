@@ -28,9 +28,9 @@ class VaccinesRequest extends Request
         return $this->addEndpoint('/suspected-diagnoses');
     }
 
-    public function visHistories(): static
+    public function visHistories(int|string|null $id = null): static
     {
-        return $this->addEndpoint('/vis-histories');
+        return $this->addEndpoint('/vis-histories')->withUriParamId($id);
     }
 
     public function wastedVaccines(int|string|null $id = null): static

@@ -18,6 +18,11 @@ class MedicationsRequest extends Request
         return $this->endPoint . '/medications';
     }
 
+    public function cancel(): static
+    {
+        return $this->addEndpoint('/cancel');
+    }
+
     public function dosageRange(): static
     {
         return $this->addEndpoint('/dosage-range');
@@ -51,5 +56,25 @@ class MedicationsRequest extends Request
     public function pdmpReport(): static
     {
         return $this->addEndpoint('/pdmp-report');
+    }
+
+    public function renew(): static
+    {
+        return $this->addEndpoint('/renew');
+    }
+
+    public function sendErx(): static
+    {
+        return $this->addEndpoint('/send-erx');
+    }
+
+    public function stop(): static
+    {
+        return $this->addEndpoint('/stop');
+    }
+
+    public function durCancel(): static
+    {
+        return $this->addEndpoint('/dur-cancel');
     }
 }

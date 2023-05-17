@@ -18,14 +18,14 @@ class ObstetricsEncountersRequest extends Request
         return $this->endPoint . '/encounters';
     }
 
-    public function obFlowSheets(int|string|null $id): static
-    {
-        return $this->addEndpoint('/ob-flowsheets')->withUriParamId($id);
-    }
-
     public function obInitialPhysicalExam(): static
     {
         return $this->addEndpoint('/ob-initial-physical-exams');
+    }
+
+    public function obInitialPhysicalExamLock(): static
+    {
+        return $this->addEndpoint('/ob-initial-physical-exams/lock');
     }
 
     public function obMultiGestation(): static
@@ -41,5 +41,11 @@ class ObstetricsEncountersRequest extends Request
     public function stiScreening(): static
     {
         return $this->addEndpoint('/sti-screening');
+    }
+
+    public function obFlowSheets(int|string|null $id = null): ObFlowSheetsRequest
+    {
+        $this->cleanUpEndpoint();
+        return new ObFlowSheetsRequest($this->endpoint, $id);
     }
 }

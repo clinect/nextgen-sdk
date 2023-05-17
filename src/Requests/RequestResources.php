@@ -63,4 +63,9 @@ trait RequestResources
     {
         return new DocumentBatchesRequest($id);
     }
+
+    public function ccda(): CcdaRequest
+    {
+        return new CcdaRequest();
+    }
 }
