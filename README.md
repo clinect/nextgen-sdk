@@ -407,6 +407,37 @@ $request = $connector->enableCaching()->persons()->get();
 $request = $connector->persons()->get();
 ```
 
+## Testing
+Run the command below to initiate testing
+```
+vendor/bin/phpunit --testsuite Feature
+```
+
+### How does it work?
+Testing Saloon requests involves Fixtures. Saloon will check if the fixture already exists, and if it doesn't, it will make the real API request and store the response for next time.
+* If an endpoint already has a Fixture, it would just use that Fixture as a recorded esponse and not run a real request.
+* If an endpoint doesnt have a Fixture, running the tests will simulate a real request and the response would be recorded as a fixture, this json response is saved inside Tests/Fixtures/Saloon.
+
+### Commands for deleting fixtures
+
+This deletes the authorization fixture and the ng-session fixtures
+```
+composer run delete-config-fixtures
+```
+
+this would delete all fixtures
+```
+composer run delete-all-fixtures
+```
+
+To reset all testing using this branch. run the commands below in order:
+```
+composer run delete-config-fixtures
+composer run delete-all-fixtures
+vendor/bin/phpunit --testsuite Feature
+```
+
+
 ## License
 
 The MIT License (MIT).
