@@ -50,7 +50,10 @@ class AppointmentsRequest extends Request
     {
         return $this->addEndpoint('/kept/workflow');
     }
-
+    public function isKept(): static
+    {
+        return $this->addEndpoint('/kept');
+    }
     public function reschedule(): static
     {
         return $this->addEndpoint('/reschedule');
