@@ -87,7 +87,10 @@ class EncountersRequest extends Request
     {
         return $this->addEndpoint('/insurances')->withUriParamId($id);
     }
-
+    public function insurance(int|string|null $id = null): static
+    {
+        return $this->addEndpoint('/insurance')->withUriParamId($id);
+    }
     public function labOrders(): static
     {
         return $this->addEndpoint('/lab/orders');
