@@ -26,19 +26,7 @@ class NextGen extends Connector implements Cacheable
             $this->withMockClient($mockclient);
         }
 
-        $this->authorize();
-
         $this->disableCaching();
-    }
-
-    public function boot(PendingRequest $pendingRequest): void
-    {
-        if (
-            !strpos($pendingRequest->getUrl(), $this->configs->getAuthUri()) &&
-            !strpos($pendingRequest->getUrl(), NgSessionRequest::getEndpoint())
-        ) {
-            $this->authorize();
-        }
     }
 
     public function resolveBaseUrl(): string
@@ -68,6 +56,7 @@ class NextGen extends Connector implements Cacheable
         if ($response->failed()) {
             $response->throw();
         }
+
         $this->configs->setCacheExpiryTime((string)$response->json('expires_in'));
 
         $this->withTokenAuth((string) $response->json('access_token'), (string) $response->json('token_type'));
