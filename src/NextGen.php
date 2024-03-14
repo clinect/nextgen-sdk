@@ -9,6 +9,7 @@ use Saloon\Contracts\PendingRequest;
 use Clinect\NextGen\Requests\AuthRequest;
 use Saloon\Http\Paginators\PagedPaginator;
 use Saloon\CachePlugin\Contracts\Cacheable;
+use Clinect\NextGen\Contracts\Configuration;
 use Clinect\NextGen\Requests\NgSessionRequest;
 use Clinect\NextGen\Requests\RequestResources;
 
@@ -18,7 +19,7 @@ class NextGen extends Connector implements Cacheable
     use Traits\Caching;
 
     public function __construct(
-        public NextGenConfig $configs,
+        public Configuration $configs,
         protected ?MockClient $mockclient = null
     ) {
         if ($mockclient) {
