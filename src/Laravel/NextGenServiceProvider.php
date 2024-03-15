@@ -4,6 +4,7 @@ namespace Clinect\NextGen\Laravel;
 
 use Clinect\NextGen\NextGen;
 use Clinect\NextGen\NextGenConfig;
+use Saloon\Http\Senders\GuzzleSender;
 use Illuminate\Support\ServiceProvider;
 
 class NextGenServiceProvider extends ServiceProvider
@@ -15,6 +16,8 @@ class NextGenServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->app->singleton(GuzzleSender::class, fn () => new GuzzleSender);
+
         $this->app->bind(NextGen::class, function ($app) {
             $config = NextGenConfig::create([
                 'client_id' => config('clinect.nextgen.client_id'),
