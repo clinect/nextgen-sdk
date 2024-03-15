@@ -5,7 +5,7 @@ namespace Clinect\NextGen;
 use Saloon\Http\Request;
 use Saloon\Http\Connector;
 use Saloon\Http\Faking\MockClient;
-use Saloon\Contracts\PendingRequest;
+use Saloon\Http\PendingRequest;
 use Clinect\NextGen\Requests\AuthRequest;
 use Saloon\Http\Paginators\PagedPaginator;
 use Saloon\CachePlugin\Contracts\Cacheable;
