@@ -31,7 +31,7 @@ class NextGen extends Connector implements Cacheable
 
     public function resolveBaseUrl(): string
     {
-        return "{$this->configs->getBaseUrl()}{$this->configs->getRouteUri()}";
+        return 'https://nativeapi.nextgen.com/nge/prod';
     }
 
     protected function authorize(): void
@@ -42,7 +42,7 @@ class NextGen extends Connector implements Cacheable
             $this->enableCaching();
         }
 
-        $request = (new AuthRequest("{$this->configs->getBaseUrl()}{$this->configs->getAuthUri()}"))
+        $request = (new AuthRequest)
             ->fill([
                 'grant_type' => 'client_credentials',
                 'client_id' => $this->configs->getClientId(),
