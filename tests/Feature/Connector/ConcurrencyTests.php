@@ -3,7 +3,7 @@
 namespace Clinect\NextGen\Tests\Feature\Connector;
 
 use Clinect\NextGen\NextGen;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Clinect\NextGen\Tests\Feature\TestCase;
 use Saloon\Exceptions\Request\RequestException;
 use Saloon\Exceptions\Request\FatalRequestException;
