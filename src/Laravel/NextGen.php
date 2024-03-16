@@ -2,7 +2,7 @@
 
 namespace Clinect\NextGen\Laravel;
 
-use Clinect\NextGen\NextGen as NextGenConnector;
+use Clinect\NextGen\NextGenConnector;
 
 class NextGen extends \Illuminate\Support\Facades\Facade
 {
