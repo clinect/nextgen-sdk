@@ -4,11 +4,15 @@ namespace Clinect\NextGen\Requests;
 
 use Saloon\Http\Request;
 use Saloon\Enums\Method;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Contracts\Authenticator;
+use Saloon\Traits\Body\HasJsonBody;
 use Saloon\Http\Auth\TokenAuthenticator;
 
-class NgSessionRequest extends Request
+class NgSessionRequest extends Request implements HasBody
 {
+    use HasJsonBody;
+
     protected Method $method = Method::PUT;
 
     public function __construct(
@@ -28,13 +32,11 @@ class NgSessionRequest extends Request
         return new TokenAuthenticator($this->token);
     }
 
-    protected function defaultConfig(): array
+    protected function defaultBody(): array
     {
         return [
-            'json' => [
-                'enterpriseId' => $this->enterpriseId,
-                'practiceId' => $this->practiceId,
-            ],
+            'enterpriseId' => $this->enterpriseId,
+            'practiceId' => $this->practiceId,
         ];
     }
 }
