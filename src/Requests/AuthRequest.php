@@ -5,13 +5,13 @@ namespace Clinect\NextGen\Requests;
 use Saloon\Http\Request;
 use Saloon\Enums\Method;
 use Saloon\Contracts\Body\HasBody;
-use Saloon\Traits\Body\HasJsonBody;
+use Saloon\Traits\Body\HasFormBody;
 
 class AuthRequest extends Request implements HasBody
 {
-    use HasJsonBody;
+    use HasFormBody;
     
-    protected Method $method = Method::GET;
+    protected Method $method = Method::POST;
 
     public function __construct(
         public readonly string $clientId,
@@ -19,7 +19,7 @@ class AuthRequest extends Request implements HasBody
         public readonly string $siteId,
     ) {
     }
-    
+
     public function resolveEndpoint(): string
     {
         return '/nge-oauth/token';
