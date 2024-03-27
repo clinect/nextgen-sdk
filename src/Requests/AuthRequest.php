@@ -2,15 +2,36 @@
 
 namespace Clinect\NextGen\Requests;
 
-class AuthRequest extends Request
+use Saloon\Http\Request;
+use Saloon\Enums\Method;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasFormBody;
+
+class AuthRequest extends Request implements HasBody
 {
+    use HasFormBody;
+    
+    protected Method $method = Method::POST;
+
     public function __construct(
-        public string $url
+        public readonly string $clientId,
+        public readonly string $clientSecret,
+        public readonly string $siteId,
     ) {
     }
 
-    public function defaultEndpoint(): string
+    public function resolveEndpoint(): string
     {
-        return $this->url;
+        return '/nge-oauth/token';
+    }
+
+    public function defaultBody(): array
+    {
+        return [
+            'grant_type' => 'client_credentials',
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'site_id' => $this->siteId,
+        ];
     }
 }

@@ -6,75 +6,66 @@ use Clinect\NextGen\Contracts\Configuration;
 
 class NextGenConfig implements Configuration
 {
-    protected array $configs;
-
-    public static function create(array $config): static
-    {
-        $static = new static();
-
-        foreach ($static->configKeys() as $key) {
-            if (!array_key_exists($key, $config)) {
-                throw new \Exception("Config key '{$key}' is missing.");
-            }
-        }
-
-        $static->configs = $config;
-
-        return $static;
-    }
-
-    public function configKeys(): array
-    {
-        return ['client_id', 'secret', 'site_id', 'enterprise_id', 'practice_id', 'base_url', 'route_uri', 'auth_uri', 'cache_adapter'];
+    public function __construct(
+        public string $clientId,
+        public string $secret,
+        public string $siteId,
+        public string $enterpriseId,
+        public string $practiceId,
+        public string $baseUrl,
+        public string $routeUri,
+        public string $authUri,
+        public string $cacheAdapter,
+    ) {
     }
 
     public function getClientId(): string
     {
-        return $this->configs['client_id'];
+        return $this->clientId;
     }
 
     public function getSecret(): string
     {
-        return $this->configs['secret'];
+        return $this->secret;
     }
 
     public function getSiteId(): string
     {
-        return $this->configs['site_id'];
+        return $this->siteId;
     }
 
     public function getEnterpriseId(): string
     {
-        return $this->configs['enterprise_id'];
+        return $this->enterpriseId;
     }
 
     public function getPracticeId(): string
     {
-        return $this->configs['practice_id'];
+        return $this->practiceId;
     }
 
     public function getBaseUrl(): string
     {
-        return $this->configs['base_url'];
+        return $this->baseUrl;
     }
 
     public function getRouteUri(): string
     {
-        return $this->configs['route_uri'];
+        return $this->routeUri;
     }
 
     public function getAuthUri(): string
     {
-        return $this->configs['auth_uri'];
+        return $this->authUri;
     }
 
     public function getCacheAdapter(string $key): mixed
     {
-        return $this->configs['cache_adapter'][$key];
+        return $this->cacheAdapter[$key];
     }
 
-    public function setCacheExpiryTime(string $key): void
+    public function setCacheExpiryTime(string $time): void
     {
-        $this->configs['cache_adapter']['expiry_time'] = $key;
+        $this->cacheAdapter['expiry_time'] = $time;
     }
 }
